@@ -1,0 +1,59 @@
+﻿@model IEnumerable<EnglishTrainer.Web.Models.VerbViewModel>
+
+@{
+    ViewData["Title"] = "MainPage";
+}
+
+<h1>MainPage</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Infinitive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PastSimple)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PastParticiple)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TranslateRu)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Infinitive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PastSimple)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PastParticiple)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TranslateRu)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
