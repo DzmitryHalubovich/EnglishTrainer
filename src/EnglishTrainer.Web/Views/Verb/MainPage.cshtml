@@ -5,6 +5,41 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="~/css/CustomMainPage.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <title>Main page</title>
+    </head>
+    <body>
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                <div class="header__logo">English trainer</div>
 
+                <nav class="nav">
+                    <a class = "nav__link" asp-action="MainPage" asp-controller="Verb">Table</a>
+                    <a class = "nav__link" href="#">Log in</a>
+                    <a class="nav__link" href="#">*Заглушка*</a>
+                    <a class="nav__link" href="#">*Заглушка*</a>
+                    <a class="nav__link" href="#">*Заглушка*</a>
+                </nav>
+                </div>
+            </div>
+        </header>
+        <div class="main_page_body">
+            <div class="left_nav_menu">
+                <nav class="left_nav">
+                <a class="nav__link" href="#">LOREM</a>
+                <a class="nav__link" href="#">LOREM</a>
+                </nav>
+            </div>
+            <div class="main_area">
+
+            </div>
+        </div>
+    </body>
 </html>

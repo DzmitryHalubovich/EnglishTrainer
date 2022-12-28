@@ -1,0 +1,107 @@
+﻿.body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    font-size: 15px;
+    color: #333;
+    margin: 0;
+}
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200;
+    margin: 0 auto;
+}
+
+.header {
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 30px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.header__logo {
+    font-size: 30px;
+    font-weight: 700;
+    color: black;
+}
+
+.nav {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.header__inner {
+    margin-left: 25px;
+    margin-right: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items:  baseline;
+}
+
+.nav__link {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 15px;
+    position: relative;
+    color: black;
+    text-decoration: none; /*Убираем подчеркивание*/
+
+    transition: color .2s linear;
+}
+
+    .nav__link:after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: black;
+        opacity: 0;
+        transition: opacity .2s linear;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1;
+    }
+
+    .nav__link:hover {
+        color: black; /*Цвет при наведении */
+    }
+
+    .nav__link:hover:after {
+        display: block;
+        opacity: 1;
+    }
+
+.left_nav_menu{
+    margin-top: 70px;
+    width: 225px;
+    height:50px;
+    background-color: aqua;
+    display:flex;
+    flex-direction:column;
+}
+
+.main_area{
+    background-color:antiquewhite;
+}
+
+.main_page_body{
+    width:100%;
+    min-width:800px;
+
+}

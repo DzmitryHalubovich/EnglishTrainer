@@ -28,7 +28,7 @@ namespace EnglishTrainer.Web.Controllers
             return View(verbViewModel);
         }
 
-        public ViewResult MainPage()  => View();
+        public IActionResult MainPage()  => View();
 
         public IActionResult Index()
         {
