@@ -15,6 +15,7 @@
         <title>Main page</title>
     </head>
     <body>
+        
         <header class="header">
             <div class="container">
                 <div class="header__inner">
@@ -30,14 +31,15 @@
                 </div>
             </div>
         </header>
+        
         <div class="main_page_body">
-            <div class="left_nav_menu">
-                <nav class="left_nav">
-                <a class="nav__link" href="#">LOREM</a>
-                <a class="nav__link" href="#">LOREM</a>
-                </nav>
-            </div>
-            <div class="main_area">
+            <aside class = "aside_left_menu">
+                <ul class = "left__nav">
+                    <li class="left__nav__link"><a asp-action="MainPage" asp-controller="Verb">Learn</a></li>
+                    <li class="left__nav__link"><a asp-action="MainTable" asp-controller="Verb">Verbs</a></li>
+                </ul>
+            </aside>
+            <div class="main_area"> 
 
             </div>
         </div>

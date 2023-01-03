@@ -20,6 +20,7 @@ h1, h2, h3, h4, h5, h6 {
 .container {
     width: 100%;
     max-width: 1200;
+    min-width: 800px;
     margin: 0 auto;
 }
 
@@ -32,6 +33,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     right: 0;
     z-index: 100;
+    background-color: aquamarine;
 }
 
 .header__logo {
@@ -103,5 +105,31 @@ h1, h2, h3, h4, h5, h6 {
 .main_page_body{
     width:100%;
     min-width:800px;
+    padding-left: 0px;
+}
 
+.aside_left_menu{
+    background-color: aqua;
+    width: 240px;
+    padding-left: 0px;
+    margin-top: 100px;
+}
+
+.left__nav{
+    list-style-type: none;
+
+}
+
+.left__nav__link{
+    margin-top: 10px;
+    height: 40px;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color .2s linear;
+
+}
+
+.left__nav__link:hover{
+    background-color: rgba(201, 201, 201, 0.738);
+    
 }
