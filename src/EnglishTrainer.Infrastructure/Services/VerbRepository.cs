@@ -5,7 +5,7 @@ namespace EnglishTrainer.Infrastructure.Services
 {
     public sealed class VerbRepository : IRepository<Verb>
     {
-        IList<Verb> _verbs = new List<Verb>()
+        IList<Verb> _verbs = new List<Verb>
         {
             new Verb() {Id =1 , Infinitive="be", PastSimple = "was/were", PastParticiple = "been", TranslateRu = "быть/являться" },
             new Verb() {Id =2 , Infinitive="beat", PastSimple = "beat", PastParticiple = "beaten", TranslateRu = "бить/колотить" },
@@ -14,11 +14,6 @@ namespace EnglishTrainer.Infrastructure.Services
             new Verb() {Id =5 , Infinitive="bend", PastSimple = "bent", PastParticiple = "bent", TranslateRu = "гнуть" },
             new Verb() {Id =6 , Infinitive="bet", PastSimple = "bet", PastParticiple = "bet", TranslateRu = "держать пари" },
         };
-
-        public VerbRepository(IRepository<Verb> verbRepository)
-        {
-            //_verbRepository=verbRepository;
-        }
 
         public IEnumerable<Verb> GetAll()
         {
