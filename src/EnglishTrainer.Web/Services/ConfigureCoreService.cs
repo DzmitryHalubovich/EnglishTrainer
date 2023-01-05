@@ -1,5 +1,6 @@
 ﻿using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
+using EnglishTrainer.Infrastructure.Data;
 using EnglishTrainer.Infrastructure.Services;
 using EnglishTrainer.Web.Interfaces;
 using EnglishTrainer.Web.Models;
@@ -10,8 +11,8 @@ namespace EnglishTrainer.Web.Services
     {
         public static IServiceCollection AddCoreServices(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IRepository<Verb>), typeof(VerbRepository));
-            
+            services.AddScoped(typeof(IRepository<Verb>), typeof(EFTrainerRepository<Verb>));
+            services.AddScoped(typeof(IVerbViewModelService), typeof(VerbViewModelService));
             return services;
         }
     }

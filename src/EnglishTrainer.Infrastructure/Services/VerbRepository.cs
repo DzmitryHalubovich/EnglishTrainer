@@ -26,6 +26,11 @@ namespace EnglishTrainer.Infrastructure.Services
             return _verbs;
         }
 
+        public Task<List<Verb>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public Verb? GetById(int id)
         {
             var verb = _verbs.FirstOrDefault(x => x.Id == id);
