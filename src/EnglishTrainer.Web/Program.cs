@@ -19,12 +19,12 @@ using (var scope = app.Services.CreateScope())
     var scopedProvider = scope.ServiceProvider;
     try
     {
-        var catalogContext = scopedProvider.GetRequiredService<EnglishTrainerContext>();
-        if (catalogContext.Database.IsSqlServer())
+        var trainerContext = scopedProvider.GetRequiredService<EnglishTrainerContext>();
+        if (trainerContext.Database.IsSqlServer())
         {
-            catalogContext.Database.Migrate();
+            trainerContext.Database.Migrate();
         }
-        //await CatalogContextSeed.SeedAsync(catalogContext, app.Logger);
+        await EnglishTrainerContextSeed.SeedAsync(trainerContext, app.Logger);
     }
     catch (Exception ex)
     {

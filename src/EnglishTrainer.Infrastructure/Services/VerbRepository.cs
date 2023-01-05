@@ -15,6 +15,11 @@ namespace EnglishTrainer.Infrastructure.Services
             new Verb() {Id =6 , Infinitive="bet", PastSimple = "bet", PastParticiple = "bet", TranslateRu = "держать пари" },
         };
 
+        public IQueryable<Verb> Get()
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Verb> GetAll()
         {
             return _verbs;

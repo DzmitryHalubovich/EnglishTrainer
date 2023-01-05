@@ -11,7 +11,7 @@ namespace EnglishTrainer.Web.Services
         public static IServiceCollection AddCoreServices(this IServiceCollection services)
         {
             services.AddScoped(typeof(IRepository<Verb>), typeof(VerbRepository));
-            //services.AddScoped(typeof(IVerbViewModelService), typeof(VerbViewModel));
+            
             return services;
         }
     }

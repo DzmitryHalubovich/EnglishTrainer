@@ -12,9 +12,6 @@ namespace EnglishTrainer.Infrastructure.Data
     {
         public DbSet<Verb> Verbs { get; set; }
 
-        public EnglishTrainerContext(DbContextOptions<EnglishTrainerContext> options) : base(options)
-        {
-
-        }
+        public EnglishTrainerContext(DbContextOptions<EnglishTrainerContext> options) : base(options) { }
     }
 }
