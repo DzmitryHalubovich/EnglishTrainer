@@ -1,7 +1,9 @@
-﻿namespace EnglishTrainer.ApplicationCore.Interfaces
+﻿using EnglishTrainer.ApplicationCore.Entities;
+
+namespace EnglishTrainer.ApplicationCore.Interfaces
 {
     public interface IRepository <T> where T : class
     {
-        IQueryable<T> Get();
+        IEnumerable<Verb> GetAll();
     }
 }

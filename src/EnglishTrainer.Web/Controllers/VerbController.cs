@@ -16,7 +16,7 @@ namespace EnglishTrainer.Web.Controllers
 
         public IActionResult MainTable()
         {
-            var verbViewModel = _verbRepository.Get().Select(item => new VerbViewModel()
+            var verbViewModel = _verbRepository.GetAll().Select(item => new VerbViewModel()
             {
                 Id= item.Id,
                 Infinitive=item.Infinitive,
@@ -32,7 +32,7 @@ namespace EnglishTrainer.Web.Controllers
 
         public IActionResult Index()
         {
-            var apartmentsViewModel = _verbRepository.Get().Select(item => new VerbViewModel()
+            var apartmentsViewModel = _verbRepository.GetAll().Select(item => new VerbViewModel()
             {
                 Id = item.Id,
                 Infinitive=item.Infinitive,
