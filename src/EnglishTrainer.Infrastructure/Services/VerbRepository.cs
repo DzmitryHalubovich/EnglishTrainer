@@ -5,6 +5,7 @@ namespace EnglishTrainer.Infrastructure.Services
 {
     public sealed class VerbRepository : IRepository<Verb>
     {
+
         IList<Verb> _verbs = new List<Verb>
         {
             new Verb() {Id =1 , Infinitive="be", PastSimple = "was/were", PastParticiple = "been", TranslateRu = "быть/являться" },
@@ -15,9 +16,19 @@ namespace EnglishTrainer.Infrastructure.Services
             new Verb() {Id =6 , Infinitive="bet", PastSimple = "bet", PastParticiple = "bet", TranslateRu = "держать пари" },
         };
 
+        //public IQueryable<Verb> Get()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         public IEnumerable<Verb> GetAll()
         {
             return _verbs;
+        }
+
+        public Task<List<Verb>> GetAllAsync()
+        {
+            throw new NotImplementedException();
         }
 
         public Verb? GetById(int id)

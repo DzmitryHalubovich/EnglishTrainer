@@ -11,5 +11,18 @@
         public string PastParticiple { get; set; }
 
         public string TranslateRu { get; set; }
+
+        public Verb()
+        {
+
+        }
+
+        public Verb(string infinitive, string pastSimple, string pastParticiple, string transtaleRu)
+        {
+            Infinitive = infinitive;
+            PastSimple = pastSimple;
+            PastParticiple = pastParticiple;
+            TranslateRu = transtaleRu;
+        }
     }
 }

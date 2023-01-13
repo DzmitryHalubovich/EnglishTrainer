@@ -1,5 +1,6 @@
 ﻿using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
+using EnglishTrainer.Web.Interfaces;
 using EnglishTrainer.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,22 +9,17 @@ namespace EnglishTrainer.Web.Controllers
     public class VerbController : Controller
     {
         private readonly IRepository<Verb> _verbRepository;
+        private readonly IVerbViewModelService _verbViewModelService;
 
-        public VerbController(IRepository<Verb> verbRepository)
+        public VerbController(IRepository<Verb> verbRepository, IVerbViewModelService verbViewModelService)
         {
             _verbRepository= verbRepository;
+            _verbViewModelService= verbViewModelService;
         }
 
-        public IActionResult MainTable()
+        public async Task <IActionResult> MainTable()
         {
-            var verbViewModel = _verbRepository.GetAll().Select(item => new VerbViewModel()
-            {
-                Id= item.Id,
-                Infinitive=item.Infinitive,
-                PastParticiple=item.PastParticiple,
-                PastSimple=item.PastSimple,
-                TranslateRu = item.TranslateRu
-            });
+            var verbViewModel = await _verbViewModelService.GetAllVerbs(); 
 
             return View(verbViewModel);
         }

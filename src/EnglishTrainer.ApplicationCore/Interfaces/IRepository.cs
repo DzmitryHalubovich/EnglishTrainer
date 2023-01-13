@@ -1,8 +1,11 @@
-﻿namespace EnglishTrainer.ApplicationCore.Interfaces
+﻿using EnglishTrainer.ApplicationCore.Entities;
+
+namespace EnglishTrainer.ApplicationCore.Interfaces
 {
     public interface IRepository <T> where T : class
     {
-        IEnumerable<T> GetAll();
-        T? GetById(int id);
+        IEnumerable<Verb> GetAll();
+
+        Task<List<T>> GetAllAsync();
     }
 }
