@@ -2,6 +2,7 @@
 using EnglishTrainer.ApplicationCore.Interfaces;
 using EnglishTrainer.Web.Interfaces;
 using EnglishTrainer.Web.Models;
+using EnglishTrainer.Web.Services.QueryOptions;
 
 namespace EnglishTrainer.Web.Services
 {
@@ -13,10 +14,11 @@ namespace EnglishTrainer.Web.Services
         {
             _verbRepository = verbRepository;
         }
-        public async Task<IEnumerable<VerbViewModel>> GetAllVerbs()
+        public async Task<IList<VerbViewModel>> GetAllVerbsAsync(int page, int pageSize)
         {
             var entities = await _verbRepository.GetAllAsync(); //look in database all our enteties
-            var verbs = entities.Select(item => new VerbViewModel()
+            
+            var verbs = entities.Skip(page*pageSize).Take(pageSize).Select(item => new VerbViewModel()
             {
                 Id = item.Id,
                 Infinitive= item.Infinitive,

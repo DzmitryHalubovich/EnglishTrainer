@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EnglishTrainer.Web.Models.VerbViewModel>
+﻿@model EnglishTrainer.Web.Models.VerbIndexViewModel
 
 @{
     ViewData["Title"] = "MainTable";
@@ -13,22 +13,23 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Infinitive)
+                Infinitive
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PastSimple)
+                PastSimple
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PastParticiple)
+                PastParticiple
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TranslateRu)
+                TranslateRu
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model.VerbsList)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Infinitive)
@@ -44,5 +45,26 @@
             </td>
         </tr>
 }
+    <form id="sort-filter-form" role="form">
+        <div class="col-sm-2">
+            <label>Page</label>
+            <div>
+                <input asp-for="SortFilterPageData.PageNum" name="PageNum"
+                       class="form-control page-control-width page-num-input"
+                       onchange="VerbsList.sendForm(this)">
+                <span class="num-pages-text">of @Model.SortFilterPageData.NumPages</span>
+            </div>
+        </div>
+
+        <div class="col-sm-1">
+            <label>Page&nbsp;Size</label>
+            <select asp-for="SortFilterPageData.PageSize" name="PageSize"
+                    asp-items="Model.SortFilterPageData.PageSizes.Select(x => new SelectListItem {Text = x.ToString(), Value = x.ToString()})"
+                    class="form-control page-control-width"
+                    onchange="VerbsList.sendForm(this)"></select>
+        </div>
+
+        <input id="PrevCheckState" name="PrevCheckState" type="hidden" value=@Model.SortFilterPageData.PrevCheckState>
+    </form>
     </tbody>
 </table>

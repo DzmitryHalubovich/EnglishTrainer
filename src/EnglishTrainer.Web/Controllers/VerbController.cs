@@ -17,11 +17,14 @@ namespace EnglishTrainer.Web.Controllers
             _verbViewModelService= verbViewModelService;
         }
 
-        public async Task <IActionResult> MainTable()
+        public async Task <IActionResult> MainTable(SortFilterPageOptions options)
         {
-            var verbViewModel = await _verbViewModelService.GetAllVerbs(); 
 
-            return View(verbViewModel);
+            var verbViewModel = await _verbViewModelService.GetAllVerbsAsync(options.PageNum, options.PageSize);
+
+            VerbIndexViewModel verbList = new VerbIndexViewModel { SortFilterPageData = options, VerbsList = verbViewModel };
+
+            return View(verbList);
         }
 
         public IActionResult MainPage()  => View();

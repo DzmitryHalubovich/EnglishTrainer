@@ -23,4 +23,8 @@
     <ProjectReference Include="..\EnglishTrainer.Infrastructure\EnglishTrainer.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTO\" />
+  </ItemGroup>
+
 </Project>
