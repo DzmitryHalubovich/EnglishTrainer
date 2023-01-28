@@ -26,18 +26,5 @@ namespace EnglishTrainer.Web.Controllers
 
         public IActionResult MainPage()  => View();
 
-        public IActionResult Index()
-        {
-            var apartmentsViewModel = _verbRepository.GetAll().Select(item => new VerbViewModel()
-            {
-                Id = item.Id,
-                Infinitive=item.Infinitive,
-                PastParticiple=item.PastParticiple,
-                PastSimple=item.PastSimple,
-                TranslateRu = item.TranslateRu
-            }).ToList();
-
-            return View(apartmentsViewModel);
-        }
     }
 }
