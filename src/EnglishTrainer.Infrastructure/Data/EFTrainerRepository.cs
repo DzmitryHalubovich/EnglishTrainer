@@ -1,5 +1,7 @@
 ﻿using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
+using EnglishTrainer.ApplicationCore.QueryOptions;
+using EnglishTrainer.Infrastructure.Data.DBExtentions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,9 +25,12 @@ namespace EnglishTrainer.Infrastructure.Data
             throw new NotImplementedException();
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync(QueryEntityOptions<T> options)
         {
-            return await _dbContext.Set<T>().ToListAsync();
+            return await _dbContext.Set<T>()
+                .SkipTakeEntities(options.PageOptions.CurrentPage, options.PageOptions.PageSize)
+                .ToListAsync();
         }
+
     }
 }

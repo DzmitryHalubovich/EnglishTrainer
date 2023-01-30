@@ -7,6 +7,7 @@
         private int _pageSize = DefaultPageSize;
         public int[] PageSizes = new[] { 5, DefaultPageSize, 20, 50, 100 };
         //public BooksFilterBy FilterBy { get; set; }
+
         public string FilterValue { get; set; }
 
         public int PageNum

@@ -1,28 +1,34 @@
-﻿using EnglishTrainer.ApplicationCore.Entities;
+﻿using AutoMapper;
+using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
 using EnglishTrainer.Web.Interfaces;
 using EnglishTrainer.Web.Models;
+using EnglishTrainer.Web.Services.QueryOptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnglishTrainer.Web.Controllers
 {
     public class VerbController : Controller
     {
-        private readonly IRepository<Verb> _verbRepository;
         private readonly IVerbViewModelService _verbViewModelService;
+        private readonly IMapper _mapper;
 
-        public VerbController(IRepository<Verb> verbRepository, IVerbViewModelService verbViewModelService)
+        public VerbController(IVerbViewModelService verbViewModelService, IMapper mapper)
         {
-            _verbRepository= verbRepository;
             _verbViewModelService= verbViewModelService;
+            _mapper = mapper;
         }
 
-        public async Task <IActionResult> MainTable(SortFilterPageOptions options)
+        public async Task <IActionResult> MainTable(VerbQueryOptions options)
         {
+            var verbViewModel = await _verbViewModelService.GetAllVerbsAsync(options);
+            options.PageOptions.CurrentElementsCount = verbViewModel.Count;
 
-            var verbViewModel = await _verbViewModelService.GetAllVerbsAsync(options.PageNum, options.PageSize);
-
-            VerbIndexViewModel verbList = new VerbIndexViewModel { SortFilterPageData = options, VerbsList = verbViewModel };
+            VerbIndexViewModel verbList = new VerbIndexViewModel()
+            {
+                Options = options,
+                VerbsList = verbViewModel
+            };
 
             return View(verbList);
         }
