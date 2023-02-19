@@ -1,5 +1,6 @@
 ﻿using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
+using EnglishTrainer.ApplicationCore.QueryOptions;
 
 namespace EnglishTrainer.Infrastructure.Services
 {
@@ -27,6 +28,11 @@ namespace EnglishTrainer.Infrastructure.Services
         }
 
         public Task<List<Verb>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Verb>> GetAllAsync(QueryEntityOptions<Verb> options)
         {
             throw new NotImplementedException();
         }

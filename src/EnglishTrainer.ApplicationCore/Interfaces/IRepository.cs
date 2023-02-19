@@ -1,4 +1,5 @@
 ﻿using EnglishTrainer.ApplicationCore.Entities;
+using EnglishTrainer.ApplicationCore.QueryOptions;
 
 namespace EnglishTrainer.ApplicationCore.Interfaces
 {
@@ -6,6 +7,6 @@ namespace EnglishTrainer.ApplicationCore.Interfaces
     {
         IEnumerable<Verb> GetAll();
 
-        Task<List<T>> GetAllAsync();
+        Task<List<T>> GetAllAsync(QueryEntityOptions<T> options);
     }
 }
