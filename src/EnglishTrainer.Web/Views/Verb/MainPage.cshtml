@@ -2,53 +2,22 @@
     ViewData["Title"] = "Main page";
 }
 
-<div class="card" style="width: 200px">
-    <img src="https://i.pinimg.com/736x/94/d1/58/94d1588d446b9e0999c04edcd9fd6652.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Irregular verbs</h5>
-    <p class="card-text">See table.</p>
-        <a asp-action="MainTable" asp-controller="Verb" class="btn btn-primary">Go somewhere</a>
-  </div>
+<div class="d-flex justify-content-start">
+    <div class="card" style="width: 250px">
+        <img src="https://i.pinimg.com/736x/94/d1/58/94d1588d446b9e0999c04edcd9fd6652.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Irregular verbs</h5>
+        <p class="card-text">See table.</p>
+            <a asp-action="MainTable" asp-controller="Verb" class="btn btn-primary">Table</a>
+      </div>
+    </div>
+
+    <div class="card" style="width: 250px">
+        <img src="https://media.tenor.com/Sj4_j0eUw0UAAAAM/gachi-gachimuchi.gif" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Comming soon</h5>
+        <p class="card-text">Exesises</p>
+            <a asp-action="MainTable" asp-controller="Verb" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
 </div>
-@*<div class="container">
-      <li class="left__nav__link"><a asp-action="MainPage" asp-controller="Verb">Learn</a></li>
-      <li class="left__nav__link"><a asp-action="MainTable" asp-controller="Verb">Verbs</a></li>
-</div>*@
-
-@*<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="~/css/CustomMainPage.css">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-        <title>Main page</title>
-    </head>
-    <body>
-        
-        <header class="header">
-            <div class="container">
-                <div class="header__inner">
-                <div class="header__logo">English trainer</div>
-
-                <nav class="nav">
-                    <a class = "nav__link" href="#">Log in</a>
-                    <a class = "nav__link" href="#">Register</a>
-                </nav>
-                </div>
-            </div>
-        </header>
-        <div class="main_page_body">
-            <aside class = "aside_left_menu">
-                <ul class = "left__nav">
-                    <li class="left__nav__link"><a asp-action="MainPage" asp-controller="Verb">Learn</a></li>
-                    <li class="left__nav__link"><a asp-action="MainTable" asp-controller="Verb">Verbs</a></li>
-                </ul>
-            </aside>
-            <div class="main_area"> 
-
-            </div>
-        </div>
-    </body>
-</html>
-*@

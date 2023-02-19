@@ -24,3 +24,17 @@
     margin-left: 20px;
     color: black;
 }
+
+.main-content{
+    display:flex;
+}
+
+.left-menu {
+    background-color: aqua;
+    height: 520px;
+    width: 300px;
+}
+
+.back-to-main-page-button{
+    margin-bottom:10px;
+}

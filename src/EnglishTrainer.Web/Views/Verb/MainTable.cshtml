@@ -4,9 +4,9 @@
     ViewData["Title"] = "MainTable";
 }
 
-<p>
-    <a asp-action="MainPage" asp-controller="Verb">Back to main page</a>
-</p>
+<div class="back-to-main-page-button">
+    <a asp-action="MainPage" asp-controller="Verb" class="btn btn-info">Back to main page</a>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -47,22 +47,22 @@
             <input type="hidden" name="pageOptions.CurrentPage" value="@(Model.Options.PageOptions.CurrentPage - 1)" />
             @if (Model.Options.PageOptions.HasPreviousPage)
             {
-                <input class="btn btn-dark btn-sm" type="submit" value="Prev" />
+                <input class="btn btn-outline-info" type="submit" value="Previous page" />
             }
             else
             {
-                <input class="btn btn-dark btn-sm" disabled type="submit" value="Prev" />
+                <input class="btn btn-info" disabled type="submit" value="Previous page" />
             }
         </form>
         <form method="get">
             <input type="hidden" name="pageOptions.CurrentPage" value="@(Model.Options.PageOptions.CurrentPage + 1)" />
             @if (Model.Options.PageOptions.HasNextPage)
             {
-                 <input class="btn btn-dark btn-sm" type="submit" value="Next" />
+                <input class="btn btn-outline-info" type="submit" value="Next page" />
             }
             else
             {
-                 <input class="btn btn-dark btn-sm" disabled type="submit" value="Next" />
+                <input class="btn btn-info" disabled type="submit" value="Next page" />
             }
         </form>
             </tbody>
