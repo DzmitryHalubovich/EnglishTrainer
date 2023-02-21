@@ -32,5 +32,10 @@ namespace EnglishTrainer.Infrastructure.Data
                 .ToListAsync();
         }
 
+        public async Task<T?> GetByIdAsync(int id)
+        {
+            var entity = await _dbContext.Set<T>().FindAsync(id);
+            return entity;
+        }
     }
 }

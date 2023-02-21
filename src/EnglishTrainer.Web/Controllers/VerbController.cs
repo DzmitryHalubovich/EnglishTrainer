@@ -33,6 +33,13 @@ namespace EnglishTrainer.Web.Controllers
             return View(verbList);
         }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            var verbById = await _verbViewModelService.GetVerbViewModelByIdAsync(id);
+
+            return View(verbById);
+        }
+
         public IActionResult MainPage()  => View();
 
     }

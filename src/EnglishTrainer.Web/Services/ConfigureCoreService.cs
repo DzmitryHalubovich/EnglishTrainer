@@ -1,7 +1,6 @@
 ﻿using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
 using EnglishTrainer.Infrastructure.Data;
-using EnglishTrainer.Infrastructure.Services;
 using EnglishTrainer.Web.Interfaces;
 using EnglishTrainer.Web.Models;
 

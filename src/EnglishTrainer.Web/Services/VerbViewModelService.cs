@@ -5,6 +5,7 @@ using EnglishTrainer.ApplicationCore.QueryOptions;
 using EnglishTrainer.Web.Interfaces;
 using EnglishTrainer.Web.Models;
 using EnglishTrainer.Web.Services.QueryOptions;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace EnglishTrainer.Web.Services
 {
@@ -27,14 +28,23 @@ namespace EnglishTrainer.Web.Services
             //var verbs = _mapper.Map<List<VerbViewModel>>(entities);
             var verbs = entities.Select(item => new VerbViewModel()
             {
-                Id = item.Id,
+                Id = item.VerbId,
                 Infinitive= item.Infinitive,
                 PastSimple= item.PastSimple,
                 PastParticiple= item.PastParticiple,
-                TranslateRu = item.TranslateRu
+                TranslateRu = item.ShortTranslate
             }).ToList();
 
             return verbs;
+        }
+
+        public async Task<VerbViewModel> GetVerbViewModelByIdAsync(int id)
+        {
+            var entity = await _verbRepository.GetByIdAsync(id);
+
+            var result = _mapper.Map<VerbViewModel>(entity);
+
+            return result;
         }
     }
 }

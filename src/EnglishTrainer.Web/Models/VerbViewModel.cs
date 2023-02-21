@@ -1,4 +1,6 @@
-﻿namespace EnglishTrainer.Web.Models
+﻿using EnglishTrainer.ApplicationCore.Entities;
+
+namespace EnglishTrainer.Web.Models
 {
     public sealed class VerbViewModel
     {
@@ -9,7 +11,8 @@
         public string PastSimple { get; set; }
 
         public string PastParticiple { get; set; }
+        public Description? Description { get; set; }
 
-        public string TranslateRu { get; set; }
+        public string ShortTranslate { get; set; }
     }
 }

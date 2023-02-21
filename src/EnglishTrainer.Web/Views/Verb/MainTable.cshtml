@@ -30,7 +30,7 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Infinitive)
+                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" itemid="@item.Id">@Html.DisplayFor(modelItem => item.Infinitive)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PastSimple)

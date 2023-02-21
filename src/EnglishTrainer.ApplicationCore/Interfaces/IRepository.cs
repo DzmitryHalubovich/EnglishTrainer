@@ -8,5 +8,7 @@ namespace EnglishTrainer.ApplicationCore.Interfaces
         IEnumerable<Verb> GetAll();
 
         Task<List<T>> GetAllAsync(QueryEntityOptions<T> options);
+
+        Task<T> GetByIdAsync(int id);
     }
 }
