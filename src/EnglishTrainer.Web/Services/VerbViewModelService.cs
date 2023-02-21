@@ -32,7 +32,7 @@ namespace EnglishTrainer.Web.Services
                 Infinitive= item.Infinitive,
                 PastSimple= item.PastSimple,
                 PastParticiple= item.PastParticiple,
-                TranslateRu = item.ShortTranslate
+                ShortTranslate = item.ShortTranslate
             }).ToList();
 
             return verbs;
