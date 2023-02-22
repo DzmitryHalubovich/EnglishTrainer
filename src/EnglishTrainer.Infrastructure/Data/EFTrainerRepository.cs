@@ -34,7 +34,7 @@ namespace EnglishTrainer.Infrastructure.Data
 
         public async Task<T?> GetByIdAsync(int id)
         {
-            var entity = await _dbContext.Set<T>().FindAsync(id);
+            var entity = await _dbContext.Set<T>().IncludeFields().FindAsync(id);
             return entity;
         }
     }

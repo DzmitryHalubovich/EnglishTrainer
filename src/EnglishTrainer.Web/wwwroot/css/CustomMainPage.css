@@ -40,3 +40,21 @@
     margin-bottom:10px;
 }
 
+.td:hover{
+    background-color: aqua;
+}
+
+a {
+    display: block;
+}
+
+.tr:hover{
+    background-color:aqua;
+}
+.td:hover{
+    color:blueviolet;
+}
+
+.a:hover{
+    background-color: aqua;
+}

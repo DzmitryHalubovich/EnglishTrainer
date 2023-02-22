@@ -4,17 +4,15 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="text-capitalize">@Html.DisplayFor(model => model.Infinitive)</h1>
 
 <div>
-    <h4>VerbViewModel</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.VerbId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.VerbId)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Infinitive)

@@ -28,7 +28,7 @@ namespace EnglishTrainer.Web.Services
             //var verbs = _mapper.Map<List<VerbViewModel>>(entities);
             var verbs = entities.Select(item => new VerbViewModel()
             {
-                Id = item.VerbId,
+                VerbId = item.VerbId,
                 Infinitive= item.Infinitive,
                 PastSimple= item.PastSimple,
                 PastParticiple= item.PastParticiple,

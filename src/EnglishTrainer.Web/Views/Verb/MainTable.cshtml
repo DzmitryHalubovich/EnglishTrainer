@@ -5,11 +5,11 @@
 }
 
 <div class="back-to-main-page-button">
-    <a asp-action="MainPage" asp-controller="Verb" class="btn btn-info">Back to main page</a>
+    <a asp-action="Index" asp-controller="Verb" class="btn btn-info">Back to main page</a>
 </div>
-<table class="table">
+<table class="table table-bordered table-hover">
     <thead>
-        <tr>
+        <tr >
             <th>
                 Infinitive
             </th>
@@ -20,7 +20,7 @@
                 PastParticiple
             </th>
             <th>
-                TranslateRu
+                Short Translate
             </th>
             <th></th>
         </tr>
@@ -28,20 +28,28 @@
     <tbody>
         @foreach (var item in Model.VerbsList)
         {
-        <tr>
-            <td>
-                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" itemid="@item.Id">@Html.DisplayFor(modelItem => item.Infinitive)</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PastSimple)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PastParticiple)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShortTranslate)
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.VerbId">
+                    @Html.DisplayFor(modelItem => item.Infinitive)
+                </a>
+                </td>
+                <td>
+                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.VerbId">
+                    @Html.DisplayFor(modelItem => item.PastSimple)
+                </a>
+                </td>
+                <td>
+                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.VerbId">
+                    @Html.DisplayFor(modelItem => item.PastParticiple)
+                </a>
+                </td>
+                <td>
+                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.VerbId">
+                    @Html.DisplayFor(modelItem => item.ShortTranslate)
+                </a> 
+                </td>
+            </tr>
 }
         <form method="get">
             <input type="hidden" name="pageOptions.CurrentPage" value="@(Model.Options.PageOptions.CurrentPage - 1)" />
