@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,8 +35,13 @@ namespace EnglishTrainer.Infrastructure.Data
 
         public async Task<T?> GetByIdAsync(int id)
         {
-            var entity = await _dbContext.Set<T>().IncludeFields().FindAsync(id);
+            var entity = await _dbContext.Set<T>().FindAsync(id);
             return entity;
-        }
+        } 
+        //public async Task<T?> GetByIdAsync(int id,params Expression<Func<T, object>>[] includes)
+        //{
+        //    var entity = await _dbContext.Set<T>().FindAsync(id);
+        //    return entity;
+        //}
     }
 }
