@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace EnglishTrainer.ApplicationCore.Entities
 {
-    public sealed class Example
+    public sealed class Example : BaseModel
     {
-        [Key]
-        public int ExampleId { get; set; }
-
         public int DescriptionId { get; set; }
         public Description Description { get; set; }
 

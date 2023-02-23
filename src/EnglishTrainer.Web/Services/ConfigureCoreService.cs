@@ -10,8 +10,9 @@ namespace EnglishTrainer.Web.Services
     {
         public static IServiceCollection AddCoreServices(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IRepository<Verb>), typeof(EFTrainerRepository<Verb>));
+            services.AddScoped(typeof(IRepository<>), typeof(EFTrainerRepository<>));
             services.AddScoped(typeof(IVerbViewModelService), typeof(VerbViewModelService));
+            services.AddScoped(typeof(IDescriptionViewModelService), typeof(DescriptionViewModelService));
             return services;
         }
     }

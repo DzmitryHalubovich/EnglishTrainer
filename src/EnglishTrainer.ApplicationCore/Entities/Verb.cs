@@ -1,9 +1,7 @@
 ﻿namespace EnglishTrainer.ApplicationCore.Entities
 {
-    public sealed class Verb
+    public sealed class Verb : BaseModel
     {
-        public int VerbId { get; set; }
-
         public string Infinitive { get; set; }
 
         public string PastSimple { get; set; } 

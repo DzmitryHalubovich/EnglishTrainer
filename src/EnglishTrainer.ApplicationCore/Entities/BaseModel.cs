@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace EnglishTrainer.ApplicationCore.Entities
 {
-    public sealed class Description : BaseModel
+    public class BaseModel
     {
-
-        public string? AllTranslateVariants { get; set; }
-
-
-        public List<Example> Examples { get; set; }
+        [Key]
+        public int Id { get; set; }
     }
 }

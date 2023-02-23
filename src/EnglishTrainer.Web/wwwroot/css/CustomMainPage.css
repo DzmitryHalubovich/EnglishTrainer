@@ -29,12 +29,18 @@
     display:flex;
 }
 
+@media only all and (max-width: 800px) {
+    .left-menu {
+        display: none;
+    }
+}
+
 .left-menu {
     background-color: aqua;
     height: 520px;
     width: 300px;
-    
 }
+
 
 .back-to-main-page-button{
     margin-bottom:10px;
@@ -57,4 +63,19 @@ a {
 
 .a:hover{
     background-color: aqua;
+}
+
+.translates {
+    font-style: italic;
+}
+
+.ex_o {
+    margin-bottom: 2px;
+    font-size: 0.875rem;
+}
+
+.ex_t {
+    margin-bottom: 15px;
+    font-size: 0.875rem;
+    font-style: italic;
 }

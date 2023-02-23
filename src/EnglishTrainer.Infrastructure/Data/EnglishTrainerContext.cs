@@ -11,6 +11,7 @@ namespace EnglishTrainer.Infrastructure.Data
     public sealed class EnglishTrainerContext : DbContext
     {
         public DbSet<Verb> Verbs { get; set; }
+        public DbSet<Description> Descriptions { get; set; }
 
         public EnglishTrainerContext(DbContextOptions<EnglishTrainerContext> options) : base(options) { }
     }

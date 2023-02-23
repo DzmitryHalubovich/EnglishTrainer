@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace EnglishTrainer.ApplicationCore.QueryOptions
 {
     public sealed class QueryEntityOptions<TEntity> : BaseQueryOptions<TEntity> where TEntity : class
     {
+        private IList<Expression<Func<TEntity, object>>> _includeOptions;
         public QueryEntityOptions<TEntity> SetCurentPageAndPageSize(PageOptions options)
         {
             PageOptions.PageSize = options.PageSize;
@@ -17,6 +19,13 @@ namespace EnglishTrainer.ApplicationCore.QueryOptions
             }
             return this;
         }
+        public QueryEntityOptions<TEntity> AddIncludeOption(Expression<Func<TEntity, object>> includeOption)
+        {
+            _includeOptions = _includeOptions ?? new List<Expression<Func<TEntity, object>>>();
+            _includeOptions.Add(includeOption);
+            return this;
+        }
+
         public QueryEntityOptions<TEntity> NextPage()
         {
             PageOptions.CurrentPage++;

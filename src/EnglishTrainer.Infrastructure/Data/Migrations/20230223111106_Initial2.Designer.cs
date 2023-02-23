@@ -4,6 +4,7 @@ using EnglishTrainer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnglishTrainer.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(EnglishTrainerContext))]
-    partial class EnglishTrainerContextModelSnapshot : ModelSnapshot
+    [Migration("20230223111106_Initial2")]
+    partial class Initial2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,27 +27,27 @@ namespace EnglishTrainer.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.Description", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("DescriptionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DescriptionId"));
 
                     b.Property<string>("AllTranslateVariants")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("DescriptionId");
 
                     b.ToTable("Descriptions");
                 });
 
             modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.Example", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ExampleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExampleId"));
 
                     b.Property<int>("DescriptionId")
                         .HasColumnType("int");
@@ -57,7 +60,7 @@ namespace EnglishTrainer.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ExampleId");
 
                     b.HasIndex("DescriptionId");
 
@@ -66,11 +69,11 @@ namespace EnglishTrainer.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.Verb", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("VerbId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VerbId"));
 
                     b.Property<int?>("DescriptionId")
                         .HasColumnType("int");
@@ -91,7 +94,7 @@ namespace EnglishTrainer.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("VerbId");
 
                     b.HasIndex("DescriptionId");
 

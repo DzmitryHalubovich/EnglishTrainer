@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EnglishTrainer.Infrastructure.Data
 {
-    public class EFTrainerRepository<T> : IRepository<T> where T : class
+    public class EFTrainerRepository<T> : IRepository<T> where T : BaseModel
     {
         private readonly EnglishTrainerContext _dbContext;
 
@@ -21,7 +21,7 @@ namespace EnglishTrainer.Infrastructure.Data
               _dbContext= dbContext;
         }
 
-        public IEnumerable<Verb> GetAll()
+        public IEnumerable<T> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -33,15 +33,16 @@ namespace EnglishTrainer.Infrastructure.Data
                 .ToListAsync();
         }
 
-        public async Task<T?> GetByIdAsync(int id)
-        {
-            var entity = await _dbContext.Set<T>().FindAsync(id);
-            return entity;
-        } 
-        //public async Task<T?> GetByIdAsync(int id,params Expression<Func<T, object>>[] includes)
+        //public async Task<T?> GetByIdAsync(int id)
         //{
         //    var entity = await _dbContext.Set<T>().FindAsync(id);
         //    return entity;
         //}
+
+        public async Task<T?> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes)
+        {
+            var entity = await _dbContext.Set<T>().IncludeFields(includes).FirstOrDefaultAsync(x => x.Id == id);
+            return entity;
+        }
     }
 }

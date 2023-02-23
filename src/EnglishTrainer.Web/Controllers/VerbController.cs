@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
+using EnglishTrainer.ApplicationCore.QueryOptions;
 using EnglishTrainer.Web.Interfaces;
 using EnglishTrainer.Web.Models;
 using EnglishTrainer.Web.Services.QueryOptions;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace EnglishTrainer.Web.Controllers
 {
@@ -30,7 +32,7 @@ namespace EnglishTrainer.Web.Controllers
         public async Task <IActionResult> MainTable(VerbQueryOptions options)
         {
             _logger.LogInformation("Processing of the request MainTable.");
-            
+
             var verbViewModel = await _verbViewModelService.GetAllVerbsAsync(options);
             options.PageOptions.CurrentElementsCount = verbViewModel.Count;
 
