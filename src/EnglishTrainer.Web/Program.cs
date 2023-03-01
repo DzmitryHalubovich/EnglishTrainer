@@ -5,11 +5,48 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Serilog.Events;
+using Serilog.Formatting.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
+//var logger = new LoggerConfiguration()
+//.MinimumLevel.Debug()
+//.WriteTo.Console()
+//.WriteTo.File("logs/rumble-.txt", rollingInterval: RollingInterval.Day)
+//.MinimumLevel.Information()
+//.WriteTo.File("logs/information-.txt", rollingInterval: RollingInterval.Day)
+//.CreateLogger();
+
+#region Serilog information
+//https://ru.stackoverflow.com/questions/883035/%D0%9A%D0%B0%D0%BA-%D0%B2-serilog-%D0%B7%D0%B0%D0%B4%D0%B0%D1%82%D1%8C-%D1%81%D0%B2%D1%8F%D0%B7%D0%BA%D1%83-%D0%B8%D0%B7-%D0%BD%D0%B5%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%B8%D1%85-%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D0%B5%D0%B9-%D0%BB%D0%BE%D0%B3%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F-%D0%B8-%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2-%D0%B7%D0%B0%D0%BF%D0%B8%D1%81
+//Log.Logger = new LoggerConfiguration()
+//    .MinimumLevel.Debug()
+//    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+//    .Enrich.FromLogContext()
+//    .WriteTo.Console()
+//    .WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day)
+//    .CreateLogger();
+#endregion
+
+//Serilog
+var logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.File("logs/main-.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.Logger(lc => lc
+        .Filter.ByIncludingOnly(le => le.Level == LogEventLevel.Debug)
+        .WriteTo.File("logs/debug-.txt", rollingInterval: RollingInterval.Day))
+    .WriteTo.Logger(lc => lc
+        .Filter.ByIncludingOnly(le => le.Level == LogEventLevel.Information)
+        .WriteTo.File("logs/information-.txt", rollingInterval: RollingInterval.Day))
+    .CreateLogger();
+
 var builder = WebApplication.CreateBuilder(args);
 
+//Add logger
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -100,6 +137,7 @@ app.UseRouting();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Verb}/{action=MainPage}/{id?}");
+    pattern: "{controller=Verb}/{action=Index}/{id?}");
+
 
 app.Run();

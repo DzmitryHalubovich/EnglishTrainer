@@ -6,5 +6,6 @@ namespace EnglishTrainer.Web.Interfaces
     public interface IVerbViewModelService
     {
         Task<IList<VerbViewModel>> GetAllVerbsAsync(VerbQueryOptions options);
+        Task<VerbViewModel> GetVerbViewModelByIdAsync(int id);
     }
 }

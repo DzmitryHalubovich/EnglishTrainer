@@ -29,12 +29,53 @@
     display:flex;
 }
 
+@media only all and (max-width: 800px) {
+    .left-menu {
+        display: none;
+    }
+}
+
 .left-menu {
     background-color: aqua;
     height: 520px;
     width: 300px;
 }
 
+
 .back-to-main-page-button{
     margin-bottom:10px;
+}
+
+.td:hover{
+    background-color: aqua;
+}
+
+a {
+    display: block;
+}
+
+.tr:hover{
+    background-color:aqua;
+}
+.td:hover{
+    color:blueviolet;
+}
+
+.a:hover{
+    background-color: aqua;
+}
+
+.translates {
+    font-style: italic;
+}
+
+.ex_o {
+    margin-bottom: 2px;
+    font-size: 0.875rem;
+}
+
+.ex_t {
+    margin-bottom: 15px;
+    font-size: 0.875rem;
+    font-style: italic;
 }
