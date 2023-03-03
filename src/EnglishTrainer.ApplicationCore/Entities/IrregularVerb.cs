@@ -7,19 +7,19 @@ namespace EnglishTrainer.ApplicationCore.Entities
     public sealed class IrregularVerb : BaseModel
     {
         [Column("infinitive")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string Infinitive { get; set; }
 
         [Column("past_simple")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string PastSimple { get; set; }
 
         [Column("past_participle")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string PastParticiple { get; set; }
 
         [Column("short_translate")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string ShortTranslate { get; set; }
 
         public IrregularVerb() { }

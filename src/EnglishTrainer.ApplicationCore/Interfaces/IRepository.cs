@@ -9,6 +9,7 @@ namespace EnglishTrainer.ApplicationCore.Interfaces
         IEnumerable<T> GetAll();
 
         Task<List<T>> GetAllAsync(QueryEntityOptions<T> options);
+        Task CreateAsync(T entity);
 
         Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes);
     }

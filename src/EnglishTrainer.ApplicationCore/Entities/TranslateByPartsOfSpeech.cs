@@ -16,35 +16,35 @@ namespace EnglishTrainer.ApplicationCore.Entities
         public Word Word { get; set; }
 
         [Column("adverb")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string? Adverb { get; set; }
 
         [Column("adjective")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string? Adjective { get; set; }
 
         [Column("conjunction")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string? Conjunction { get; set; }
 
         [Column("interjection")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string? Interjection { get; set; }
 
         [Column("noun")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string? Noun { get; set; }
 
         [Column("verb")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string? Verb { get; set; }
 
         [Column("preposition")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string? Preposition { get; set; }
 
         [Column("pronoun")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string? Pronoun { get; set; }
         
     }
