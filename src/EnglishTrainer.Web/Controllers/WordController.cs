@@ -1,8 +1,11 @@
-﻿using EnglishTrainer.ApplicationCore.Interfaces;
+﻿using EnglishTrainer.ApplicationCore;
+using EnglishTrainer.ApplicationCore.Entities;
+using EnglishTrainer.ApplicationCore.Interfaces;
 using EnglishTrainer.Web.Interfaces;
 using EnglishTrainer.Web.Models;
 using EnglishTrainer.Web.Services.QueryOptions;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Packaging;
 
 namespace EnglishTrainer.Web.Controllers
 {
@@ -34,7 +37,24 @@ namespace EnglishTrainer.Web.Controllers
         {
             var newWord = new WordViewModel();
 
+            //var newExample = new Example();
+
+            //newWord.Examples.Add(newExample);
+
             return View(newWord);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(WordViewModel wordViewModel)
+        {
+
+            await _wordViewModelService.CreateNewWordAsync(wordViewModel);
+            //var newExample = new Example();
+
+            //newWord.Examples.Add(newExample);
+
+            return RedirectToAction("MainTable");
+        }
+
     }
 }

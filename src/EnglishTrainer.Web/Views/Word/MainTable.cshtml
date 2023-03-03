@@ -15,8 +15,27 @@
 <table class="table">
     <thead>
         <tr>
-            <th></th>
+            
         </tr>
+        
+        @foreach(var item in Model.WordsList)
+        {
+            <td>
+                @item.Name + @item.TranslateVariants
+            </td>
+        }
+        
+@*        @foreach(var item in Model.WordsList){
+            <td>
+                @item.Name + @item.TranslateVariants
+                @foreach(var ex in item.Examples)
+                {
+                <p>@ex.EnglishExample</p>
+                <p>@ex.RussianExample</p>
+                }
+            </td>
+        }*@
+         
     </thead>
     <tbody>
 @foreach (var item in Model.WordsList) {

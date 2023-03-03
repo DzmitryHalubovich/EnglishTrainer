@@ -6,5 +6,7 @@ namespace EnglishTrainer.Web.Interfaces
     public interface IWordViewModelService
     {
         Task<IList<WordViewModel>> GetAllWordsAsync(VerbQueryOptions options);
+        Task CreateNewWordAsync(WordViewModel wordViewModel);
+
     }
 }

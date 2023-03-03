@@ -21,6 +21,12 @@ namespace EnglishTrainer.Infrastructure.Data
               _dbContext= dbContext;
         }
 
+        public async Task CreateAsync(T entity)
+        {
+            _dbContext.Add(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll()
         {
             throw new NotImplementedException();

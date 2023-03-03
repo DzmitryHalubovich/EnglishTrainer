@@ -9,9 +9,10 @@ namespace EnglishTrainer.Web.Models
         [Required]
         public string Name { get; set; }
         [Required]
+        [DataType("varchar(max)")]
         public string TranslateVariants { get; set; }
 
-        public IList<Example> Examples { get; set; }
+        public IList<Example> Examples { get; set; } = new List<Example>();
         public TranslateByPartsOfSpeech PartsOfSpeech { get; set; }
     }
 }

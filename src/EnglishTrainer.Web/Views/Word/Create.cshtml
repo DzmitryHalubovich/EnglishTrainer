@@ -1,4 +1,5 @@
-﻿@model EnglishTrainer.Web.Models.WordViewModel
+﻿@using EnglishTrainer.ApplicationCore.Entities;
+@model EnglishTrainer.Web.Models.WordViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -8,10 +9,15 @@
 
 <h4>WordViewModel</h4>
 <hr />
-<div class="row">
+@*<div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -22,14 +28,67 @@
                 <input asp-for="TranslateVariants" class="form-control" />
                 <span asp-validation-for="TranslateVariants" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
+</div>*@
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div id="exampleBlock">
+        <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="TranslateVariants" class="control-label"></label>
+            <input asp-for="TranslateVariants" class="form-control" />
+            <span asp-validation-for="TranslateVariants" class="text-danger"></span>
+        </div>
+        <div class="exampleItem">
+            <h4>Пример  № 1</h4>
+            <div>
+                <label>Английский вариант</label>
+                <div>
+                    <input type="text" name="Examples[0].EnglishExample" />
+                </div>
+                <label>Русский перевод</label>
+                <div>
+                    <input type="text" name="Examples[0].RussianExample" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <p><a class="addLink">Добавить новый элемент</a></p>
+    <p><input type="submit" value="Добавить" /></p>
+}
 
 <div>
-    <a asp-action="MainTable">Back to List</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    <script>
+        $(function () {
+            var i = 0;
+            $('.addLink').click(function () {
+                i++;
+                var html2Add = "<div class='exampleItem'>" +
+                    "<h4>Пример № " + (i + 1) + "</h4>" +
+                    "<div><label>Английский вариант</label><div>" +
+                    "<input type='text' name='Examples[" + i + "].EnglishExample' />" +
+                    "</div><label>Русский перевод</label><div>" +
+                    "<input type='text' name='Examples[" + i + "].RussianExample' />" +
+                    "</div></div></div>";
+                $('#exampleBlock').append(html2Add);
+            })
+        })
+    </script>
+}

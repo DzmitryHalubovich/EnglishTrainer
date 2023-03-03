@@ -22,8 +22,8 @@ namespace EnglishTrainer.Infrastructure.Data
             modelBuilder.Entity<Word>(builder =>
             {
                 builder.Property(x=>x.Id).ValueGeneratedOnAdd();
-                builder.Property(x=>x.Name).HasColumnName("word").HasColumnType("varchar(max)").IsRequired();
-                builder.Property(x => x.TranslateVariants).HasColumnName("translate").HasColumnType("varchar(max)").IsRequired();
+                builder.Property(x=>x.Name).HasColumnName("word").HasColumnType("nvarchar(max)").IsRequired();
+                builder.Property(x => x.TranslateVariants).HasColumnName("translate").HasColumnType("nvarchar(max)").IsRequired();
                 builder.HasMany(x => x.Examples).WithOne(e=>e.Word);
                 builder.HasOne(x=>x.PartsOfSpeech).WithOne(e=>e.Word);
                 builder.ToTable("dictionary");

@@ -1,4 +1,5 @@
-﻿using EnglishTrainer.ApplicationCore.Entities;
+﻿using AutoMapper;
+using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
 using EnglishTrainer.ApplicationCore.QueryOptions;
 using EnglishTrainer.Web.Interfaces;
@@ -10,10 +11,18 @@ namespace EnglishTrainer.Web.Services
     public class WordViewModelService : IWordViewModelService
     {
         private readonly IRepository<Word> _wordRepository;
+        private readonly IMapper _mapper;
 
-        public WordViewModelService(IRepository<Word> wordRepository)
+        public WordViewModelService(IRepository<Word> wordRepository, IMapper mapper)
         {
             _wordRepository=wordRepository;
+            _mapper=mapper;
+        }
+
+        public async Task CreateNewWordAsync(WordViewModel wordViewModel)
+        {
+            var newWord = _mapper.Map<Word>(wordViewModel);
+            await _wordRepository.CreateAsync(newWord);
         }
 
         public async Task<IList<WordViewModel>> GetAllWordsAsync(VerbQueryOptions wordQueryOptions)
