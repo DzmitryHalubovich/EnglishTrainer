@@ -2,22 +2,21 @@
     ViewData["Title"] = "Main page";
 }
 
-<div class="d-flex justify-content-start">
-    <div class="card" style="width: 250px">
+<div class="d-flex justify-content-center">
+    <a asp-action="MainTable" asp-controller="Verb" div class="card" style="width: 250px; margin-right:20px;">
         <img src="https://i.pinimg.com/736x/94/d1/58/94d1588d446b9e0999c04edcd9fd6652.jpg" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Irregular verbs</h5>
-        <p class="card-text">See table.</p>
-            <a asp-action="MainTable" asp-controller="Verb" class="btn btn-primary">Table</a>
+        <h5 class="card-title">Таблица неправильных глаголов</h5>
+            @*<a asp-action="MainTable" asp-controller="Verb" class="btn btn-primary">Table</a>*@
       </div>
-    </div>
+    </a>
 
-    <div class="card" style="width: 250px">
+    <a asp-action="MainTable" asp-controller="Verb" div class="card" style="width: 250px">
         <img src="https://media.tenor.com/Sj4_j0eUw0UAAAAM/gachi-gachimuchi.gif" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Comming soon</h5>
-        <p class="card-text">Exesises</p>
-            <a asp-action="MainTable" asp-controller="Verb" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title">Словарик</h5>
+        <p class="card-text">Записывайте слова, которые хотите запомнить!</p>
+            @*<a asp-action="MainTable" asp-controller="Verb" class="btn btn-primary">К словарю</a>*@
       </div>
-    </div>
+    </a>
 </div>

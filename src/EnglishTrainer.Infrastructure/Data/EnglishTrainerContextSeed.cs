@@ -38,9 +38,9 @@ namespace EnglishTrainer.Infrastructure.Data
             }
         }
 
-        private static IEnumerable<Verb> GetPreconfiguredVerbs()
+        private static IEnumerable<IrregularVerb> GetPreconfiguredVerbs()
         {
-            return new List<Verb>
+            return new List<IrregularVerb>
             {
                 new ("be", "was/were", "been", "быть/являться"),
                 new ("beat", "beat", "beaten", "бить/колотить"),

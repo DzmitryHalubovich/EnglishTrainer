@@ -3,6 +3,7 @@ using EnglishTrainer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnglishTrainer.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(EnglishTrainerContext))]
-    partial class EnglishTrainerContextModelSnapshot : ModelSnapshot
+    [Migration("20230303101541_ChangeStructure")]
+    partial class ChangeStructure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,8 +28,7 @@ namespace EnglishTrainer.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -46,15 +48,14 @@ namespace EnglishTrainer.Infrastructure.Data.Migrations
 
                     b.HasIndex("WordId");
 
-                    b.ToTable("examples");
+                    b.ToTable("Examples");
                 });
 
             modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.IrregularVerb", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -80,15 +81,14 @@ namespace EnglishTrainer.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("irregular_verbs");
+                    b.ToTable("Verbs");
                 });
 
             modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.TranslateByPartsOfSpeech", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -132,15 +132,14 @@ namespace EnglishTrainer.Infrastructure.Data.Migrations
                     b.HasIndex("WordId")
                         .IsUnique();
 
-                    b.ToTable("various_translations");
+                    b.ToTable("various translation");
                 });
 
             modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.Word", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 

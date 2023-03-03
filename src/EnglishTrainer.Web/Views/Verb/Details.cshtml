@@ -8,15 +8,6 @@
 
 <div>
     <p>Past simple - <span style="font-weight:700">@Html.DisplayFor(model => model.PastSimple)</span>; Past participle - <span style="font-weight:700">@Html.DisplayFor(model => model.PastParticiple)</span>;</p>
-    <p class="translates">@Html.DisplayFor(model => model.Description.AllTranslateVariants)</p>
-    <h3 style="margin-bottom:10px">Примеры с переводом</h3>
-    <div class = "d-block">
-        @foreach (var item in Model.Description.Examples)
-        {
-            <p class="ex_o">@item.EnglishExample</p>
-            <p class="ex_t">@item.RussianExample</p>
-        }
-    </div>
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

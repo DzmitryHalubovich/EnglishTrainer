@@ -11,18 +11,17 @@ namespace EnglishTrainer.Web.Services
 {
     public class VerbViewModelService : IVerbViewModelService
     {
-        private readonly IRepository<Verb> _verbRepository;
+        private readonly IRepository<IrregularVerb> _verbRepository;
         private readonly IMapper _mapper;
 
-        public VerbViewModelService(IRepository<Verb> verbRepository, IMapper mapper)
+        public VerbViewModelService(IRepository<IrregularVerb> verbRepository, IMapper mapper)
         {
             _verbRepository = verbRepository;
             _mapper = mapper;
         }
         public async Task<IList<VerbViewModel>> GetAllVerbsAsync(VerbQueryOptions verbQueryOptions)
         {
-            var options = new QueryEntityOptions<Verb>()
-                .AddIncludeOption(x=>x.Description)
+            var options = new QueryEntityOptions<IrregularVerb>()
                 .SetCurentPageAndPageSize(verbQueryOptions.PageOptions);
 
             var entities = await _verbRepository.GetAllAsync(options); //look in database all our enteties
@@ -34,7 +33,6 @@ namespace EnglishTrainer.Web.Services
                 PastSimple= item.PastSimple,
                 PastParticiple= item.PastParticiple,
                 ShortTranslate = item.ShortTranslate,
-                DescriptionId = item.DescriptionId
             }).ToList();
 
             return verbs;
@@ -42,7 +40,7 @@ namespace EnglishTrainer.Web.Services
 
         public async Task<VerbViewModel> GetVerbViewModelByIdAsync(int id)
         {
-            var entity = await _verbRepository.GetByIdAsync(id,  x=>x.Description.Examples);
+            var entity = await _verbRepository.GetByIdAsync(id);
 
             var result = _mapper.Map<VerbViewModel>(entity);
 

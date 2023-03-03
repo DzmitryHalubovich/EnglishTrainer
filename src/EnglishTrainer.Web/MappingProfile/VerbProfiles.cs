@@ -8,8 +8,8 @@ namespace EnglishTrainer.Web.MappingProfile
     {
         public VerbProfiles()
         {
-            CreateMap<Verb, VerbViewModel>();
-            CreateMap<VerbIndexViewModel, Verb>();
+            CreateMap<IrregularVerb, VerbViewModel>();
+            CreateMap<VerbIndexViewModel, IrregularVerb>();
         }
     }
 

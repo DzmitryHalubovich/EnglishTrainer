@@ -1,0 +1,23 @@
+﻿@model EnglishTrainer.Web.Models.VerbViewModel
+
+<div class="container">
+        <h4>Глагол:</h4>
+        <h1 class="text-capitalize">@Html.DisplayFor(model => model.Infinitive)</h1>
+        <p>Past simple - <span style="font-weight:700">@Html.DisplayFor(model => model.PastSimple)</span>; Past participle - <span style="font-weight:700">@Html.DisplayFor(model => model.PastParticiple)</span>;</p>
+
+    <div class="d-flex justify-content-start">
+        <div>
+            <img src="~/css/images/pepe.png" style="height:80px; width:80px;"/>
+        </div>
+            <h2>Упс... Кажется у этого слова нет описания!</h2> 
+            <div class="d-flex justify-content-center">
+            <h2>Хотите добавить описание?</h2>
+        </div>
+        
+    </div>
+    <div class="d-flex justify-content-start">
+        <a asp-action="MainTable" asp-controller="Verb" asp-route-id="@Model.VerbId" button type="button" class="btn btn-outline-info" asp-for>Да</a>
+        <a asp-action="MainTable" asp-controller="Verb" button type="button" class="btn btn-outline-info">Нет</a>
+    </div>
+</div>
+
