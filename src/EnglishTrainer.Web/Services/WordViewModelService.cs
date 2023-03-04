@@ -46,7 +46,7 @@ namespace EnglishTrainer.Web.Services
 
         public async Task<WordViewModel> GetWordViewModelByIdAsync(int id)
         {
-            var entity = await _wordRepository.GetByIdAsync(id);
+            var entity = await _wordRepository.GetByIdAsync(id, x=>x.PartsOfSpeech,t=>t.Examples);
 
             var result = _mapper.Map<WordViewModel>(entity);
 
