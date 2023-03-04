@@ -1,5 +1,6 @@
-﻿.body{
-    min-width:820px;
+﻿body {
+    background-color: #ededed;
+    min-width: 820px;
 }
 
 .trainer-header {
@@ -82,9 +83,21 @@ a {
 
 .my-card {
     width: 200px;
-    transition: all linear .03s
+    transition: all linear .04s
 }
 
 .my-card:hover {
     transform: scale(1.2)
 }
+
+.my-row {
+    height: 40px;
+    color: black;
+    transition: all linear .05s
+}
+
+    .my-row:hover {
+        color: #8378ff;
+        background-color: gainsboro;
+        transform: scale(1.02)
+    }

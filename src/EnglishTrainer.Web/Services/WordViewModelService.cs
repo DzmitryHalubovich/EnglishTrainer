@@ -41,8 +41,16 @@ namespace EnglishTrainer.Web.Services
                 TranslateVariants = item.TranslateVariants
             }).ToList();
 
-
             return words;
+        }
+
+        public async Task<WordViewModel> GetWordViewModelByIdAsync(int id)
+        {
+            var entity = await _wordRepository.GetByIdAsync(id);
+
+            var result = _mapper.Map<WordViewModel>(entity);
+
+            return result;
         }
     }
 }

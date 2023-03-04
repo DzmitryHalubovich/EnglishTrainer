@@ -28,7 +28,7 @@
     <tbody>
         @foreach (var item in Model.VerbsList)
         {
-            <tr>
+            <tr class="my-row">
                 <td>
                     <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.VerbId">
                     @Html.DisplayFor(modelItem => item.Infinitive)

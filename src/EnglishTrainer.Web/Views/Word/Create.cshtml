@@ -5,10 +5,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Новое слово</h1>
 
-<h4>WordViewModel</h4>
-<hr />
 @*<div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -42,14 +40,57 @@
     @Html.AntiForgeryToken()
     <div id="exampleBlock">
         <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">Слово</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="TranslateVariants" class="control-label"></label>
+            <label asp-for="TranslateVariants" class="control-label">Варианты перевода</label>
             <input asp-for="TranslateVariants" class="form-control" />
             <span asp-validation-for="TranslateVariants" class="text-danger"></span>
+        </div>
+        <h6>Слово может иметь разный перевод в зависимости от части речи в которой оно употребляется.</h6>
+        <h6>Заполните форму. Пустая форма означает что слово такого значения не принимает.</h6>
+        <h6>Позже вы сможете изменить данные</h6>
+        <div class="form-group">
+            <label asp-for="PartsOfSpeech.Adjective" class="control-label">Adjective/Прилагательное</label>
+            <input asp-for="PartsOfSpeech.Adjective" class="form-control" placeholder="..." />
+            <span asp-validation-for="PartsOfSpeech.Adjective" class="text-danger"></span>
+        </div> 
+        <div class="form-group">
+            <label asp-for="PartsOfSpeech.Adverb" class="control-label">Adverb/Наречие</label>
+            <input asp-for="PartsOfSpeech.Adverb" class="form-control" placeholder="..."/>
+            <span asp-validation-for="PartsOfSpeech.Adverb" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PartsOfSpeech.Conjunction" class="control-label">Conjunction/Союз</label>
+            <input asp-for="PartsOfSpeech.Conjunction" class="form-control" placeholder="..."/>
+            <span asp-validation-for="PartsOfSpeech.Conjunction" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PartsOfSpeech.Noun" class="control-label">Noun/Существительное</label>
+            <input asp-for="PartsOfSpeech.Noun" class="form-control" placeholder="..."/>
+            <span asp-validation-for="PartsOfSpeech.Noun" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PartsOfSpeech.Interjection" class="control-label">Interjection/Междометие</label>
+            <input asp-for="PartsOfSpeech.Interjection" class="form-control" placeholder="..."/>
+            <span asp-validation-for="PartsOfSpeech.Interjection" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PartsOfSpeech.Verb" class="control-label">Verb/Глагол</label>
+            <input asp-for="PartsOfSpeech.Verb" class="form-control" placeholder="..." />
+            <span asp-validation-for="PartsOfSpeech.Verb" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PartsOfSpeech.Preposition" class="control-label">Preposition/Предлог</label>
+            <input asp-for="PartsOfSpeech.Preposition" class="form-control" placeholder="..." />
+            <span asp-validation-for="PartsOfSpeech.Preposition" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PartsOfSpeech.Pronoun" class="control-label">Pronoun/Междометие</label>
+            <input asp-for="PartsOfSpeech.Pronoun" class="form-control" placeholder="..." />
+            <span asp-validation-for="PartsOfSpeech.Pronoun" class="text-danger"></span>
         </div>
         <div class="exampleItem">
             <h4>Пример  № 1</h4>

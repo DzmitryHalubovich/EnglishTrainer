@@ -4,7 +4,7 @@
     ViewData["Title"] = "MainTable";
 }
 
-<h1>MainTable</h1>
+<h1></h1>
 
 <p>
     <a asp-action="Index" asp-controller="Verb">Back</a>
@@ -12,18 +12,17 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            
-        </tr>
+
+<div class="container">
+    @foreach(var item in Model.WordsList)
+    {
+
+        <a asp-action="Details" asp-controller="Word" asp-route-id="@item.Id" div class="col my-row border text-decoration-none">
+            @item.Name - @item.TranslateVariants
+         </a>
         
-        @foreach(var item in Model.WordsList)
-        {
-            <td>
-                @item.Name + @item.TranslateVariants
-            </td>
-        }
+    }
+</div>
         
 @*        @foreach(var item in Model.WordsList){
             <td>
@@ -37,15 +36,15 @@
         }*@
          
     </thead>
-    <tbody>
-@foreach (var item in Model.WordsList) {
-        <tr>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    @*<tbody>
+        @foreach (var item in Model.WordsList) {
+            <tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>*@
+

@@ -56,5 +56,11 @@ namespace EnglishTrainer.Web.Controllers
             return RedirectToAction("MainTable");
         }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            var existingWord = await  _wordViewModelService.GetWordViewModelByIdAsync(id);
+
+            return View(existingWord);
+        }
     }
 }
