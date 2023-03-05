@@ -1,6 +1,7 @@
-﻿using EnglishTrainer.Web.Models;
+﻿
+using EnglishTrainer.ApplicationCore.Models;
 
-namespace EnglishTrainer.Web.Interfaces
+namespace EnglishTrainer.Services
 {
     public interface IExampleViewModelService
     {

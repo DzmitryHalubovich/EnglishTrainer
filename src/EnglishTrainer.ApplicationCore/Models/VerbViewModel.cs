@@ -1,6 +1,5 @@
-﻿using EnglishTrainer.ApplicationCore.Entities;
-
-namespace EnglishTrainer.Web.Models
+﻿
+namespace EnglishTrainer.ApplicationCore.Models
 {
     public sealed class VerbViewModel
     {

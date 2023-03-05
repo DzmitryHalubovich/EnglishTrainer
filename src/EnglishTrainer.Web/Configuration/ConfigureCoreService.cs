@@ -1,10 +1,8 @@
-﻿using EnglishTrainer.ApplicationCore.Entities;
+﻿using EnglishTrainer.ApplicationCore;
 using EnglishTrainer.ApplicationCore.Interfaces;
 using EnglishTrainer.Infrastructure.Data;
-using EnglishTrainer.Web.Interfaces;
-using EnglishTrainer.Web.Models;
 
-namespace EnglishTrainer.Web.Services
+namespace EnglishTrainer.Services
 {
     public static class ConfigureCoreService
     {

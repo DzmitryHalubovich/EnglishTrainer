@@ -27,6 +27,12 @@ namespace EnglishTrainer.Infrastructure.Data
             await _dbContext.SaveChangesAsync();
         }
 
+        public Task DeleteAsync(int id)
+        {
+            //_dbContext.Remove(id);
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<T> GetAll()
         {
             throw new NotImplementedException();
@@ -49,6 +55,11 @@ namespace EnglishTrainer.Infrastructure.Data
         {
             var entity = await _dbContext.Set<T>().IncludeFields(includes).FirstOrDefaultAsync(x => x.Id == id);
             return entity;
+        }
+
+        public Task<T> Update(T entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

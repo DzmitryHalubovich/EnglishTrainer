@@ -1,7 +1,7 @@
-﻿using EnglishTrainer.Web.Models;
-using EnglishTrainer.Web.Services.QueryOptions;
+﻿using EnglishTrainer.ApplicationCore.Models;
+using EnglishTrainer.ApplicationCore.QueryOptions;
 
-namespace EnglishTrainer.Web.Interfaces
+namespace EnglishTrainer.Services
 {
     public interface IVerbViewModelService
     {

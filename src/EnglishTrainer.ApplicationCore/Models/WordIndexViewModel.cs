@@ -1,6 +1,6 @@
-﻿using EnglishTrainer.Web.Services.QueryOptions;
+﻿using EnglishTrainer.ApplicationCore.QueryOptions;
 
-namespace EnglishTrainer.Web.Models
+namespace EnglishTrainer.ApplicationCore.Models
 {
     public class WordIndexViewModel
     {

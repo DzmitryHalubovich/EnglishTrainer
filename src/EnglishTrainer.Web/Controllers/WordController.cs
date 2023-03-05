@@ -1,13 +1,10 @@
-﻿using EnglishTrainer.ApplicationCore;
-using EnglishTrainer.ApplicationCore.Entities;
-using EnglishTrainer.ApplicationCore.Interfaces;
-using EnglishTrainer.Web.Interfaces;
-using EnglishTrainer.Web.Models;
-using EnglishTrainer.Web.Services.QueryOptions;
-using Microsoft.AspNetCore.Mvc;
-using NuGet.Packaging;
+﻿using EnglishTrainer.ApplicationCore.Models;
+using EnglishTrainer.ApplicationCore.QueryOptions;
 
-namespace EnglishTrainer.Web.Controllers
+using Microsoft.AspNetCore.Mvc;
+
+
+namespace EnglishTrainer.Services
 {
     public class WordController : Controller
     {
@@ -32,14 +29,14 @@ namespace EnglishTrainer.Web.Controllers
             return View(verbList);
         }
 
+
+        //Создание обьекта и вью работает по примеру отсюда
+        //https://metanit.com/sharp/mvc5/5.11.php
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             var newWord = new WordViewModel();
-
-            //var newExample = new Example();
-
-            //newWord.Examples.Add(newExample);
 
             return View(newWord);
         }
@@ -49,9 +46,6 @@ namespace EnglishTrainer.Web.Controllers
         {
 
             await _wordViewModelService.CreateNewWordAsync(wordViewModel);
-            //var newExample = new Example();
-
-            //newWord.Examples.Add(newExample);
 
             return RedirectToAction("MainTable");
         }

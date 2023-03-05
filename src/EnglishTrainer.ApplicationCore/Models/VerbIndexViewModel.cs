@@ -1,7 +1,7 @@
-﻿using EnglishTrainer.ApplicationCore.QueryOptions;
-using EnglishTrainer.Web.Services.QueryOptions;
+﻿
+using EnglishTrainer.ApplicationCore.QueryOptions;
 
-namespace EnglishTrainer.Web.Models
+namespace EnglishTrainer.ApplicationCore.Models
 {
     public sealed class VerbIndexViewModel
     {

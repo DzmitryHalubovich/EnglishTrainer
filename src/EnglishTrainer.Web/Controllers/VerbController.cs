@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
-using EnglishTrainer.ApplicationCore.Entities;
-using EnglishTrainer.ApplicationCore.Interfaces;
+using EnglishTrainer.ApplicationCore.Models;
 using EnglishTrainer.ApplicationCore.QueryOptions;
-using EnglishTrainer.Web.Interfaces;
-using EnglishTrainer.Web.Models;
-using EnglishTrainer.Web.Services.QueryOptions;
+using EnglishTrainer.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 namespace EnglishTrainer.Web.Controllers
 {

@@ -1,4 +1,4 @@
-﻿using EnglishTrainer.Web.Models;
+﻿using EnglishTrainer.ApplicationCore.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnglishTrainer.Web.Controllers

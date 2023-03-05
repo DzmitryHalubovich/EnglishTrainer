@@ -1,9 +1,9 @@
 ﻿using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
-using EnglishTrainer.Web.Interfaces;
-using EnglishTrainer.Web.Models;
+using EnglishTrainer.ApplicationCore;
+using EnglishTrainer.ApplicationCore.Models;
 
-namespace EnglishTrainer.Web.Services
+namespace EnglishTrainer.Services
 {
     public class ExampleViewModelService : IExampleViewModelService
     {

@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EnglishTrainer.Infrastructure\EnglishTrainer.Infrastructure.csproj" />
+    <ProjectReference Include="..\EnglishTrainer.Services\EnglishTrainer.Services.csproj" />
   </ItemGroup>
 
 </Project>

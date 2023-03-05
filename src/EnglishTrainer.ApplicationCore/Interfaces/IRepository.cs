@@ -12,5 +12,9 @@ namespace EnglishTrainer.ApplicationCore.Interfaces
         Task CreateAsync(T entity);
 
         Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes);
+
+        Task DeleteAsync(int id);
+
+        Task<T> Update(T entity);
     }
 }

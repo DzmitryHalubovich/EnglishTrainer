@@ -1,7 +1,7 @@
 ﻿using EnglishTrainer.ApplicationCore.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace EnglishTrainer.Web.Models
+namespace EnglishTrainer.ApplicationCore.Models
 {
     public class WordViewModel
     {

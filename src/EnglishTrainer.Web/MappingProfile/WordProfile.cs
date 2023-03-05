@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EnglishTrainer.ApplicationCore.Entities;
-using EnglishTrainer.Web.Models;
+using EnglishTrainer.ApplicationCore.Models;
 
 namespace EnglishTrainer.Web.MappingProfile
 {

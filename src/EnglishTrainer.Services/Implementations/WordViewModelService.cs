@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
+using EnglishTrainer.ApplicationCore.Models;
 using EnglishTrainer.ApplicationCore.QueryOptions;
-using EnglishTrainer.Web.Interfaces;
-using EnglishTrainer.Web.Models;
-using EnglishTrainer.Web.Services.QueryOptions;
+using EnglishTrainer.Services;
 
-namespace EnglishTrainer.Web.Services
+namespace EnglishTrainer.ApplicationCore
 {
     public class WordViewModelService : IWordViewModelService
     {
