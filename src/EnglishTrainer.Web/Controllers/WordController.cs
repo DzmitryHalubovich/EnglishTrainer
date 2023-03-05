@@ -45,9 +45,15 @@ namespace EnglishTrainer.Services
         public async Task<IActionResult> Create(WordViewModel wordViewModel)
         {
 
-            await _wordViewModelService.CreateNewWordAsync(wordViewModel);
+           var response = await _wordViewModelService.CreateNewWordAsync(wordViewModel);
 
-            return RedirectToAction("MainTable");
+            if (response.StatusCode == ApplicationCore.Enums.StatusCode.OK)
+            {
+                return Ok(new { description = response.Description});
+            }
+
+            return BadRequest(new { description = response.Description });
+            //return RedirectToAction("MainTable");
         }
 
         public async Task<IActionResult> Details(int id)
