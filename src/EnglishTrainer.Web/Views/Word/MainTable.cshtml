@@ -4,71 +4,20 @@
     ViewData["Title"] = "MainTable";
 }
 
-<h1></h1>
+<h1>Словарь</h1>
 
-<p>
-    <a asp-action="Index" asp-controller="Verb">Back</a>
-</p>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div style="margin-bottom: 15px;">
+    <h6>Навигация</h6>
+        <a type="button" class="btn btn-info" style ="border-radius:0" asp-action="Index" asp-controller="Verb">На главную страницу</a>
+        <a type="button" class="btn btn-info" style="border-radius:0" asp-action="Create" asp-controller="Word">Добавить новое слово </a>
+</div>
 
 <div class="container">
     @foreach(var item in Model.WordsList)
     {
-
         <a asp-action="Details" asp-controller="Word" asp-route-id="@item.Id" div class="col my-row border text-decoration-none">
             @item.Name - @item.TranslateVariants
          </a>
-        
     }
 </div>
         
-@*        @foreach(var item in Model.WordsList){
-            <td>
-                @item.Name + @item.TranslateVariants
-                @foreach(var ex in item.Examples)
-                {
-                <p>@ex.EnglishExample</p>
-                <p>@ex.RussianExample</p>
-                }
-            </td>
-        }*@
-         
-<table class="table">
-    <thead>
-        <tr>
-            
-        </tr>
-        
-        @foreach(var item in Model.WordsList)
-        {
-            <td>
-                @item.Name + @item.TranslateVariants
-            </td>
-        }
-        
-@*        @foreach(var item in Model.WordsList){
-            <td>
-                @item.Name + @item.TranslateVariants
-                @foreach(var ex in item.Examples)
-                {
-                <p>@ex.EnglishExample</p>
-                <p>@ex.RussianExample</p>
-                }
-            </td>
-        }*@
-         
-    </thead>
-    @*<tbody>
-        @foreach (var item in Model.WordsList) {
-            <tr>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
-        }
-    </tbody>*@
-
