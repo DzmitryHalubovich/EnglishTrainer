@@ -29,9 +29,9 @@ namespace EnglishTrainer.ApplicationCore
             {
                 _logger.LogInformation($"Запрос на добавление нового слова в словарь - {wordViewModel.Name}");
 
-                VerbQueryOptions options = new VerbQueryOptions();
+                //VerbQueryOptions options = new VerbQueryOptions();
 
-                var word = GetAllWordsAsync(options);
+                //var word = GetAllWordsAsync(options);
 
 
                 //TO DO Проверку на наличие слова в словаре
