@@ -21,8 +21,23 @@
     <h6>Слово может иметь разный перевод в зависимости от части речи в которой оно употребляется.</h6>
     <h6>Форма ниже необязательна к заполнению</h6>
     <h6>Вы так же можете внести данные позже</h6>
-    <partial name="WordPartial/_PartsOfSpeechPartial" model="@Model" />
 
+
+
+<div class="accordion" id="accordionPartsOfSpeech">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Accordion Item #1
+            </button>
+        </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionPartsOfSpeech">
+            <div class="accordion-body">
+                    <partial name="WordPartial/_PartsOfSpeechPartial" model="@Model" />
+            </div>
+        </div>
+    </div>
+</div>
 
     <div class="accordion" id="anotherAccordionExample">
         <div class="accordion-item">
