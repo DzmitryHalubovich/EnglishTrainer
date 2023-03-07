@@ -1,13 +1,11 @@
 using EnglishTrainer.Infrastructure.Data;
+using EnglishTrainer.Services;
 using EnglishTrainer.Web.Options;
-using EnglishTrainer.Web.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
-using Serilog.Formatting.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 

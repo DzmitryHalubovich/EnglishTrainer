@@ -4,13 +4,12 @@ using EnglishTrainer.ApplicationCore.Models;
 
 namespace EnglishTrainer.Web.MappingProfile
 {
-    public class VerbProfiles : Profile
+    public class WordProfile : Profile
     {
-        public VerbProfiles()
+        public WordProfile()
         {
-            CreateMap<IrregularVerb, VerbViewModel>();
-            CreateMap<VerbIndexViewModel, IrregularVerb>();
+            CreateMap<Word, WordViewModel>();
+            CreateMap<WordViewModel, Word>();
         }
     }
-
 }

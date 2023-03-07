@@ -1,0 +1,23 @@
+﻿@model EnglishTrainer.ApplicationCore.Models.WordIndexViewModel
+
+@{
+    ViewData["Title"] = "MainTable";
+}
+
+<h1>Словарь</h1>
+
+<div style="margin-bottom: 15px;">
+    <h6>Навигация</h6>
+        <a type="button" class="btn btn-info" style ="border-radius:0" asp-action="Index" asp-controller="Verb">На главную страницу</a>
+        <a type="button" class="btn btn-info" style="border-radius:0" asp-action="Create" asp-controller="Word">Добавить новое слово </a>
+</div>
+
+<div class="container">
+    @foreach(var item in Model.WordsList)
+    {
+        <a asp-action="Details" asp-controller="Word" asp-route-id="@item.Id" div class="col my-row border text-decoration-none">
+            @item.Name - @item.TranslateVariants
+         </a>
+    }
+</div>
+        

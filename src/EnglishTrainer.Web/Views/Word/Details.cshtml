@@ -1,0 +1,36 @@
+﻿@model EnglishTrainer.ApplicationCore.Models.WordViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h4 class="text-capitalize">@Html.DisplayFor(model => model.Name)</h4>
+<p style="font-style:italic">@Html.DisplayFor(model => model.TranslateVariants)</p>
+
+<div>
+    @if (@Model.PartsOfSpeech is not null)
+    {
+        <div>
+            <span style="font-weight:700;">Существительное</span><br> - @Model.PartsOfSpeech.Noun <br>
+            <span style="font-weight:700;">Глагол</span> - @Model.PartsOfSpeech.Verb<br>
+            Прилагательное - @Model.PartsOfSpeech.Adjective<br>
+            Наречие - @Model.PartsOfSpeech.Adverb<br>
+            @Model.PartsOfSpeech.Pronoun<br>
+            @Model.PartsOfSpeech.Conjunction<br>
+            @Model.PartsOfSpeech.Preposition<br>
+            @Model.PartsOfSpeech.Interjection<br>
+        </div>
+    }         
+</div>
+
+<h4>Примеры:</h4>
+@foreach (var item in Model.Examples)
+{
+    <div>
+        <p>@item.EnglishExample - @item.RussianExample</p>
+    </div>
+}
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="MainTable">Back to List</a>
+</div>

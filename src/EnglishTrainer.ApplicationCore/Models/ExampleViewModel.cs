@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using EnglishTrainer.ApplicationCore.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace EnglishTrainer.ApplicationCore.Entities
+namespace EnglishTrainer.ApplicationCore.Models
 {
-    [Table("examples")]
-    public sealed class Example : BaseModel
+    public class ExampleViewModel
     {
+        public int Id { get; set; }
         [Required]
         public int WordId { get; set; }
         public Word Word { get; set; }

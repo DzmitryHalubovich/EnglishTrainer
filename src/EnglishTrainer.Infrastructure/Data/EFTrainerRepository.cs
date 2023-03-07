@@ -21,6 +21,18 @@ namespace EnglishTrainer.Infrastructure.Data
               _dbContext= dbContext;
         }
 
+        public async Task CreateAsync(T entity)
+        {
+            _dbContext.Add(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(T entity)
+        {
+            _dbContext.Set<T>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll()
         {
             throw new NotImplementedException();
@@ -42,6 +54,13 @@ namespace EnglishTrainer.Infrastructure.Data
         public async Task<T?> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes)
         {
             var entity = await _dbContext.Set<T>().IncludeFields(includes).FirstOrDefaultAsync(x => x.Id == id);
+            return entity;
+        }
+
+        public async Task<T> UpdateAsync(T entity)
+        {
+            _dbContext.Update(entity);
+            await _dbContext.SaveChangesAsync(); 
             return entity;
         }
     }

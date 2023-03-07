@@ -1,7 +1,7 @@
 ﻿using EnglishTrainer.ApplicationCore;
 using EnglishTrainer.ApplicationCore.QueryOptions;
 
-namespace EnglishTrainer.Web.Services.QueryOptions
+namespace EnglishTrainer.ApplicationCore.QueryOptions
 {
     public class VerbQueryOptions
     {
