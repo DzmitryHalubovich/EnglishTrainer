@@ -11,10 +11,9 @@ namespace EnglishTrainer.ApplicationCore.Models
         public int WordId { get; set; }
         public Word Word { get; set; }
 
-        [Required]
         [Column("engliish_example")]
         [DataType("varchar(max)")]
-        public string EnglishExample { get; set; }
+        public string? EnglishExample { get; set; }
 
         [Column("russian_translate")]
         [DataType("varchar(max)")]

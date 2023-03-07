@@ -33,9 +33,9 @@ namespace EnglishTrainer.Infrastructure.Data
             await _dbContext.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAll()
+        public IQueryable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Set<T>();
         }
 
         public async Task<List<T>> GetAllAsync(QueryEntityOptions<T> options)

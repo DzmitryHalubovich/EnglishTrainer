@@ -31,7 +31,7 @@ namespace EnglishTrainer.ApplicationCore
 
                 //VerbQueryOptions options = new VerbQueryOptions();
 
-                //var word = GetAllWordsAsync(options);
+                var word = _wordRepository.GetAll().Where(x => x.Name == wordViewModel.Name).FirstOrDefault();
 
 
                 //TO DO Проверку на наличие слова в словаре
@@ -39,14 +39,14 @@ namespace EnglishTrainer.ApplicationCore
                 //var task = _wordRepository.GetAllAsync(wordViewModel).Where;
 
 
-                //if (word)
-                //{
-                //    return new BaseResponse<Word>()
-                //    {
-                //        Description = "Такое слово уже есть!",
-                //        StatusCode = Enums.StatusCode.WordIsHasAlready
-                //    };
-                //}
+                if (word is not null)
+                {
+                    return new BaseResponse<Word>()
+                    {
+                        Description = "Такое слово уже есть в словаре!",
+                        StatusCode = Enums.StatusCode.WordIsHasAlready
+                    };
+                }
 
                 //var newWord = _mapper.Map<Word>(wordViewModel);
                 var newWord = new Word()
@@ -60,34 +60,23 @@ namespace EnglishTrainer.ApplicationCore
                 await _wordRepository.CreateAsync(newWord);
 
                 _logger.LogInformation($"Слово {newWord.Name} успешно добавлено в словарь");
+
                 return new BaseResponse<Word>
                 {
                     StatusCode = Enums.StatusCode.OK,
                     Description = "Слово добавлено в словарь!",
                 };
 
-
-                //Если слово уже есть в словаре
-                //if (word != null)
-                //{
-                //    return new BaseResponse<Word>()
-                //    {
-                //        Description = "Такое слово уже есть в словаре",
-                //        StatusCode = Enums.StatusCode.WordIsHasAlready
-                //    };
-                //}
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex,$"[WordViewModelService.Create]: {ex.Message}");
+                
                 return new BaseResponse<Word>()
                 {
                     StatusCode = Enums.StatusCode.InternalServerError,
                 };
-
             }
-
-            
         }
 
         public async Task<IList<WordViewModel>> GetAllWordsAsync(VerbQueryOptions wordQueryOptions)

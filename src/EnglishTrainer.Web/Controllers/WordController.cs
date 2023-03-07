@@ -53,7 +53,6 @@ namespace EnglishTrainer.Services
             }
 
             return BadRequest(new { description = response.Description });
-            //return RedirectToAction("MainTable");
         }
 
         public async Task<IActionResult> Details(int id)
