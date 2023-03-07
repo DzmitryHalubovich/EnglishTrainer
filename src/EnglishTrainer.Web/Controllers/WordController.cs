@@ -61,5 +61,18 @@ namespace EnglishTrainer.Services
 
             return View(existingWord);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var existingWord =  await _wordViewModelService.GetWordViewModelByIdAsync(id);
+
+            //if (existingWord is null)
+            //{
+            //    return BadRequest(new { description = "Что-то пошло не так..."});
+            //}
+
+            return View(existingWord);
+        }
     }
 }
