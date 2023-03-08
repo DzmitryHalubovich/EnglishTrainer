@@ -106,5 +106,18 @@ namespace EnglishTrainer.ApplicationCore
 
             return result;
         }
+
+        public async Task UpdateWordAsync(WordViewModel viewModel)
+        {
+            var existingWord = await _wordRepository.GetByIdAsync(viewModel.Id);
+
+            existingWord.Created = DateTime.Now;
+            existingWord.Examples = viewModel.Examples;
+            existingWord.TranslateVariants = viewModel.TranslateVariants;
+            existingWord.PartsOfSpeech = viewModel.PartsOfSpeech;
+            existingWord.Name = viewModel.Name;
+            
+           await  _wordRepository.UpdateAsync(existingWord);
+        }
     }
 }

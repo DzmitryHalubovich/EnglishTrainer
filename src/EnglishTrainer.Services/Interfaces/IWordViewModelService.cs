@@ -10,7 +10,7 @@ namespace EnglishTrainer.Services
     {
         Task<IList<WordViewModel>> GetAllWordsAsync(VerbQueryOptions options);
         Task<IBaseResponse<Word>> CreateNewWordAsync(WordViewModel wordViewModel);
-
+        Task UpdateWordAsync(WordViewModel viewModel);
         Task<WordViewModel> GetWordViewModelByIdAsync(int id);
 
     }

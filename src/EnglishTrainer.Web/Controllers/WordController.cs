@@ -74,5 +74,12 @@ namespace EnglishTrainer.Services
 
             return View(existingWord);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(WordViewModel wordViewModel)
+        {
+            await _wordViewModelService.UpdateWordAsync(wordViewModel);
+            return RedirectToAction("MainTable");
+        }
     }
 }
