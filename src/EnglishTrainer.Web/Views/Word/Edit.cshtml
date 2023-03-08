@@ -49,6 +49,22 @@
                 </div>
             }
 
+
+            <div class="accordion" id="accordionExamples">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Добавить новые примеры
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExamples">
+                        <div class="accordion-body">
+                            <partial name="Example/_PartsCreateNewExample" model="@Model" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -70,3 +86,21 @@
     <a asp-action="MainTable">Back to List</a>
 </div>
 
+@section Scripts {
+    <script>
+        $(function () {
+            var i = 0;
+            $('.addLink').click(function () {
+                i++;
+                var html2Add = "<div class='exampleItem'>" +
+                    "<h4>Пример № " + (i) + "</h4>" +
+                    "<div><label>Английский вариант</label><div>" +
+                    "<input class='form-control'  type='text' name='Examples[" + i + "].EnglishExample' />" +
+                    "</div><label>Русский перевод</label><div>" +
+                    "<input class='form-control'  type='text' name='Examples[" + i + "].RussianExample' />" +
+                    "</div></div></div>";
+                $('#exampleBlock').append(html2Add);
+            })
+        });
+    </script>
+}
