@@ -1,8 +1,9 @@
-﻿using EnglishTrainer.ApplicationCore.Models;
+﻿using EnglishTrainer.ApplicationCore.Enums;
+using EnglishTrainer.ApplicationCore.Models;
 using EnglishTrainer.ApplicationCore.QueryOptions;
 
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace EnglishTrainer.Services
 {
@@ -13,6 +14,26 @@ namespace EnglishTrainer.Services
         public WordController(IWordViewModelService wordViewModelService)
         {
             _wordViewModelService=wordViewModelService;
+        }
+
+        //https://metanit.com/sharp/aspnet5/12.4.php
+        public async Task<IActionResult> Index(SortState sortOrder = SortState.WordAsc)
+        {
+            var words = _wordViewModelService.GetAllWords();
+
+            ViewData["NameSort"] = sortOrder == SortState.WordAsc ? SortState.WordDesc : SortState.WordAsc;
+            ViewData["DateSort"] = sortOrder == SortState.DateAsc ? SortState.DateDesc : SortState.DateAsc;
+
+            words = sortOrder switch
+            {
+                SortState.WordAsc => words.OrderBy(x => x.Name),
+                SortState.WordDesc => words.OrderByDescending(x=>x.Name),
+                SortState.DateAsc => words.OrderBy(x=>x.Created),
+                SortState.DateDesc => words.OrderByDescending(x =>x.Name),
+                _=>words.OrderBy(x=>x.Name),
+            };
+
+            return View(await words.AsNoTracking().ToListAsync());
         }
 
         public async Task<IActionResult> MainTable(VerbQueryOptions options)

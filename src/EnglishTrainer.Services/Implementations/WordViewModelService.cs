@@ -5,6 +5,7 @@ using EnglishTrainer.ApplicationCore.Models;
 using EnglishTrainer.ApplicationCore.QueryOptions;
 using EnglishTrainer.ApplicationCore.Response;
 using EnglishTrainer.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace EnglishTrainer.ApplicationCore
@@ -68,6 +69,16 @@ namespace EnglishTrainer.ApplicationCore
                     StatusCode = Enums.StatusCode.InternalServerError,
                 };
             }
+        }
+
+        public IQueryable<Word> GetAllWords()
+        {
+            IQueryable<Word> words = _wordRepository.GetAll()
+                .Include(x=>x.Examples)
+                .Include(x=>x.PartsOfSpeech);
+
+
+            return words;
         }
 
         public async Task<IList<WordViewModel>> GetAllWordsAsync(VerbQueryOptions wordQueryOptions)
