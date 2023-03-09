@@ -57,11 +57,10 @@ namespace EnglishTrainer.Infrastructure.Data
             return entity;
         }
 
-        public async Task<T> UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
             _dbContext.Update(entity);
             await _dbContext.SaveChangesAsync(); 
-            return entity;
         }
     }
 }

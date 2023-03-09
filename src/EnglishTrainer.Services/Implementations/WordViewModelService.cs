@@ -13,9 +13,9 @@ namespace EnglishTrainer.ApplicationCore
     {
         private readonly IRepository<Word> _wordRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger<WordViewModelService> _logger;
+        private readonly ILogger<PartsOfSpeechViewModelService> _logger;
 
-        public WordViewModelService(IRepository<Word> wordRepository, IMapper mapper, ILogger<WordViewModelService> logger)
+        public WordViewModelService(IRepository<Word> wordRepository, IMapper mapper, ILogger<PartsOfSpeechViewModelService> logger)
         {
             _wordRepository=wordRepository;
             _mapper=mapper;
@@ -111,6 +111,7 @@ namespace EnglishTrainer.ApplicationCore
         public async Task UpdateWordAsync(WordViewModel viewModel)
         {
             var existingWord = await _wordRepository.GetByIdAsync(viewModel.Id);
+            //var existingWord = _wordRepository.GetAll().Where(x=>x.Name == viewModel.Name).FirstOrDefault();
 
             existingWord.Created = DateTime.Now;
             existingWord.Examples = viewModel.Examples;

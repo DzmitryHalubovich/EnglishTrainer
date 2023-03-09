@@ -74,11 +74,6 @@ namespace EnglishTrainer.Services
         {
             var existingWord =  await _wordViewModelService.GetWordViewModelByIdAsync(id);
 
-            //if (existingWord is null)
-            //{
-            //    return BadRequest(new { description = "Что-то пошло не так..."});
-            //}
-
             return View(existingWord);
         }
 

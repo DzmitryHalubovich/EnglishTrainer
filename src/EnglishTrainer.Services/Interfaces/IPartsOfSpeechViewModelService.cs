@@ -1,0 +1,16 @@
+﻿using EnglishTrainer.ApplicationCore.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EnglishTrainer.Services
+{
+    public interface IPartsOfSpeechViewModelService
+    {
+        Task UpdatePartsAsync(PartsOfSpeechViewModel viewModel);
+        Task<PartsOfSpeechViewModel> GetPartViewModelByIdAsync(int id);
+
+    }
+}
