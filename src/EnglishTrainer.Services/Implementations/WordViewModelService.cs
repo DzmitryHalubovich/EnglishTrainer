@@ -29,15 +29,7 @@ namespace EnglishTrainer.ApplicationCore
             {
                 _logger.LogInformation($"Запрос на добавление нового слова в словарь - {wordViewModel.Name}");
 
-                //VerbQueryOptions options = new VerbQueryOptions();
-
-                var word = _wordRepository.GetAll().Where(x => x.Name == wordViewModel.Name).FirstOrDefault();
-
-
-                //TO DO Проверку на наличие слова в словаре
-
-                //var task = _wordRepository.GetAllAsync(wordViewModel).Where;
-
+                var word =  _wordRepository.GetAll().Where(x => x.Name == wordViewModel.Name).FirstOrDefault();
 
                 if (word is not null)
                 {
@@ -48,7 +40,6 @@ namespace EnglishTrainer.ApplicationCore
                     };
                 }
 
-                //var newWord = _mapper.Map<Word>(wordViewModel);
                 var newWord = new Word()
                 {
                     Name= wordViewModel.Name,
@@ -97,6 +88,16 @@ namespace EnglishTrainer.ApplicationCore
 
             return words;
         }
+        
+
+        public List<WordShortViewModel> GetLastFiveWords()
+        {
+            var lastFiveWords = _wordRepository.GetAll().Take(5);
+
+            List<WordShortViewModel> result = _mapper.Map<List<WordShortViewModel>>(lastFiveWords);
+
+            return result;
+        }
 
         public async Task<WordViewModel> GetWordViewModelByIdAsync(int id)
         {
@@ -119,5 +120,7 @@ namespace EnglishTrainer.ApplicationCore
             
            await  _wordRepository.UpdateAsync(existingWord);
         }
+
+
     }
 }

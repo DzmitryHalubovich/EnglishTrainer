@@ -30,6 +30,13 @@ namespace EnglishTrainer.Services
         }
 
 
+        public IActionResult LastFiveWords()
+        {
+            var lastFiveWords = _wordViewModelService.GetLastFiveWords();
+
+            return PartialView(lastFiveWords);
+        }
+
         //Создание обьекта и вью работает по примеру отсюда
         //https://metanit.com/sharp/mvc5/5.11.php
 
