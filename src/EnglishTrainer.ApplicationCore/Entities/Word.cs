@@ -16,7 +16,7 @@ namespace EnglishTrainer.ApplicationCore.Entities
         public DateTime Created { get; set; }
 
 
-        public IList<Example> Examples { get; set; }
+        public IList<Example>? Examples { get; set; }
         public TranslateByPartsOfSpeech PartsOfSpeech { get; set; }
 
     }

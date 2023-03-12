@@ -1,8 +1,9 @@
-﻿using EnglishTrainer.ApplicationCore.Models;
+﻿using EnglishTrainer.ApplicationCore.Enums;
+using EnglishTrainer.ApplicationCore.Models;
 using EnglishTrainer.ApplicationCore.QueryOptions;
 
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace EnglishTrainer.Services
 {
@@ -13,6 +14,26 @@ namespace EnglishTrainer.Services
         public WordController(IWordViewModelService wordViewModelService)
         {
             _wordViewModelService=wordViewModelService;
+        }
+
+        //https://metanit.com/sharp/aspnet5/12.4.php
+        public async Task<IActionResult> Index(SortState sortOrder = SortState.WordAsc)
+        {
+            var words = _wordViewModelService.GetAllWords();
+
+            ViewData["NameSort"] = sortOrder == SortState.WordAsc ? SortState.WordDesc : SortState.WordAsc;
+            ViewData["DateSort"] = sortOrder == SortState.DateAsc ? SortState.DateDesc : SortState.DateAsc;
+
+            words = sortOrder switch
+            {
+                SortState.WordAsc => words.OrderBy(x => x.Name),
+                SortState.WordDesc => words.OrderByDescending(x=>x.Name),
+                SortState.DateAsc => words.OrderBy(x=>x.Created),
+                SortState.DateDesc => words.OrderByDescending(x =>x.Name),
+                _=>words.OrderBy(x=>x.Name),
+            };
+
+            return View(await words.AsNoTracking().ToListAsync());
         }
 
         public async Task<IActionResult> MainTable(VerbQueryOptions options)
@@ -29,6 +50,13 @@ namespace EnglishTrainer.Services
             return View(verbList);
         }
 
+
+        public IActionResult LastFiveWords()
+        {
+            var lastFiveWords = _wordViewModelService.GetLastFiveWords();
+
+            return PartialView(lastFiveWords);
+        }
 
         //Создание обьекта и вью работает по примеру отсюда
         //https://metanit.com/sharp/mvc5/5.11.php
@@ -53,7 +81,6 @@ namespace EnglishTrainer.Services
             }
 
             return BadRequest(new { description = response.Description });
-            //return RedirectToAction("MainTable");
         }
 
         public async Task<IActionResult> Details(int id)
@@ -61,6 +88,21 @@ namespace EnglishTrainer.Services
             var existingWord = await  _wordViewModelService.GetWordViewModelByIdAsync(id);
 
             return View(existingWord);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var existingWord =  await _wordViewModelService.GetWordViewModelByIdAsync(id);
+
+            return View(existingWord);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(WordViewModel wordViewModel)
+        {
+            await _wordViewModelService.UpdateWordAsync(wordViewModel);
+            return RedirectToAction("MainTable");
         }
     }
 }

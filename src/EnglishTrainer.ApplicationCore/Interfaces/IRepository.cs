@@ -6,7 +6,7 @@ namespace EnglishTrainer.ApplicationCore.Interfaces
 {
     public interface IRepository <T> where T : class
     {
-        IEnumerable<T> GetAll();
+        IQueryable<T> GetAll();
 
         Task<List<T>> GetAllAsync(QueryEntityOptions<T> options);
         Task CreateAsync(T entity);
@@ -15,6 +15,6 @@ namespace EnglishTrainer.ApplicationCore.Interfaces
 
         Task DeleteAsync( T entity);
 
-        Task<T> UpdateAsync(T entity);
+        Task UpdateAsync(T entity);
     }
 }

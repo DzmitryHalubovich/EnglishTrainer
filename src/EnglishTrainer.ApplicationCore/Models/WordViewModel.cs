@@ -12,7 +12,7 @@ namespace EnglishTrainer.ApplicationCore.Models
         [DataType("varchar(max)")]
         public string TranslateVariants { get; set; }
 
-        public IList<Example> Examples { get; set; } = new List<Example>();
+        public IList<Example>? Examples { get; set; } = new List<Example>();
         public TranslateByPartsOfSpeech PartsOfSpeech { get; set; }
     }
 }

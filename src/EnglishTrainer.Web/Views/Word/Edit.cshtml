@@ -1,0 +1,90 @@
+﻿@model EnglishTrainer.ApplicationCore.Models.WordViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>WordViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-lg">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TranslateVariants" class="control-label"></label>
+                <input asp-for="TranslateVariants" class="form-control" />
+                <span asp-validation-for="TranslateVariants" class="text-danger"></span>
+            </div>
+            <div>
+                <h4>Перевод по частям речи</h4>
+                <partial name="WordPartial/_SeeResultPartsOfSpeechPartial" model="@Model" />
+                <a asp-action="Edit" asp-controller="PartsOfSpeech" asp-route-id="@Model.PartsOfSpeech.Id">Редактировать</a>
+            </div>
+@*            <div class="accordion" id="accordionPartsOfSpeech">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Перевод в зависимости от части речи
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionPartsOfSpeech">
+                        <div class="accordion-body">
+                            <partial name="WordPartial/_PartsOfSpeechPartial" model="@Model.PartsOfSpeech" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+*@
+            <div class="form-group">
+                @foreach (var item in Model.Examples)
+                {
+                    <h2>Примеры</h2>
+                    <div>
+                        @*<input class="form-control" type="text" name="@item.EnglishExample" />*@
+                        <label asp-for="@item.EnglishExample" class="control-label"></label>
+                        <input asp-for="@item.EnglishExample" class="form-control" />
+                    </div>
+                    <div>
+                        @* <input class='form-control' type='text' name='item.RussianExample' placeholder="@item.RussianExample" />*@
+                        <label asp-for="@item.RussianExample" class="control-label"></label>
+                        <input asp-for="@item.RussianExample" class="form-control" />
+                    </div>
+                }
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="MainTable">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            var i = 0;
+            $('.addLink').click(function () {
+                i++;
+                var html2Add = "<div class='exampleItem'>" +
+                    "<h4>Пример № " + (i) + "</h4>" +
+                    "<div><label>Английский вариант</label><div>" +
+                    "<input class='form-control'  type='text' name='Examples[" + i + "].EnglishExample' />" +
+                    "</div><label>Русский перевод</label><div>" +
+                    "<input class='form-control'  type='text' name='Examples[" + i + "].RussianExample' />" +
+                    "</div></div></div>";
+                $('#exampleBlock').append(html2Add);
+            })
+        });
+    </script>
+}

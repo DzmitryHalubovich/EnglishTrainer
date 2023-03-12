@@ -5,6 +5,7 @@ using EnglishTrainer.ApplicationCore.Models;
 using EnglishTrainer.ApplicationCore.QueryOptions;
 using EnglishTrainer.ApplicationCore.Response;
 using EnglishTrainer.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace EnglishTrainer.ApplicationCore
@@ -13,9 +14,9 @@ namespace EnglishTrainer.ApplicationCore
     {
         private readonly IRepository<Word> _wordRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger<WordViewModelService> _logger;
+        private readonly ILogger<PartsOfSpeechViewModelService> _logger;
 
-        public WordViewModelService(IRepository<Word> wordRepository, IMapper mapper, ILogger<WordViewModelService> logger)
+        public WordViewModelService(IRepository<Word> wordRepository, IMapper mapper, ILogger<PartsOfSpeechViewModelService> logger)
         {
             _wordRepository=wordRepository;
             _mapper=mapper;
@@ -29,26 +30,17 @@ namespace EnglishTrainer.ApplicationCore
             {
                 _logger.LogInformation($"Запрос на добавление нового слова в словарь - {wordViewModel.Name}");
 
-                //VerbQueryOptions options = new VerbQueryOptions();
+                var word =  _wordRepository.GetAll().Where(x => x.Name == wordViewModel.Name).FirstOrDefault();
 
-                //var word = GetAllWordsAsync(options);
+                if (word is not null)
+                {
+                    return new BaseResponse<Word>()
+                    {
+                        Description = "Такое слово уже есть в словаре!",
+                        StatusCode = Enums.StatusCode.WordIsHasAlready
+                    };
+                }
 
-
-                //TO DO Проверку на наличие слова в словаре
-
-                //var task = _wordRepository.GetAllAsync(wordViewModel).Where;
-
-
-                //if (word)
-                //{
-                //    return new BaseResponse<Word>()
-                //    {
-                //        Description = "Такое слово уже есть!",
-                //        StatusCode = Enums.StatusCode.WordIsHasAlready
-                //    };
-                //}
-
-                //var newWord = _mapper.Map<Word>(wordViewModel);
                 var newWord = new Word()
                 {
                     Name= wordViewModel.Name,
@@ -60,34 +52,33 @@ namespace EnglishTrainer.ApplicationCore
                 await _wordRepository.CreateAsync(newWord);
 
                 _logger.LogInformation($"Слово {newWord.Name} успешно добавлено в словарь");
+
                 return new BaseResponse<Word>
                 {
                     StatusCode = Enums.StatusCode.OK,
                     Description = "Слово добавлено в словарь!",
                 };
 
-
-                //Если слово уже есть в словаре
-                //if (word != null)
-                //{
-                //    return new BaseResponse<Word>()
-                //    {
-                //        Description = "Такое слово уже есть в словаре",
-                //        StatusCode = Enums.StatusCode.WordIsHasAlready
-                //    };
-                //}
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex,$"[WordViewModelService.Create]: {ex.Message}");
+                
                 return new BaseResponse<Word>()
                 {
                     StatusCode = Enums.StatusCode.InternalServerError,
                 };
-
             }
+        }
 
-            
+        public IQueryable<Word> GetAllWords()
+        {
+            IQueryable<Word> words = _wordRepository.GetAll()
+                .Include(x=>x.Examples)
+                .Include(x=>x.PartsOfSpeech);
+
+
+            return words;
         }
 
         public async Task<IList<WordViewModel>> GetAllWordsAsync(VerbQueryOptions wordQueryOptions)
@@ -108,6 +99,16 @@ namespace EnglishTrainer.ApplicationCore
 
             return words;
         }
+        
+
+        public List<WordShortViewModel> GetLastFiveWords()
+        {
+            var lastFiveWords = _wordRepository.GetAll().Take(5);
+
+            List<WordShortViewModel> result = _mapper.Map<List<WordShortViewModel>>(lastFiveWords);
+
+            return result;
+        }
 
         public async Task<WordViewModel> GetWordViewModelByIdAsync(int id)
         {
@@ -117,5 +118,21 @@ namespace EnglishTrainer.ApplicationCore
 
             return result;
         }
+
+        public async Task UpdateWordAsync(WordViewModel viewModel)
+        {
+            var existingWord = await _wordRepository.GetByIdAsync(viewModel.Id);
+            //var existingWord = _wordRepository.GetAll().Where(x=>x.Name == viewModel.Name).FirstOrDefault();
+
+            existingWord.Created = DateTime.Now;
+            existingWord.Examples = viewModel.Examples;
+            existingWord.TranslateVariants = viewModel.TranslateVariants;
+            existingWord.PartsOfSpeech = viewModel.PartsOfSpeech;
+            existingWord.Name = viewModel.Name;
+            
+           await  _wordRepository.UpdateAsync(existingWord);
+        }
+
+
     }
 }

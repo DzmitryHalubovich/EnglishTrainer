@@ -1,0 +1,55 @@
+﻿@model IEnumerable<EnglishTrainer.ApplicationCore.Entities.Word>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.NameSort">
+                    По алфавиту
+                </a>
+                @*@Html.DisplayNameFor(model => model.Name)*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TranslateVariants)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.DateSort">
+                По дате добавления
+                </a>
+                @*@Html.DisplayNameFor(model => model.Created)*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TranslateVariants)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

@@ -28,7 +28,7 @@
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Accordion Item #1
+              Перевод в зависимости от части речи
             </button>
         </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionPartsOfSpeech">
@@ -39,11 +39,11 @@
     </div>
 </div>
 
-    <div class="accordion" id="anotherAccordionExample">
+    <div class="accordion" id="accordionExample">
         <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            Accordion Item #1
+            Примеры
             </button>
         </h2>
             <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -64,14 +64,16 @@
                         </div>
                     </div>
                     <p><a class="addLink">Добавить новый пример</a></p>
+                    <p><a class="removeLink">Убрать пример</a></p>
                 </div>
             </div>
+            @*<partial name="Example/_PartsCreateNewExample" model="@Model" />*@
         </div>
     </div>
 
    
-    <button id ="createWord" class="btn btn-primary">Добавить</button>
-    <a type="button" class="btn btn-info" style="border-radius:0" asp-action="MainTable" asp-controller="Word">К словарю</a>
+    <a type="button" class="btn btn-info" style="border-radius:0" asp-action="MainTable" asp-controller="Word">Назад к словарю</a>
+    <button id="createWord" style="border-radius:0" class="btn btn-primary">Добавить</button>
 </form>
 
 @section Scripts {
@@ -82,7 +84,7 @@
             $('.addLink').click(function () {
                 i++;
                 var html2Add = "<div class='exampleItem'>" +
-                    "<h4>Пример № " + (i + 1) + "</h4>" +
+                    "<h4>Пример № " + (i) + "</h4>" +
                     "<div><label>Английский вариант</label><div>" +
                     "<input class='form-control'  type='text' name='Examples[" + i + "].EnglishExample' />" +
                     "</div><label>Русский перевод</label><div>" +
@@ -115,8 +117,10 @@
                         icon: 'error',
                         confirmButtonText: 'Окей'
                     })
-                }
+                },
             })
         });
     </script>
+
+
 }

@@ -33,9 +33,9 @@ namespace EnglishTrainer.Infrastructure.Data
             await _dbContext.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAll()
+        public IQueryable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Set<T>();
         }
 
         public async Task<List<T>> GetAllAsync(QueryEntityOptions<T> options)
@@ -57,11 +57,10 @@ namespace EnglishTrainer.Infrastructure.Data
             return entity;
         }
 
-        public async Task<T> UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
             _dbContext.Update(entity);
             await _dbContext.SaveChangesAsync(); 
-            return entity;
         }
     }
 }

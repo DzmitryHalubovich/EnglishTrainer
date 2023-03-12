@@ -10,6 +10,11 @@ namespace EnglishTrainer.Web.MappingProfile
         {
             CreateMap<Word, WordViewModel>();
             CreateMap<WordViewModel, Word>();
+
+            CreateMap<Word, WordShortViewModel>()
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(entity => entity.Id))
+                .ForMember(dst => dst.Name, opt => opt.MapFrom(entity => entity.Name));
+
         }
     }
 }

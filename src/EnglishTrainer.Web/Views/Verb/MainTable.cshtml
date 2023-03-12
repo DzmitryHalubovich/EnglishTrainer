@@ -30,7 +30,7 @@
         {
             <tr class="my-row">
                 <td>
-                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.VerbId">
+                <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.VerbId">
                     @Html.DisplayFor(modelItem => item.Infinitive)
                 </a>
                 </td>
@@ -55,22 +55,22 @@
             <input type="hidden" name="pageOptions.CurrentPage" value="@(Model.Options.PageOptions.CurrentPage - 1)" />
             @if (Model.Options.PageOptions.HasPreviousPage)
             {
-                <input class="btn btn-outline-info" type="submit" value="Previous page" />
+                <input class="btn btn-outline-info" type="submit" value="Предыдущая страница" />
             }
             else
             {
-                <input class="btn btn-info" disabled type="submit" value="Previous page" />
+                <input class="btn btn-info" disabled type="submit" value="Предыдущая страница" />
             }
         </form>
         <form method="get">
             <input type="hidden" name="pageOptions.CurrentPage" value="@(Model.Options.PageOptions.CurrentPage + 1)" />
             @if (Model.Options.PageOptions.HasNextPage)
             {
-                <input class="btn btn-outline-info" type="submit" value="Next page" />
+                <input class="btn btn-outline-info" type="submit" value="Следующая страница" />
             }
             else
             {
-                <input class="btn btn-info" disabled type="submit" value="Next page" />
+                <input class="btn btn-info" disabled type="submit" value="Следующая страница" />
             }
         </form>
             </tbody>

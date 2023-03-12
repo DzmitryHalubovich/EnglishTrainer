@@ -87,7 +87,7 @@ a {
 }
 
 .my-card {
-    width: 250px;
+    width: 350px;
     background-color: #fff;
     border-width: 1px;
     transition: all linear .08s, color 0.5s, background-color 0.5s, border-color 1s;

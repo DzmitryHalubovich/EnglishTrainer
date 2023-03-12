@@ -19,5 +19,10 @@ namespace EnglishTrainer.Services
             throw new NotImplementedException();
 
         }
+
+        public Task UpdateExampleAsync(ExampleViewModel viewModel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
