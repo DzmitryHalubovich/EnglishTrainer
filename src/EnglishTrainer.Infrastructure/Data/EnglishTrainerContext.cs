@@ -12,7 +12,6 @@ namespace EnglishTrainer.Infrastructure.Data
     {
         public DbSet<IrregularVerb> Verbs { get; set; }
         public DbSet<Example> Examples { get; set; }
-        public DbSet<TranslateByPartsOfSpeech> TranslateByPartsOfSpeeches { get; set; }
         public DbSet<Word> Words { get; set; }
 
         public EnglishTrainerContext(DbContextOptions<EnglishTrainerContext> options) : base(options) { }
@@ -26,7 +25,6 @@ namespace EnglishTrainer.Infrastructure.Data
                 builder.Property(x => x.TranslateVariants).HasColumnName("translate").HasColumnType("nvarchar(max)").IsRequired();
                 builder.Property(x => x.Created).HasColumnName("created").HasColumnType("date");
                 builder.HasMany(x => x.Examples).WithOne(e=>e.Word);
-                builder.HasOne(x=>x.PartsOfSpeech).WithOne(e=>e.Word);
                 builder.ToTable("dictionary");
             });
         }

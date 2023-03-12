@@ -1,4 +1,4 @@
-﻿@model EnglishTrainer.ApplicationCore.Models.VerbIndexViewModel
+﻿@model IEnumerable<EnglishTrainer.ApplicationCore.Models.VerbViewModel>
 
 @{
     ViewData["Title"] = "MainTable";
@@ -26,32 +26,32 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.VerbsList)
+        @foreach (var item in Model)
         {
             <tr class="my-row">
                 <td>
-                <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.VerbId">
+                <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.Id">
                     @Html.DisplayFor(modelItem => item.Infinitive)
                 </a>
                 </td>
                 <td>
-                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.VerbId">
+                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.Id">
                     @Html.DisplayFor(modelItem => item.PastSimple)
                 </a>
                 </td>
                 <td>
-                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.VerbId">
+                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.Id">
                     @Html.DisplayFor(modelItem => item.PastParticiple)
                 </a>
                 </td>
                 <td>
-                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.VerbId">
+                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.Id">
                     @Html.DisplayFor(modelItem => item.ShortTranslate)
                 </a> 
                 </td>
             </tr>
 }
-        <form method="get">
+      @*  <form method="get">
             <input type="hidden" name="pageOptions.CurrentPage" value="@(Model.Options.PageOptions.CurrentPage - 1)" />
             @if (Model.Options.PageOptions.HasPreviousPage)
             {
@@ -72,7 +72,7 @@
             {
                 <input class="btn btn-info" disabled type="submit" value="Следующая страница" />
             }
-        </form>
+        </form>*@
             </tbody>
 
 </table>

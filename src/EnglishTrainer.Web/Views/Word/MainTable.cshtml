@@ -1,4 +1,4 @@
-﻿@model EnglishTrainer.ApplicationCore.Models.WordIndexViewModel
+﻿@model IEnumerable<EnglishTrainer.ApplicationCore.Models.WordViewModel>
 
 @{
     ViewData["Title"] = "MainTable";
@@ -13,7 +13,7 @@
 </div>
 
 <div class="container">
-    @foreach(var item in Model.WordsList)
+    @foreach(var item in Model)
     {
         <a asp-action="Details" asp-controller="Word" asp-route-id="@item.Id" div class="col my-row border text-decoration-none">
             @item.Name - @item.TranslateVariants

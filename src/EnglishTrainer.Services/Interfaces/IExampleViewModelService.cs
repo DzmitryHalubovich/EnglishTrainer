@@ -1,5 +1,4 @@
-﻿
-using EnglishTrainer.ApplicationCore.Models;
+﻿using EnglishTrainer.ApplicationCore.Models;
 
 namespace EnglishTrainer.Services
 {

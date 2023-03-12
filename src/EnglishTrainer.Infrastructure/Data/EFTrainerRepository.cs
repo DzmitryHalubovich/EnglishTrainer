@@ -1,14 +1,8 @@
 ﻿using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
-using EnglishTrainer.ApplicationCore.QueryOptions;
-using EnglishTrainer.Infrastructure.Data.DBExtentions;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EnglishTrainer.Infrastructure.Data
 {
@@ -35,15 +29,32 @@ namespace EnglishTrainer.Infrastructure.Data
 
         public IQueryable<T> GetAll()
         {
-            return _dbContext.Set<T>();
+            return _dbContext.Set<T>().AsNoTracking();
         }
 
-        public async Task<List<T>> GetAllAsync(QueryEntityOptions<T> options)
+        public async Task<IEnumerable<T>> GetAllAsync(
+            Expression<Func<T, bool>>? predicate = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+            bool isTracking = false)
         {
-            return await _dbContext.Set<T>()
-                .SkipTakeEntities(options.PageOptions.CurrentPage, options.PageOptions.PageSize)
-                .ToListAsync();
+            IQueryable<T> query = _dbContext.Set<T>();
+
+            if (!isTracking) { query = query.AsNoTracking(); }
+            if (predicate is not null) { query = query.Where(predicate); }
+            if (include is not null) { query = include(query); }
+
+
+            return orderBy is not null
+              ? await orderBy(query).ToListAsync()
+              :  await query.ToListAsync();
         }
+
+        //public IQueryable<T> GetAllAsync()
+        //{
+        //    var allEntities = _dbContext.Set<T>().AsNoTracking();
+        //    return allEntities;
+        //}
 
         //public async Task<T?> GetByIdAsync(int id)
         //{
@@ -51,10 +62,28 @@ namespace EnglishTrainer.Infrastructure.Data
         //    return entity;
         //}
 
-        public async Task<T?> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes)
+        public async Task<T?> GetFirstOrDefaultAsync(
+            Expression<Func<T,bool>>? predicate = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+            Func<IQueryable<T>, IIncludableQueryable<T,object>>? include = null,
+            bool isTracking = false)
         {
-            var entity = await _dbContext.Set<T>().IncludeFields(includes).FirstOrDefaultAsync(x => x.Id == id);
-            return entity;
+            IQueryable<T> query = _dbContext.Set<T>();
+
+            if (!isTracking) { query = query.AsNoTracking(); }
+            if (predicate is not null) { query = query.Where(predicate); }
+            if (include is not null) { query = include(query); }
+
+            //var entity = await _dbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            //if (include is not null)
+            //{
+            //    entity = include(entity);
+            //}
+
+
+            return orderBy is not null 
+                ? await orderBy(query).FirstOrDefaultAsync()
+                :  await query.FirstOrDefaultAsync();
         }
 
         public async Task UpdateAsync(T entity)

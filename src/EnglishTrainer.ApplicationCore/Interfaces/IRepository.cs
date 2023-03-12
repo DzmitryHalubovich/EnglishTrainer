@@ -1,17 +1,26 @@
 ﻿using EnglishTrainer.ApplicationCore.Entities;
-using EnglishTrainer.ApplicationCore.QueryOptions;
+using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
 namespace EnglishTrainer.ApplicationCore.Interfaces
 {
     public interface IRepository <T> where T : class
     {
-        IQueryable<T> GetAll();
+        //IQueryable<T> GetAll();
 
-        Task<List<T>> GetAllAsync(QueryEntityOptions<T> options);
+        Task<IEnumerable<T>> GetAllAsync(
+            Expression<Func<T, bool>>? predicate = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+            bool isTracking = false);
+
         Task CreateAsync(T entity);
 
-        Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes);
+        Task<T> GetFirstOrDefaultAsync(
+            Expression<Func<T, bool>>? predicate = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+            bool isTracking = false);
 
         Task DeleteAsync( T entity);
 

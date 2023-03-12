@@ -12,7 +12,6 @@ namespace EnglishTrainer.Services
             services.AddScoped(typeof(IRepository<>), typeof(EFTrainerRepository<>));
             services.AddScoped(typeof(IVerbViewModelService), typeof(VerbViewModelService));
             services.AddScoped(typeof(IWordViewModelService),typeof(WordViewModelService));
-            services.AddScoped(typeof(IPartsOfSpeechViewModelService),typeof(PartsOfSpeechViewModelService));
             return services;
         }
     }

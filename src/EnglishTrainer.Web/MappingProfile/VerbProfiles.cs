@@ -9,7 +9,7 @@ namespace EnglishTrainer.Web.MappingProfile
         public VerbProfiles()
         {
             CreateMap<IrregularVerb, VerbViewModel>();
-            CreateMap<VerbIndexViewModel, IrregularVerb>();
+            CreateMap<VerbViewModel, IrregularVerb>();
         }
     }
 

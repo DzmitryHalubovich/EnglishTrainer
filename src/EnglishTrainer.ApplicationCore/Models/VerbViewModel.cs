@@ -3,7 +3,7 @@ namespace EnglishTrainer.ApplicationCore.Models
 {
     public sealed class VerbViewModel
     {
-        public int VerbId { get; set; }
+        public int Id { get; set; }
 
         public string Infinitive { get; set; }
 
