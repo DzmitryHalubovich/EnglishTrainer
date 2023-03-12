@@ -4,9 +4,9 @@ using EnglishTrainer.ApplicationCore.Models;
 
 namespace EnglishTrainer.Web.MappingProfile
 {
-    public class WordProfile : Profile
+    public class WordProfiles : Profile
     {
-        public WordProfile()
+        public WordProfiles()
         {
             CreateMap<Word, WordViewModel>();
             CreateMap<WordViewModel, Word>();

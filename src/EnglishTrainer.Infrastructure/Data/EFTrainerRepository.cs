@@ -50,18 +50,6 @@ namespace EnglishTrainer.Infrastructure.Data
               :  await query.ToListAsync();
         }
 
-        //public IQueryable<T> GetAllAsync()
-        //{
-        //    var allEntities = _dbContext.Set<T>().AsNoTracking();
-        //    return allEntities;
-        //}
-
-        //public async Task<T?> GetByIdAsync(int id)
-        //{
-        //    var entity = await _dbContext.Set<T>().FindAsync(id);
-        //    return entity;
-        //}
-
         public async Task<T?> GetFirstOrDefaultAsync(
             Expression<Func<T,bool>>? predicate = null,
             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
@@ -73,13 +61,6 @@ namespace EnglishTrainer.Infrastructure.Data
             if (!isTracking) { query = query.AsNoTracking(); }
             if (predicate is not null) { query = query.Where(predicate); }
             if (include is not null) { query = include(query); }
-
-            //var entity = await _dbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
-            //if (include is not null)
-            //{
-            //    entity = include(entity);
-            //}
-
 
             return orderBy is not null 
                 ? await orderBy(query).FirstOrDefaultAsync()

@@ -1,17 +1,19 @@
-﻿using EnglishTrainer.ApplicationCore.Entities;
+﻿using EnglishTrainer.ApplicationCore;
+using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
 using EnglishTrainer.ApplicationCore.Models;
+using EnglishTrainer.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnglishTrainer.Web.Controllers
 {
     public class ExampleController : Controller
     {
-        private readonly IRepository<Example> _exampleRepository;
+        private readonly IExampleViewModelService _exampleViewModelService;
 
-        public ExampleController(IRepository<Example> repository)
+        public ExampleController(IRepository<Example> repository, IExampleViewModelService exampleViewModelService)
         {
-
+            _exampleViewModelService=exampleViewModelService;
         }
 
         [HttpGet]
@@ -22,9 +24,20 @@ namespace EnglishTrainer.Web.Controllers
             return View(newExample);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var existingWord = await _exampleViewModelService.GetExampleViewModelByIdAsync(id);
+
+            return View(existingWord);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ExampleViewModel model)
+        {
+            await _exampleViewModelService.UpdateExampleAsync(model);
+
+            return RedirectToAction("MainTable", "Word");
         }
     }
 }
