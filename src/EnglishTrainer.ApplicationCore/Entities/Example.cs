@@ -17,11 +17,11 @@ namespace EnglishTrainer.ApplicationCore.Entities
 
         [Required]
         [Column("engliish_example")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string EnglishExample { get; set; }
 
         [Column("russian_translate")]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string? RussianExample { get; set; }
     }
 }

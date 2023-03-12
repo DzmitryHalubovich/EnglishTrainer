@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using EnglishTrainer.ApplicationCore.Models;
-using EnglishTrainer.ApplicationCore.QueryOptions;
 using EnglishTrainer.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,13 +8,11 @@ namespace EnglishTrainer.Web.Controllers
     public class VerbController : Controller
     {
         private readonly IVerbViewModelService _verbViewModelService;
-        private readonly IMapper _mapper;
         private readonly ILogger<VerbController> _logger;
 
-        public VerbController(IVerbViewModelService verbViewModelService, IMapper mapper, ILogger<VerbController> logger)
+        public VerbController(IVerbViewModelService verbViewModelService,ILogger<VerbController> logger)
         {
             _verbViewModelService= verbViewModelService;
-            _mapper = mapper;
             _logger = logger;
         }
 
@@ -25,22 +22,15 @@ namespace EnglishTrainer.Web.Controllers
             return View();
         }
 
-        public async Task <IActionResult> MainTable(VerbQueryOptions options)
+        public async Task <IActionResult> MainTable()
         {
             _logger.LogInformation("Processing of the request MainTable.");
 
-            var verbViewModel = await _verbViewModelService.GetAllVerbsAsync(options);
-            options.PageOptions.CurrentElementsCount = verbViewModel.Count;
+            var verbViewModel = await _verbViewModelService.GetAllVerbsAsync();
+          
+            _logger.LogInformation($"Return collection {verbViewModel.ToString()} with {verbViewModel.Count()} elements");
 
-            VerbIndexViewModel verbList = new VerbIndexViewModel()
-            {
-                Options = options,
-                VerbsList = verbViewModel
-            };
-
-            _logger.LogInformation($"Return collection {verbList.VerbsList.ToString()} with {verbList.VerbsList.Count()} elements");
-
-            return View(verbList);
+            return View(verbViewModel);
         }
 
         public async Task<IActionResult> Details(int id)

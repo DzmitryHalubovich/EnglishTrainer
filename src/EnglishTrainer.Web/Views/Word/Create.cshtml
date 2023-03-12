@@ -17,27 +17,11 @@
         <label class="form-label">Варианты перевода</label>
         <input asp-for="TranslateVariants" class="form-control" />
     </div>
-
-    <h6>Слово может иметь разный перевод в зависимости от части речи в которой оно употребляется.</h6>
-    <h6>Форма ниже необязательна к заполнению</h6>
-    <h6>Вы так же можете внести данные позже</h6>
-
-
-
-<div class="accordion" id="accordionPartsOfSpeech">
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Перевод в зависимости от части речи
-            </button>
-        </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionPartsOfSpeech">
-            <div class="accordion-body">
-                    <partial name="WordPartial/_PartsOfSpeechPartial" model="@Model" />
-            </div>
-        </div>
+    
+    <div class="form-floating" style="margin-bottom:20px; margin-top: 10px;">
+        <textarea class="form-control" asp-for="Description" placeholder="Определение" id="floatingTextarea"></textarea>
+        <label for="floatingTextarea">Определение (необязательно)</label>
     </div>
-</div>
 
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">

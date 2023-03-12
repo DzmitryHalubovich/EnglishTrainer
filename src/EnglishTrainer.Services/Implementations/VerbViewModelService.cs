@@ -2,46 +2,43 @@
 using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
 using EnglishTrainer.ApplicationCore.Models;
-using EnglishTrainer.ApplicationCore.QueryOptions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace EnglishTrainer.Services
 {
     public class VerbViewModelService : IVerbViewModelService
     {
         private readonly IRepository<IrregularVerb> _verbRepository;
+        private readonly ILogger<VerbViewModelService> _logger;
         private readonly IMapper _mapper;
 
-        public VerbViewModelService(IRepository<IrregularVerb> verbRepository, IMapper mapper)
+        public VerbViewModelService(IRepository<IrregularVerb> verbRepository, IMapper mapper, ILogger<VerbViewModelService> logger)
         {
             _verbRepository = verbRepository;
             _mapper = mapper;
+            _logger=logger;
         }
-        public async Task<IList<VerbViewModel>> GetAllVerbsAsync(VerbQueryOptions verbQueryOptions)
+        public async Task<IEnumerable<VerbViewModel>> GetAllVerbsAsync()
         {
-            var options = new QueryEntityOptions<IrregularVerb>()
-                .SetCurentPageAndPageSize(verbQueryOptions.PageOptions);
+            var getAllVerbs = await _verbRepository.GetAllAsync(isTracking:true); //look in database all our enteties
 
-            var entities = await _verbRepository.GetAllAsync(options); //look in database all our enteties
-            //var verbs = _mapper.Map<List<VerbViewModel>>(entities);
-            var verbs = entities.Select(item => new VerbViewModel()
-            {
-                VerbId = item.Id,
-                Infinitive= item.Infinitive,
-                PastSimple= item.PastSimple,
-                PastParticiple= item.PastParticiple,
-                ShortTranslate = item.ShortTranslate,
-            }).ToList();
+            _logger.LogInformation("Запрос на получение таблицы неправильных глаголов.");
 
-            return verbs;
+            var allVerbsDto = _mapper.Map<IEnumerable<VerbViewModel>>(getAllVerbs);
+
+            return allVerbsDto;
         }
 
         public async Task<VerbViewModel> GetVerbViewModelByIdAsync(int id)
         {
-            var entity = await _verbRepository.GetByIdAsync(id);
+            var entity = await _verbRepository.GetFirstOrDefaultAsync(x=>x.Id==id);
 
             var result = _mapper.Map<VerbViewModel>(entity);
 
             return result;
         }
+
+  
     }
 }

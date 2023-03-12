@@ -2,7 +2,6 @@
 using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
 using EnglishTrainer.ApplicationCore.Models;
-using EnglishTrainer.ApplicationCore.QueryOptions;
 using EnglishTrainer.ApplicationCore.Response;
 using EnglishTrainer.Services;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +12,10 @@ namespace EnglishTrainer.ApplicationCore
     public class WordViewModelService : IWordViewModelService
     {
         private readonly IRepository<Word> _wordRepository;
+        private readonly ILogger<WordViewModelService> _logger;
         private readonly IMapper _mapper;
-        private readonly ILogger<PartsOfSpeechViewModelService> _logger;
 
-        public WordViewModelService(IRepository<Word> wordRepository, IMapper mapper, ILogger<PartsOfSpeechViewModelService> logger)
+        public WordViewModelService(IRepository<Word> wordRepository, IMapper mapper, ILogger<WordViewModelService> logger)
         {
             _wordRepository=wordRepository;
             _mapper=mapper;
@@ -25,12 +24,11 @@ namespace EnglishTrainer.ApplicationCore
 
         public async Task<IBaseResponse<Word>> CreateNewWordAsync(WordViewModel wordViewModel)
         {
-           
             try
             {
                 _logger.LogInformation($"Запрос на добавление нового слова в словарь - {wordViewModel.Name}");
 
-                var word =  _wordRepository.GetAll().Where(x => x.Name == wordViewModel.Name).FirstOrDefault();
+                var word = await  _wordRepository.GetFirstOrDefaultAsync(predicate:x=>x.Name == wordViewModel.Name);
 
                 if (word is not null)
                 {
@@ -43,12 +41,13 @@ namespace EnglishTrainer.ApplicationCore
 
                 var newWord = new Word()
                 {
-                    Name= wordViewModel.Name,
-                    Examples= wordViewModel.Examples,
-                    PartsOfSpeech= wordViewModel.PartsOfSpeech,
-                    TranslateVariants= wordViewModel.TranslateVariants,
+                    Name = wordViewModel.Name,
+                    Examples = wordViewModel.Examples,
+                    TranslateVariants = wordViewModel.TranslateVariants,
+                    Description = wordViewModel.Description,
                     Created = DateTime.Now
                 };
+
                 await _wordRepository.CreateAsync(newWord);
 
                 _logger.LogInformation($"Слово {newWord.Name} успешно добавлено в словарь");
@@ -71,48 +70,23 @@ namespace EnglishTrainer.ApplicationCore
             }
         }
 
-        public IQueryable<Word> GetAllWords()
+        public async Task<IEnumerable<WordViewModel>> GetAllWordsAsync()
         {
-            IQueryable<Word> words = _wordRepository.GetAll()
-                .Include(x=>x.Examples)
-                .Include(x=>x.PartsOfSpeech);
+            _logger.LogInformation("Получение списка слов из словаря.");
 
+            var getAllWords = await _wordRepository.GetAllAsync(isTracking:true);
 
-            return words;
-        }
+            var allWordsDto = _mapper.Map<IEnumerable<WordViewModel>>(getAllWords);
 
-        public async Task<IList<WordViewModel>> GetAllWordsAsync(VerbQueryOptions wordQueryOptions)
-        {
-            var options = new QueryEntityOptions<Word>()
-                .SetCurentPageAndPageSize(wordQueryOptions.PageOptions);
-
-            var allWords = await _wordRepository.GetAllAsync(options);
-
-            var words = allWords.Select(item => new WordViewModel()
-            {
-                Id = item.Id,
-                Name= item.Name,
-                Examples= item.Examples,
-                PartsOfSpeech= item.PartsOfSpeech,
-                TranslateVariants = item.TranslateVariants
-            }).ToList();
-
-            return words;
+            return allWordsDto;
         }
         
-
-        public List<WordShortViewModel> GetLastFiveWords()
-        {
-            var lastFiveWords = _wordRepository.GetAll().Take(5);
-
-            List<WordShortViewModel> result = _mapper.Map<List<WordShortViewModel>>(lastFiveWords);
-
-            return result;
-        }
-
         public async Task<WordViewModel> GetWordViewModelByIdAsync(int id)
         {
-            var entity = await _wordRepository.GetByIdAsync(id, x=>x.PartsOfSpeech,t=>t.Examples);
+            var entity = await _wordRepository.GetFirstOrDefaultAsync(
+                predicate: x=>x.Id==id,
+                include:query => query.Include(t=>t.Examples), 
+                isTracking:false);
 
             var result = _mapper.Map<WordViewModel>(entity);
 
@@ -121,15 +95,14 @@ namespace EnglishTrainer.ApplicationCore
 
         public async Task UpdateWordAsync(WordViewModel viewModel)
         {
-            var existingWord = await _wordRepository.GetByIdAsync(viewModel.Id);
-            //var existingWord = _wordRepository.GetAll().Where(x=>x.Name == viewModel.Name).FirstOrDefault();
+            var existingWord = await _wordRepository.GetFirstOrDefaultAsync(predicate: x=>x.Id==viewModel.Id);
 
             existingWord.Created = DateTime.Now;
             existingWord.Examples = viewModel.Examples;
             existingWord.TranslateVariants = viewModel.TranslateVariants;
-            existingWord.PartsOfSpeech = viewModel.PartsOfSpeech;
             existingWord.Name = viewModel.Name;
-            
+            existingWord.Description = viewModel.Description;
+
            await  _wordRepository.UpdateAsync(existingWord);
         }
 

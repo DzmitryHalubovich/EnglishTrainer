@@ -35,4 +35,8 @@
     <ProjectReference Include="..\EnglishTrainer.Services\EnglishTrainer.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Shared\WordPartial\" />
+  </ItemGroup>
+
 </Project>

@@ -9,10 +9,9 @@ namespace EnglishTrainer.ApplicationCore.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        [DataType("varchar(max)")]
+        [DataType("nvarchar(max)")]
         public string TranslateVariants { get; set; }
-
+        public string? Description { get; set; }
         public IList<Example>? Examples { get; set; } = new List<Example>();
-        public TranslateByPartsOfSpeech PartsOfSpeech { get; set; }
     }
 }

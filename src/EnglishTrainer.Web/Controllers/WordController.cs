@@ -1,6 +1,6 @@
 ﻿using EnglishTrainer.ApplicationCore.Enums;
 using EnglishTrainer.ApplicationCore.Models;
-using EnglishTrainer.ApplicationCore.QueryOptions;
+
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,46 +17,32 @@ namespace EnglishTrainer.Services
         }
 
         //https://metanit.com/sharp/aspnet5/12.4.php
-        public async Task<IActionResult> Index(SortState sortOrder = SortState.WordAsc)
+        //public async Task<IActionResult> Index(SortState sortOrder = SortState.WordAsc)
+        //{
+        //    var words = _wordViewModelService.GetAllWords();
+
+        //    ViewData["NameSort"] = sortOrder == SortState.WordAsc ? SortState.WordDesc : SortState.WordAsc;
+        //    ViewData["DateSort"] = sortOrder == SortState.DateAsc ? SortState.DateDesc : SortState.DateAsc;
+
+        //    words = sortOrder switch
+        //    {
+        //        SortState.WordAsc => words.OrderBy(x => x.Name),
+        //        SortState.WordDesc => words.OrderByDescending(x=>x.Name),
+        //        SortState.DateAsc => words.OrderBy(x=>x.Created),
+        //        SortState.DateDesc => words.OrderByDescending(x =>x.Name),
+        //        _=>words.OrderBy(x=>x.Name),
+        //    };
+
+        //    return View(await words.AsNoTracking().ToListAsync());
+        //}
+
+        public async Task<IActionResult> MainTable()
         {
-            var words = _wordViewModelService.GetAllWords();
+            var wordViewModel = await _wordViewModelService.GetAllWordsAsync();
 
-            ViewData["NameSort"] = sortOrder == SortState.WordAsc ? SortState.WordDesc : SortState.WordAsc;
-            ViewData["DateSort"] = sortOrder == SortState.DateAsc ? SortState.DateDesc : SortState.DateAsc;
-
-            words = sortOrder switch
-            {
-                SortState.WordAsc => words.OrderBy(x => x.Name),
-                SortState.WordDesc => words.OrderByDescending(x=>x.Name),
-                SortState.DateAsc => words.OrderBy(x=>x.Created),
-                SortState.DateDesc => words.OrderByDescending(x =>x.Name),
-                _=>words.OrderBy(x=>x.Name),
-            };
-
-            return View(await words.AsNoTracking().ToListAsync());
+            return View(wordViewModel);
         }
 
-        public async Task<IActionResult> MainTable(VerbQueryOptions options)
-        {
-            var wordViewModel = await _wordViewModelService.GetAllWordsAsync(options);
-            options.PageOptions.CurrentElementsCount = wordViewModel.Count;
-
-            WordIndexViewModel verbList = new WordIndexViewModel()
-            {
-                Options = options,
-                WordsList = wordViewModel
-            };
-
-            return View(verbList);
-        }
-
-
-        public IActionResult LastFiveWords()
-        {
-            var lastFiveWords = _wordViewModelService.GetLastFiveWords();
-
-            return PartialView(lastFiveWords);
-        }
 
         //Создание обьекта и вью работает по примеру отсюда
         //https://metanit.com/sharp/mvc5/5.11.php

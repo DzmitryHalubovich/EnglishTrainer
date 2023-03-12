@@ -13,11 +13,10 @@ namespace EnglishTrainer.ApplicationCore.Entities
         public string Name { get; set; }
         [Required]
         public string TranslateVariants { get; set; }
+        public string? Description { get; set; }
         public DateTime Created { get; set; }
 
-
         public IList<Example>? Examples { get; set; }
-        public TranslateByPartsOfSpeech PartsOfSpeech { get; set; }
 
     }
 }
