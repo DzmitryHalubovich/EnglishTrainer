@@ -1,14 +1,6 @@
-﻿using EnglishTrainer.ApplicationCore.Dto.ResponseDto;
-using JWTTokensTest.Dto;
-
-using JWTTokensTest.Entities;
-using JWTTokensTest.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace JWTTokensTest.Controllers
+﻿
+namespace EnglishTrainer.ApplicationCore.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {

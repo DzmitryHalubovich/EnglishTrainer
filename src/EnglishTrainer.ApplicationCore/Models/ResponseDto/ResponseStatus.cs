@@ -1,4 +1,4 @@
-﻿namespace EnglishTrainer.ApplicationCore.Dto.ResponseDto
+﻿namespace EnglishTrainer.ApplicationCore.Models
 {
     public class ResponseStatus
     {
