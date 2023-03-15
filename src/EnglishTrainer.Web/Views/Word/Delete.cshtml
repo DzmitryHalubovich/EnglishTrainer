@@ -31,8 +31,9 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="MainTable">Back to List</a>
+    <form asp-action="DeleteWord">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit" class="btn btn-primary" style="width: 150px;">Удалить</button>
+        <a class="btn btn-outline-primary" style="width: 150px;" asp-action="MainTable">Отмена</a>
     </form>
 </div>

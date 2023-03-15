@@ -98,5 +98,22 @@ namespace EnglishTrainer.Services
 
             return View(existingWord);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteWord(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingWord = await _wordViewModelService.GetWordViewModelByIdAsync(id);
+
+                await _wordViewModelService.DeleteWordAsync(id);
+                return RedirectToAction("MainTable");
+            }
+            else
+            {
+                return View();
+            }
+        }
     }
 }
