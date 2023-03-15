@@ -1,0 +1,24 @@
+﻿@model EnglishTrainer.ApplicationCore.Models.VerbViewModel
+
+
+<div class="container" style="width:1000px; background-color:deepskyblue">
+    <div class="row">
+        <div class="col">
+            <label><span style="font-weight:700">Infinitive</span></label>
+            <input value="@Model.Infinitive"/>   
+        </div>
+        <div class="col">
+            <label><span style="font-weight:700">Past Simple</span></label>
+            <input value="@Model.PastSimple" />
+        </div>
+        <div class="col">
+            <label><span style="font-weight:700">Past Participle</span></label>
+            <input value="@Model.PastParticiple" />
+        </div>
+        <div class="col">
+            <label><span style="font-weight:700">Перевод</span></label>
+            <p>@Model.ShortTranslate</p>
+        </div>
+    </div>
+</div>
+

@@ -90,5 +90,13 @@ namespace EnglishTrainer.Services
             await _wordViewModelService.UpdateWordAsync(wordViewModel);
             return RedirectToAction("MainTable");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var existingWord = await _wordViewModelService.GetWordViewModelByIdAsync(id);
+
+            return View(existingWord);
+        }
     }
 }

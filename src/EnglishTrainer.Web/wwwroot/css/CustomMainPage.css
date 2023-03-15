@@ -106,9 +106,9 @@ a {
     }
 
 .my-row {
-    height: 40px;
+    height: 50px;
     color: black;
-    transition: all linear .05s
+    transition: all linear .05s;
 }
 
 .my-row:hover {

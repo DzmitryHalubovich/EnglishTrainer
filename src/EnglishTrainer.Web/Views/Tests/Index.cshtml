@@ -1,0 +1,44 @@
+﻿@*@model EnglishTrainer.ApplicationCore.Models.VerbViewModel*@
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div style="margin-bottom:20px">
+    <h1>Здесь вы можете проверить свой уровень знаний!</h1>
+    <a asp-action="Index" asp-controller="Verb" style="border-radius:0" class="btn btn-info">На главную страницу</a>
+    <button id="createWord" style="border-radius:0" class="btn btn-primary">Следующий</button>
+    <button id="checkAnswer" style="border-radius:0" class="btn btn-warning">Проверить</button>
+</div>
+
+
+
+
+<div class="container">
+        <div class="partialResultVerb">
+
+        </div>
+</div>
+
+
+
+@section Scripts {
+    <script>
+       $('#createWord').on('click', function (e) {
+                e.preventDefault();
+                 $.ajax({
+                    url: "/Tests/GetNewVerb",
+                    type: "GET",
+                    dataType: "html",
+                    contentType: 'application/json; charset=utf-8',
+                    success: function(data){ 
+                        //var message = data.Message; 
+                        //alert(data);
+                        $('.partialResultVerb').html(data);
+                        } //<-- added close for anonymous function
+                    }); //<--added close/semicolon for ajax function
+            });
+    </script>
+}
+
+  

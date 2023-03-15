@@ -11,5 +11,7 @@ namespace EnglishTrainer.Services
         Task<WordViewModel> GetWordViewModelByIdAsync(int id);
         Task UpdateWordAsync(WordViewModel viewModel);
 
+        Task DeleteWordAsync(int id);
+
     }
 }

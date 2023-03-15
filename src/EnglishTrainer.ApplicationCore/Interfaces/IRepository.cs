@@ -22,7 +22,7 @@ namespace EnglishTrainer.ApplicationCore.Interfaces
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
             bool isTracking = false);
 
-        Task DeleteAsync( T entity);
+        Task DeleteAsync(T entity);
 
         Task UpdateAsync(T entity);
     }

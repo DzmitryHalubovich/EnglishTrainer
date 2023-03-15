@@ -15,9 +15,19 @@
 <div class="container">
     @foreach(var item in Model)
     {
-        <a asp-action="Details" asp-controller="Word" asp-route-id="@item.Id" div class="col my-row border text-decoration-none">
-            @item.Name - @item.TranslateVariants
-         </a>
+        <div class="container">
+            <div class="row border">
+                <div class="col">
+                    <a asp-action="Details" asp-controller="Word" asp-route-id="@item.Id" div class="col my-row border text-decoration-none">
+                        @item.Name - @item.TranslateVariants
+                    </a>
+                </div>
+                <div class="col">
+                    <a asp-action="Delete" asp-controller="Word" asp-route-id="@item.Id" class="btn btn-danger">Удалить</a>
+                </div>
+            </div>
+
+        </div>
     }
 </div>
         
