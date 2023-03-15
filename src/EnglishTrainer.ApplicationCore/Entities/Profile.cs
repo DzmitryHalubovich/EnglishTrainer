@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JWTTokensTest.Entities
+namespace EnglishTrainer.ApplicationCore.Entities
 {
     public class Profile
     {

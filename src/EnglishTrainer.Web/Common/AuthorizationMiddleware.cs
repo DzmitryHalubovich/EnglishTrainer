@@ -1,4 +1,5 @@
 ﻿using EnglishTrainer.ApplicationCore.Config;
+using EnglishTrainer.Config;
 using Microsoft.Extensions.Options;
 
 namespace JWTTokensTest.Common

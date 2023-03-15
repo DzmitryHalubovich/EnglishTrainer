@@ -1,6 +1,6 @@
-﻿using JWTTokensTest.Config;
-using JWTTokensTest.Data;
-using JWTTokensTest.Interfaces;
+﻿
+using EnglishTrainer.ApplicationCore.Config;
+using EnglishTrainer.Services.Interfaces;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 
 
-namespace JWTTokensTest.Services
+namespace EnglishTrainer.Services
 {
     public class TokenService : ITokenService
     {

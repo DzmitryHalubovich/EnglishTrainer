@@ -1,13 +1,19 @@
+using EnglishTrainer.ApplicationCore.Common;
+using EnglishTrainer.ApplicationCore.Config;
+using EnglishTrainer.Config;
 using EnglishTrainer.Infrastructure.Data;
 using EnglishTrainer.Services;
 using EnglishTrainer.Web.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
+using System.Text.Json.Serialization;
 
 //var logger = new LoggerConfiguration()
 //.MinimumLevel.Debug()
@@ -43,6 +49,33 @@ var logger = new LoggerConfiguration()
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
+
+builder.Services.AddOptions<AuthorizationConfig>().BindConfiguration("Authorization");
+builder.Services.AddOptions<JwtConfig>().BindConfiguration("Jwt");
+
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
+    };
+});
+
+builder.Services.AddCors();
+
+
 //Add logger
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
@@ -59,6 +92,8 @@ builder.Services.AddCoreServices();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
+
+app.UseCors(x => x.AllowCredentials().AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000"));
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -104,5 +139,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Verb}/{action=Index}/{id?}");
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseMiddleware<AuthorizationMiddleware>();
 
 app.Run();

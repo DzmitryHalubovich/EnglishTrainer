@@ -1,4 +1,4 @@
-﻿namespace JWTTokensTest.Config
+﻿namespace EnglishTrainer.Config
 {
     public class AuthorizationConfig
     {

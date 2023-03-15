@@ -1,6 +1,6 @@
-﻿using EnglishTrainer.ApplicationCore.Dto;
-using EnglishTrainer.ApplicationCore.Dto.ResponseDto;
+﻿
 using EnglishTrainer.ApplicationCore.Entities;
+using EnglishTrainer.ApplicationCore.Models;
 
 namespace EnglishTrainer.Services.Interfaces
 {

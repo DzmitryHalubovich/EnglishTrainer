@@ -1,14 +1,26 @@
 ﻿
+using EnglishTrainer.ApplicationCore.Entities;
+using EnglishTrainer.ApplicationCore.Models;
+using EnglishTrainer.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
 namespace EnglishTrainer.ApplicationCore.Controllers
 {
-    [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class UserController : Controller
     {
         private readonly IUserService _userService;
 
         public UserController(IUserService userService)
         {
             _userService=userService;
+        }
+
+
+        public IActionResult Register()
+        {
+            var newRegister = new RegisterDto();
+            return View(newRegister);
         }
 
         [HttpPost("registerUser")]
