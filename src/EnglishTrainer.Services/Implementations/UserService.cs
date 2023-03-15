@@ -6,6 +6,7 @@ using EnglishTrainer.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace EnglishTrainer.Services
 {
@@ -73,8 +74,8 @@ namespace EnglishTrainer.Services
 
             var duplicateUser = await _efContex.Users.FirstOrDefaultAsync(x=>x.Username == userName);
             var duplicateEmail = await _efContex.Users.FirstOrDefaultAsync(x =>x.Email==email);
+           if (duplicateUser == null && duplicateEmail == null)
 
-            if (duplicateUser == null && duplicateEmail == null)
             {
                 await _efContex.Users.AddAsync(user);
                 await _efContex.Profiles.AddAsync(profile);

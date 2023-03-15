@@ -16,23 +16,38 @@ namespace EnglishTrainer.ApplicationCore.Controllers
             _userService=userService;
         }
 
-
+        [HttpGet]
         public IActionResult Register()
         {
             var newRegister = new RegisterDto();
             return View(newRegister);
         }
 
-        [HttpPost("registerUser")]
-        public async Task<ResponseStatus> RegisterUser([FromBody] RegisterDto dto)
+        [HttpPost]
+        public async Task<IActionResult> RegisterUser(RegisterDto dto)
         {
-            return await _userService.RegisterUser(dto.UserName,dto.Password, dto.Email);
+            await _userService.RegisterUser(dto.UserName,dto.Password, dto.Email);
+
+            return RedirectToAction("Main", "Verb");
         }
 
-        [HttpPost("loginAccaunt")]
-        public async Task<TokenDto> LoginUser([FromBody] LoginDto dto)
+        [HttpGet]
+        public async Task<IActionResult> Login()
         {
-            return await _userService.LoginUser(dto.UserName, dto.Password);
+            var newLogin = new LoginDto();
+            return View(newLogin);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LoginUser(LoginDto dto)
+        {
+            var token = await _userService.LoginUser(dto.UserName, dto.Password);
+
+            HttpContext.Request.Headers.Add("Authorization", "Bearer"+ token.AccessToken.ToString());
+
+            return RedirectToAction("Index", "Verb");
+
+            //return await _userService.LoginUser(dto.UserName, dto.Password);
         }
 
         [HttpGet("getProfile/{id}"), Authorize(AuthenticationSchemes = "Bearer ",Roles ="Admin")]
