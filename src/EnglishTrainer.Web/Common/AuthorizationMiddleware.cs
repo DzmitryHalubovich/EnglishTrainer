@@ -1,5 +1,6 @@
 ﻿using EnglishTrainer.ApplicationCore.Config;
 using EnglishTrainer.Config;
+using EnglishTrainer.Services.Interfaces;
 using Microsoft.Extensions.Options;
 
 namespace JWTTokensTest.Common
@@ -18,23 +19,30 @@ namespace JWTTokensTest.Common
 
         public async Task InvokeAsync(HttpContext context)
         {
-            try
-            {
-                var RoleClaim = context.User.Claims?.First(x =>
-                x.Type.Equals(_authorizationConfig.MicrosoftClaimsGateway,
-                StringComparison.InvariantCultureIgnoreCase)).Value.ToString();
+            
+            var token = context.Request.Cookies["X-UserRole"];
 
-                if (RoleClaim != null)
-                {
-                    context.Response.Headers["X-UserRole"] = RoleClaim;
-                }
-            }
-            catch (Exception ex)
-            {
+            if (token != null)
+                context.Request.Headers.Add("Authorization", "Bearer " + token);
 
-            }
+            //try
+            //{
+            //    var RoleClaim = context.User.Claims?.First(x =>
+            //    x.Type.Equals(_authorizationConfig.MicrosoftClaimsGateway,
+            //    StringComparison.InvariantCultureIgnoreCase)).Value.ToString();
+
+            //    if (RoleClaim != null)
+            //    {
+            //        context.Response.Headers["X-UserRole"] = RoleClaim;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+
+            //}
             await _next.Invoke(context);
         }
+
     }
 }
 

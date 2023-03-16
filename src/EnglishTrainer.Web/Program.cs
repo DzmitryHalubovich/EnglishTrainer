@@ -3,9 +3,11 @@ using EnglishTrainer.ApplicationCore.Config;
 using EnglishTrainer.Config;
 using EnglishTrainer.Infrastructure.Data;
 using EnglishTrainer.Services;
+using EnglishTrainer.Web.Configuration;
 using EnglishTrainer.Web.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
@@ -95,8 +97,7 @@ var app = builder.Build();
 
 app.UseCors(x => x.AllowCredentials().AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000"));
 
-app.UseAuthentication();
-app.UseAuthorization();
+
 
 
 
@@ -122,6 +123,14 @@ using (var scope = app.Services.CreateScope())
 
 }
 
+// Improves cookie security
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    MinimumSameSitePolicy = SameSiteMode.None,
+    HttpOnly = HttpOnlyPolicy.Always,
+    Secure = CookieSecurePolicy.Always
+});
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -135,11 +144,19 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Verb}/{action=Index}/{id?}");
 
+app.UseSecureJwt();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseMiddleware<AuthorizationMiddleware>();
+
+//app.UseMiddleware<AuthorizationMiddleware>();
 
 app.Run();

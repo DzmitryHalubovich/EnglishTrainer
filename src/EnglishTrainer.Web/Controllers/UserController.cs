@@ -43,8 +43,9 @@ namespace EnglishTrainer.ApplicationCore.Controllers
         {
             var token = await _userService.LoginUser(dto.UserName, dto.Password);
 
-            HttpContext.Request.Headers.Add("Authorization", "Bearer"+ token.AccessToken.ToString());
-
+            //HttpContext.Request.Headers.Add("Authorization", "Bearer"+ token.AccessToken.ToString());
+            //Response.Cookies.Append("Bearer", token.AccessToken);
+            HttpContext.Response.Cookies.Append("X-UserRole", token.AccessToken);
             return RedirectToAction("Index", "Verb");
 
             //return await _userService.LoginUser(dto.UserName, dto.Password);
