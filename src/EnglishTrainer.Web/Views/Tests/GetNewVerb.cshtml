@@ -1,7 +1,9 @@
 ﻿@model EnglishTrainer.ApplicationCore.Models.VerbViewModel
 
+<input id="checkPastSimple" type="hidden" value="@Model.PastSimple" />
+<input id="checkPastParticiple" type="hidden" value="@Model.PastParticiple" />
 
-<div class="container" style="width:1000px; background-color:deepskyblue">
+<div class="container" style="width:1000px; background-color:#3b375e">
     <div class="row">
         <div class="col">
             <label><span style="font-weight:700">Infinitive</span></label>
@@ -9,11 +11,21 @@
         </div>
         <div class="col">
             <label><span style="font-weight:700">Past Simple</span></label>
-            <input value="@Model.PastSimple" />
+            <input id="answerPastSimple" value="@Model.PastSimple" />
+        </div>
+        <div class="col">
+            <p class="wrong-answer-past-simple">
+                
+            </p>
         </div>
         <div class="col">
             <label><span style="font-weight:700">Past Participle</span></label>
-            <input value="@Model.PastParticiple" />
+            <input id="answerPastParticiple" value="@Model.PastParticiple" />
+        </div>
+        <div class="col">
+            <p class="wrong-answer-past-participle">
+                
+            </p>
         </div>
         <div class="col">
             <label><span style="font-weight:700">Перевод</span></label>

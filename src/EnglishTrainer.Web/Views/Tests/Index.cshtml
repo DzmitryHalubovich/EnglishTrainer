@@ -39,6 +39,54 @@
                     }); //<--added close/semicolon for ajax function
             });
     </script>
+
+    <script>
+        $('#checkAnswer').on('click', function (e) {
+            const checkPastSimple = document.getElementById("checkPastSimple").value;
+            const checkPastParticiple = document.getElementById("checkPastParticiple").value;
+
+            const answerPastSimple = document.getElementById("answerPastSimple").value;
+            const answerPastParticiple = document.getElementById("answerPastParticiple").value;
+
+
+            const pastSimpleInput = document.getElementById("answerPastSimple");
+            const pastParticipleInput = document.getElementById("answerPastParticiple");
+            //const p = document.querySelector('.wrong-answer-past-simple').innerHTML;
+
+            //p.textContent = "Wrong!";
+            //p.classList.add("text-danger");
+            //pastSimpleInput.classList.add("is-invalid");
+
+
+            if(checkPastSimple != answerPastSimple){
+
+                document.querySelector('.wrong-answer-past-simple').innerHTML = 'Неправильно!';
+                document.querySelector('.wrong-answer-past-simple').classList.add('text-danger');
+                pastSimpleInput.style.outline = '2px solid red';
+
+            }
+            else{
+                document.querySelector('.wrong-answer-past-simple').innerHTML = 'Правильно!';
+
+                document.querySelector('.wrong-answer-past-simple').classList.add('text-success');
+
+                pastSimpleInput.style.outline = '2px solid green';
+            }
+
+            if (checkPastParticiple != answerPastParticiple){
+                document.querySelector('.wrong-answer-past-participle').innerHTML = 'Неправильно!';
+                document.querySelector('.wrong-answer-past-participle').classList.add('text-danger');
+                pastParticipleInput.style.outline = '2px solid red';
+            }
+            else{
+                document.querySelector('.wrong-answer-past-participle').innerHTML = 'Правильно!';
+                document.querySelector('.wrong-answer-past-participle').classList.add('text-success');
+                pastParticipleInput.style.outline = '2px solid green';
+            }
+
+        });
+
+    </script>
 }
 
   
