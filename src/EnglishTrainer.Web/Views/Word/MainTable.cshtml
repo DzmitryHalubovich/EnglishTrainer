@@ -12,22 +12,26 @@
         <a type="button" class="btn btn-primary" style="border-radius:0" asp-action="Create" asp-controller="Word">Добавить новое слово </a>
 </div>
 
-<div class="container">
+<div class="container flex-column justify-content-center" >
     @foreach(var item in Model)
     {
-        <div class="container">
-            <div class="row border">
-                <div class="col">
-                    <a asp-action="Details" asp-controller="Word" asp-route-id="@item.Id" div class="col my-row border text-decoration-none">
-                        @item.Name - @item.TranslateVariants
-                    </a>
-                </div>
-                <div class="col">
-                    <a asp-action="Delete" asp-controller="Word" asp-route-id="@item.Id" class="btn btn-danger">Удалить</a>
-                </div>
-            </div>
-
+        <div class="my-row" style="display:flex; justify-content:space-between; width:800px;">
+            <a asp-action="Details" asp-controller="Word" asp-route-id="@item.Id" div class="text-decoration-none my-row_word">
+                @item.Name - @item.TranslateVariants
+            </a>
+            <a asp-action="Delete" asp-controller="Word" asp-route-id="@item.Id" class="btn btn-danger">Удалить</a>
         </div>
+
+
+
+        @*  <div class="col">
+            <a asp-action="Details" asp-controller="Word" asp-route-id="@item.Id" div class="col my-row border text-decoration-none">
+                @item.Name - @item.TranslateVariants
+            </a>
+        </div>
+        <div class="col">
+            <a asp-action="Delete" asp-controller="Word" asp-route-id="@item.Id" class="btn btn-danger">Удалить</a>
+        </div>*@
     }
 </div>
         
