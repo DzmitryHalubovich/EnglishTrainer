@@ -60,28 +60,36 @@
 
             if(checkPastSimple != answerPastSimple){
 
-                document.querySelector('.wrong-answer-past-simple').innerHTML = 'Неправильно!';
-                document.querySelector('.wrong-answer-past-simple').classList.add('text-danger');
-                pastSimpleInput.style.outline = '2px solid red';
+                document.querySelector('.result-answer-past-simple').innerHTML = 'Неправильно!';
+                document.querySelector('.result-answer-past-simple').classList.add('text-danger');
+
+                pastSimpleInput.style.backgroundColor = '#fa9bab';
+
+                //pastSimpleInput.style.outline = '2px solid red';
 
             }
             else{
-                document.querySelector('.wrong-answer-past-simple').innerHTML = 'Правильно!';
 
-                document.querySelector('.wrong-answer-past-simple').classList.add('text-success');
+                document.querySelector('.result-answer-past-simple').innerHTML = 'Правильно!';
+                document.querySelector('.result-answer-past-simple').classList.add('text-success');
+                pastSimpleInput.style.backgroundColor = '#7df279';
 
-                pastSimpleInput.style.outline = '2px solid green';
+                //pastSimpleInput.style.outline = '2px solid green';
             }
 
             if (checkPastParticiple != answerPastParticiple){
-                document.querySelector('.wrong-answer-past-participle').innerHTML = 'Неправильно!';
-                document.querySelector('.wrong-answer-past-participle').classList.add('text-danger');
-                pastParticipleInput.style.outline = '2px solid red';
+                document.querySelector('.result-answer-past-participle').innerHTML = 'Неправильно!';
+                document.querySelector('.result-answer-past-participle').classList.add('text-danger');
+
+                pastParticipleInput.style.backgroundColor = '#fa9bab';
+
+                //pastParticipleInput.style.outline = '2px solid red';
             }
             else{
-                document.querySelector('.wrong-answer-past-participle').innerHTML = 'Правильно!';
-                document.querySelector('.wrong-answer-past-participle').classList.add('text-success');
-                pastParticipleInput.style.outline = '2px solid green';
+                document.querySelector('.result-answer-past-participle').innerHTML = 'Правильно!';
+                document.querySelector('.result-answer-past-participle').classList.add('text-success');
+                pastParticipleInput.style.backgroundColor = '#7df279';
+                //pastParticipleInput.style.outline = '2px solid green';
             }
 
         });
