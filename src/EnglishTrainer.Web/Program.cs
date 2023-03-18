@@ -157,7 +157,7 @@ app.UseSecureJwt();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseMiddleware<ExceptionHandlingMiddleware>();
+//app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 //app.UseMiddleware<AuthorizationMiddleware>();
 

@@ -48,52 +48,32 @@
             const answerPastSimple = document.getElementById("answerPastSimple").value;
             const answerPastParticiple = document.getElementById("answerPastParticiple").value;
 
-
             const pastSimpleInput = document.getElementById("answerPastSimple");
             const pastParticipleInput = document.getElementById("answerPastParticiple");
-            //const p = document.querySelector('.wrong-answer-past-simple').innerHTML;
-
-            //p.textContent = "Wrong!";
-            //p.classList.add("text-danger");
-            //pastSimpleInput.classList.add("is-invalid");
-
 
             if(checkPastSimple != answerPastSimple){
-
                 document.querySelector('.result-answer-past-simple').innerHTML = 'Неправильно!';
                 document.querySelector('.result-answer-past-simple').classList.add('text-danger');
-
                 pastSimpleInput.style.backgroundColor = '#fa9bab';
-
-                //pastSimpleInput.style.outline = '2px solid red';
-
             }
             else{
-
                 document.querySelector('.result-answer-past-simple').innerHTML = 'Правильно!';
                 document.querySelector('.result-answer-past-simple').classList.add('text-success');
                 pastSimpleInput.style.backgroundColor = '#7df279';
-
-                //pastSimpleInput.style.outline = '2px solid green';
             }
 
             if (checkPastParticiple != answerPastParticiple){
                 document.querySelector('.result-answer-past-participle').innerHTML = 'Неправильно!';
                 document.querySelector('.result-answer-past-participle').classList.add('text-danger');
-
                 pastParticipleInput.style.backgroundColor = '#fa9bab';
-
-                //pastParticipleInput.style.outline = '2px solid red';
             }
             else{
                 document.querySelector('.result-answer-past-participle').innerHTML = 'Правильно!';
                 document.querySelector('.result-answer-past-participle').classList.add('text-success');
                 pastParticipleInput.style.backgroundColor = '#7df279';
-                //pastParticipleInput.style.outline = '2px solid green';
             }
 
         });
-
     </script>
 }
 

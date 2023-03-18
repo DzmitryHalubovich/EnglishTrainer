@@ -7,9 +7,12 @@
 
 <h2>@Model.Name</h2>
 
+
 <div class="row" style="width:800px;">
     <div class="col-lg">
         <form asp-action="Edit">
+            <input type="hidden" asp-for="Name" value="@Model.Name" />
+
             <div class="form-group">
                 <label asp-for="TranslateVariants" class="control-label">Варианты перевода</label>
                 <input asp-for="TranslateVariants" class="form-control" style="background-color: #3b375e; color:#fff; margin-bottom:20px;" />
