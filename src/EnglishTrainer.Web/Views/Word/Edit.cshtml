@@ -36,18 +36,37 @@
                         @*<input class="form-control" type="text" name="@item.EnglishExample" />*@
                         <label asp-for="@item.EnglishExample" class="control-label" ></label>
                         <input asp-for="@item.EnglishExample" class="form-control" style="background-color: #3b375e; color:#fff;" />
+                        <span asp-validation-for="@item.EnglishExample" class="text-danger"></span>
                     </div>
                     <div>
                         @* <input class='form-control' type='text' name='item.RussianExample' placeholder="@item.RussianExample" />*@
                         <label asp-for="@item.RussianExample" class="control-label"></label>
                         <input asp-for="@item.RussianExample" class="form-control" style="background-color: #3b375e; color:#fff;" />
+                        <span asp-validation-for="@item.RussianExample" class="text-danger"></span>
                     </div>
                 }
             </div>
 
+            <div id="exampleBlock">
+                <div class="exampleItem">
+                  @*  <h4>Пример  № 1</h4>
+                    <div>
+                        <label>Английский вариант</label>
+                        <div>
+                            <input class="form-control" type="text" name="Examples[0].EnglishExample" />
+                        </div>
+                        <label>Русский перевод</label>
+                        <div>
+                            <input class="form-control" type="text" name="Examples[0].RussianExample" />
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+            <p><a class="addLink">Добавить новый пример</a></p>
+
             <div class="form-group" style="margin-top:10px;">
-                <a asp-action="MainTable" class="btn btn-info" style="border-radius:0">Отмена</a>
-                <input type="submit" value="Сохранить изменения" class="btn btn-primary" style="border-radius:0"/>
+                <a asp-action="MainTable" class="btn btn-info" >Отмена</a>
+                <input type="submit" value="Сохранить изменения" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -60,15 +79,15 @@
 @section Scripts {
     <script>
         $(function () {
-            var i = 0;
+            var i = @Model.Examples.Count;
             $('.addLink').click(function () {
                 i++;
                 var html2Add = "<div class='exampleItem'>" +
                     "<h4>Пример № " + (i) + "</h4>" +
                     "<div><label>Английский вариант</label><div>" +
-                    "<input class='form-control'  type='text' name='Examples[" + i + "].EnglishExample' />" +
+                    "<input class='form-control' style='background-color:#3b375e; color: #fff;' type='text' name='Examples[" + i + "].EnglishExample' />" +
                     "</div><label>Русский перевод</label><div>" +
-                    "<input class='form-control'  type='text' name='Examples[" + i + "].RussianExample' />" +
+                    "<input class='form-control' style='background-color:#3b375e; color: #fff;' type='text' type='text' name='Examples[" + i + "].RussianExample' />" +
                     "</div></div></div>";
                 $('#exampleBlock').append(html2Add);
             })

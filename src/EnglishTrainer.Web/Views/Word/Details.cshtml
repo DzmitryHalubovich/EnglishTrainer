@@ -4,22 +4,26 @@
     ViewData["Title"] = "Details";
 }
 
-<h4 class="text-capitalize">@Html.DisplayFor(model => model.Name)</h4>
-<p style="font-style:italic">@Html.DisplayFor(model => model.TranslateVariants)</p>
+<div class="my-details-form">
 
-<div >
-    <p style="font-weight:700">@Html.DisplayFor(model => model.Description)</p>
+
+    <h4 class="text-capitalize">@Html.DisplayFor(model => model.Name)</h4>
+    <p style="font-style:italic">@Html.DisplayFor(model => model.TranslateVariants)</p>
+
+    <div >
+        <p style="font-weight:700">@Html.DisplayFor(model => model.Description)</p>
+    </div>
+
+    <h4>Примеры:</h4>
+    @foreach (var item in Model.Examples)
+    {
+        <div>
+            <p>@item.EnglishExample - @item.RussianExample</p>
+            <a type="button" class="btn btn-warning" asp-action="Edit" asp-controller="Example" asp-route-id="@item.Id">Изменить пример</a>
+        </div> 
+    }
+
 </div>
 
-<h4>Примеры:</h4>
-@foreach (var item in Model.Examples)
-{
-    <div>
-        <p>@item.EnglishExample - @item.RussianExample</p>
-        <a type="button" class="btn btn-warning" style="border-radius:0" asp-action="Edit" asp-controller="Example" asp-route-id="@item.Id">Изменить пример</a>
-    </div> 
-}
-
-
-<a type="button" class="btn btn-info" style="border-radius:0" asp-action="MainTable" asp-controller="Word">К словарю</a>
-<a type="button" class="btn btn-primary" style="border-radius:0" asp-action="Edit" asp-route-id="@Model.Id" asp-controller="Word">Изменить</a>
+<a type="button" class="btn btn-info" asp-action="MainTable" asp-controller="Word">К словарю</a>
+<a type="button" class="btn btn-primary"  asp-action="Edit" asp-route-id="@Model.Id" asp-controller="Word">Изменить</a>

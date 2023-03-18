@@ -141,3 +141,7 @@ a {
     background-color: gainsboro;
     transform: scale(1.02)
 }
+
+.my-details-form {
+    background-color: #3b375e;
+}

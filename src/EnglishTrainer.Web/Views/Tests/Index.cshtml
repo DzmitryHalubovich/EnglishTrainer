@@ -6,12 +6,10 @@
 
 <div style="margin-bottom:20px">
     <h1>Здесь вы можете проверить свой уровень знаний!</h1>
-    <a asp-action="Index" asp-controller="Verb" style="border-radius:0" class="btn btn-info">На главную страницу</a>
-    <button id="createWord" style="border-radius:0" class="btn btn-primary">Следующий</button>
-    <button id="checkAnswer" style="border-radius:0" class="btn btn-warning">Проверить</button>
+    <a asp-action="Index" asp-controller="Verb" class="btn btn-info">На главную страницу</a>
+    <button id="createWord" class="btn btn-primary">Следующий</button>
+    <button id="checkAnswer" class="btn btn-warning">Проверить</button>
 </div>
-
-
 
 
 <div class="container">
@@ -19,8 +17,6 @@
 
         </div>
 </div>
-
-
 
 @section Scripts {
     <script>
@@ -73,6 +69,26 @@
                 pastParticipleInput.style.backgroundColor = '#7df279';
             }
 
+        });
+    </script>
+
+    <script>
+        $(document).keypress(function (e) {
+            if (e.which == 13) {
+                document.getElementById("checkAnswer").click();
+                document.getElementById("my-input").value = "";
+                alert("Pressed");
+            }
+        });
+    </script>
+
+    <script>
+        $(document).keypress(function (e) {
+            if (e.which == 13) {
+                document.getElementById("checkAnswer").click();
+                document.getElementById("my-input").value = "";
+                alert("Pressed");
+            }
         });
     </script>
 }
