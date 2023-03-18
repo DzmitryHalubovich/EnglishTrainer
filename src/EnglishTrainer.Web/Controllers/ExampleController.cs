@@ -10,18 +10,33 @@ namespace EnglishTrainer.Web.Controllers
     public class ExampleController : Controller
     {
         private readonly IExampleViewModelService _exampleViewModelService;
+        private readonly IWordViewModelService _wordViewModelService;
 
-        public ExampleController(IRepository<Example> repository, IExampleViewModelService exampleViewModelService)
+        public ExampleController(IExampleViewModelService exampleViewModelService, IWordViewModelService wordViewModelService)
         {
             _exampleViewModelService=exampleViewModelService;
+            _wordViewModelService=wordViewModelService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create(int id)
         {
             var newExample = new ExampleViewModel();
+            newExample.WordId = id;
 
-            return View(newExample);
+
+            return PartialView("_createPartial", newExample);
+            //return View(newExample);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(ExampleViewModel model)
+        {
+           await _exampleViewModelService.CreateExampleAsync(model);
+
+            var wordViewModel = await _wordViewModelService.GetWordViewModelByIdAsync(model.Id);
+
+            return RedirectToAction("Details", "Word", wordViewModel);
         }
 
         [HttpGet]

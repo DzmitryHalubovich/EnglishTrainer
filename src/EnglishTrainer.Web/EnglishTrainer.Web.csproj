@@ -38,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Example\Patial\" />
     <Folder Include="Views\Shared\WordPartial\" />
   </ItemGroup>
 
