@@ -4,22 +4,19 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>ExampleViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="EnglishExample" class="control-label"></label>
-                <input asp-for="EnglishExample" class="form-control" />
+                <label asp-for="EnglishExample" class="control-label" >Пример на английском</label>
+                <input asp-for="EnglishExample" class="form-control" style="background-color:#3b375e; color: #fff;" />
                 <span asp-validation-for="EnglishExample" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RussianExample" class="control-label"></label>
-                <input asp-for="RussianExample" class="form-control" />
+                <label asp-for="RussianExample" class="control-label">Перевод</label>
+                <input asp-for="RussianExample" class="form-control" style="background-color:#3b375e; color: #fff;" />
                 <span asp-validation-for="RussianExample" class="text-danger"></span>
             </div>
             <div class="form-group">
