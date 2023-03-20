@@ -1,7 +1,8 @@
-﻿using EnglishTrainer.ApplicationCore.Enums;
+﻿using EnglishTrainer.ApplicationCore.Entities;
+using EnglishTrainer.ApplicationCore.Enums;
 using EnglishTrainer.ApplicationCore.Models;
-
-
+using EnglishTrainer.Infrastructure.Data;
+using EnglishTrainer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +11,14 @@ namespace EnglishTrainer.Services
     public class WordController : Controller
     {
         private readonly IWordViewModelService _wordViewModelService;
+        private readonly IPictureService _pictureService;
+        private readonly IWebHostEnvironment _appEnvironment;
 
-        public WordController(IWordViewModelService wordViewModelService)
+        public WordController(IWordViewModelService wordViewModelService, IWebHostEnvironment appEnvironment,IPictureService pictureService)
         {
             _wordViewModelService=wordViewModelService;
+            _appEnvironment=appEnvironment;
+            _pictureService=pictureService;
         }
 
         //https://metanit.com/sharp/aspnet5/12.4.php
@@ -59,7 +64,21 @@ namespace EnglishTrainer.Services
         public async Task<IActionResult> Create(WordViewModel wordViewModel)
         {
 
-           var response = await _wordViewModelService.CreateNewWordAsync(wordViewModel);
+            //if (wordViewModel.Picture!=null)
+            //{
+            //    string path = "/Images/" + wordViewModel.Picture.FileName; //путь к файлу
+
+            //    using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+            //    {
+            //        await wordViewModel.Picture.CopyToAsync(fileStream);
+            //    }
+
+            //    Picture file = new Picture { Name = wordViewModel.Picture.FileName, Path = path };
+            //    await _pictureService.CreatePictureAsync(file);
+            //}
+
+
+            var response = await _wordViewModelService.CreateNewWordAsync(wordViewModel);
 
             if (response.StatusCode == ApplicationCore.Enums.StatusCode.OK)
             {

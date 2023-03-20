@@ -4,19 +4,16 @@ using EnglishTrainer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace EnglishTrainer.Infrastructure.Data.Migrations
+namespace EnglishTrainer.Infrastructure.Migrations
 {
     [DbContext(typeof(EnglishTrainerContext))]
-    [Migration("20230312140736_DeletePartsOfSpeech")]
-    partial class DeletePartsOfSpeech
+    partial class EnglishTrainerContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,6 +84,83 @@ namespace EnglishTrainer.Infrastructure.Data.Migrations
                     b.ToTable("irregular_verbs");
                 });
 
+            modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.Picture", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pictures");
+                });
+
+            modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.Profile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Profiles");
+                });
+
+            modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.Word", b =>
                 {
                     b.Property<int>("Id")
@@ -108,12 +182,17 @@ namespace EnglishTrainer.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("word");
 
+                    b.Property<int?>("PictureId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TranslateVariants")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("translate");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PictureId");
 
                     b.ToTable("dictionary", (string)null);
                 });
@@ -127,6 +206,26 @@ namespace EnglishTrainer.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Word");
+                });
+
+            modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.Profile", b =>
+                {
+                    b.HasOne("EnglishTrainer.ApplicationCore.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.Word", b =>
+                {
+                    b.HasOne("EnglishTrainer.ApplicationCore.Entities.Picture", "Picture")
+                        .WithMany()
+                        .HasForeignKey("PictureId");
+
+                    b.Navigation("Picture");
                 });
 
             modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.Word", b =>

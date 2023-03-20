@@ -16,6 +16,9 @@ namespace EnglishTrainer.ApplicationCore.Entities
         public string? Description { get; set; }
         public DateTime Created { get; set; }
 
+        public int? PictureId { get; set; }
+        public Picture? Picture { get; set; }
+        
         public IList<Example>? Examples { get; set; }
 
     }

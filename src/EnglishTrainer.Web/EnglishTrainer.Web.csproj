@@ -40,6 +40,7 @@
   <ItemGroup>
     <Folder Include="Views\Example\Patial\" />
     <Folder Include="Views\Shared\WordPartial\" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
 </Project>
