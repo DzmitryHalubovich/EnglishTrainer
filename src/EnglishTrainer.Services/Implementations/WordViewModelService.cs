@@ -73,7 +73,7 @@ namespace EnglishTrainer.ApplicationCore
         public async Task DeleteWordAsync(int id)
         {
             var existingWord = await _wordRepository.GetFirstOrDefaultAsync(predicate: x=>x.Id == id);
-            _wordRepository.DeleteAsync(existingWord);
+            await _wordRepository.DeleteAsync(existingWord);
 
         }
 

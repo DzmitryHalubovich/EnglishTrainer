@@ -22,6 +22,8 @@
         <div>
             <p>@item.EnglishExample - @item.RussianExample</p>
             <a type="button" class="btn btn-warning" asp-action="Edit" asp-controller="Example" asp-route-id="@item.Id">Изменить пример</a>
+            <a type="button" class="btn btn-danger" asp-action="ConfirmDelete" asp-controller="Example" asp-route-id="@item.Id">Удалить пример</a>
+            <hr>
         </div> 
     }
 @*    <a type="button" class="btn btn-info" asp-action="Create" asp-route-id="@Model.Id" asp-controller="Example">Добавить новый пример</a>
@@ -39,6 +41,8 @@
     
 </div>
 
+<input type="hidden" id="modelId" value="@Model.Id" />
+
 <a type="button" class="btn btn-info" asp-action="MainTable" asp-controller="Word">К словарю</a>
 <a type="button" class="btn btn-primary"  asp-action="Edit" asp-route-id="@Model.Id" asp-controller="Word">Изменить описание</a>
 
@@ -46,18 +50,23 @@
     <script>
         $('#createExample').on('click', function (e) {
             e.preventDefault();
-            $.ajax({
-                url: "/Example/Create",
-                data: @Model.Id.ToString(),
-                type: "GET",
-                dataType: "html",
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    //var message = data.Message;
-                    //alert(data);
-                    $('.partialResultNewExample').html(data);
-                } //<-- added close for anonymous function
-            }); //<--added close/semicolon for ajax function
+            var id = $('#modelId').val();
+            $('.partialResultNewExample').load('@Url.Action("Create", "Example")?id=' + id);
+
+
+            //$.ajax({
+            //    //url: "/Example/Create",
+            //    //data: @Model.Id.ToString(),
+            //    type: "GET",
+            //    dataType: "html",
+            //    //contentType: 'application/json; charset=utf-8',
+            //    //success: function (data) {
+            //        //var message = data.Message;
+            //        //alert(data);
+            //        //$('.partialResultNewExample').html(data);
+            //        $('.partialResultNewExample').load('@Url.Action("Create", "Example")?id=' + @Model.Id);
+                //} //<-- added close for anonymous function
+            //}); //<--added close/semicolon for ajax function
         });
     </script>
 }

@@ -27,12 +27,18 @@ namespace EnglishTrainer.Services
             {
                 EnglishExample = viewModel.EnglishExample,
                 RussianExample= viewModel.RussianExample,
-                WordId= viewModel.Id,
+                WordId= viewModel.WordId,
             };
 
 
             await _exampleRepository.CreateAsync(newExample);
             
+        }
+
+        public async Task DeleteExampleAsync(int id)
+        {
+            var existedExample = await _exampleRepository.GetFirstOrDefaultAsync(predicate:x=>x.Id == id);
+            await _exampleRepository.DeleteAsync(existedExample);
         }
 
         public async Task<ExampleViewModel> GetExampleViewModelByIdAsync(int id)

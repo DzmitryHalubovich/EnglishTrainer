@@ -32,9 +32,9 @@ namespace EnglishTrainer.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ExampleViewModel model)
         {
-           await _exampleViewModelService.CreateExampleAsync(model);
+            await _exampleViewModelService.CreateExampleAsync(model);
 
-            var wordViewModel = await _wordViewModelService.GetWordViewModelByIdAsync(model.Id);
+            var wordViewModel = await _wordViewModelService.GetWordViewModelByIdAsync(model.WordId);
 
             return RedirectToAction("Details", "Word", wordViewModel);
         }
@@ -54,5 +54,24 @@ namespace EnglishTrainer.Web.Controllers
 
             return RedirectToAction("MainTable", "Word");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmDelete(int id)
+        {
+            var existingExample = await _exampleViewModelService.GetExampleViewModelByIdAsync(id);
+
+            return View(existingExample);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var existedExample = await _exampleViewModelService.GetExampleViewModelByIdAsync(id);
+            var wordViewModel = await _wordViewModelService.GetWordViewModelByIdAsync(existedExample.WordId);
+
+            await _exampleViewModelService.DeleteExampleAsync(id);
+            return RedirectToAction("Details", "Word", wordViewModel);
+        }
+
     }
 }
