@@ -28,7 +28,7 @@ namespace EnglishTrainer.ApplicationCore.Controllers
         {
             await _userService.RegisterUser(dto.UserName,dto.Password, dto.Email);
 
-            return RedirectToAction("Main", "Verb");
+            return RedirectToAction("MainTable", "Verb");
         }
 
         [HttpGet]
@@ -51,7 +51,7 @@ namespace EnglishTrainer.ApplicationCore.Controllers
             //return await _userService.LoginUser(dto.UserName, dto.Password);
         }
 
-        [HttpGet("getProfile/{id}"), Authorize(AuthenticationSchemes = "Bearer ",Roles ="Admin")]
+        [HttpGet("getProfile/{id}"), Authorize(AuthenticationSchemes = "Bearer ",Roles ="user")]
         public async Task<Profile> GetProfile([FromRoute] int id)
         {
             return await _userService.GetProfile(id);

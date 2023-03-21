@@ -25,7 +25,7 @@ namespace EnglishTrainer.Web.Controllers
             return View();
         }
 
-        [Authorize(AuthenticationSchemes = "Bearer ", Roles = "Admin")]
+        [Authorize(AuthenticationSchemes = "Bearer ", Roles = "user")]
         public async Task <IActionResult> MainTable()
         {
             _logger.LogInformation("Processing of the request MainTable.");
