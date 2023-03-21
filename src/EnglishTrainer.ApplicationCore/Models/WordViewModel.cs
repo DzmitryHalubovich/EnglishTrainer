@@ -13,7 +13,6 @@ namespace EnglishTrainer.ApplicationCore.Models
         [DataType("nvarchar(max)")]
         public string TranslateVariants { get; set; }
         public string? Description { get; set; }
-        public Picture? Picture { get; set; }
         public IList<Example>? Examples { get; set; } = new List<Example>();
     }
 }

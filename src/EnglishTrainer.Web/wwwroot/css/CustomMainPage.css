@@ -13,10 +13,10 @@
 
 
 
-.create-word-menu {
-    background-color: #3b375e;
+.create-word-menu { 
+    /*background-color: #3b375e;*/
     color: #fff;
-    width: 1000px;
+    width: 900px;
     height: 400px;
     margin:auto;
 }
@@ -32,22 +32,28 @@
 }
 
 .create-word-menu_top {
-    background-color: aquamarine;
+    /*background-color: aquamarine;*/
     width: 100%;
     height: 250px;
 }
 
 .create-word-menu_top_translation{
-    background-color: aqua;
+    /*background-color: aqua;*/
     height: 100px;
     display:flex;
 }
 
-.create-word-menu_top_translation_block {
-    background-color: burlywood;
+.create-word-menu_top_translation_block_eu {
+    /*background-color: burlywood;*/
     height:100px;
     width: 50%;
-    padding: 0px 8px 0px 8px;
+    padding: 0px 5px 0px 0px;
+}
+.create-word-menu_top_translation_block_ru{
+    /*background-color: burlywood;*/
+    height:100px;
+    width: 50%;
+    padding: 0px 0px 0px 5px;
 }
 
 .create-word-menu_top_translation_input {
@@ -77,7 +83,7 @@
 }
 
 .create-word-menu_top_translation_description{
-    background-color: blueviolet;
+    /*background-color: blueviolet;*/
     height:60%;
 }
 
@@ -99,6 +105,59 @@
     outline-offset: 0;
     border-bottom: 6px solid yellow;
 }
+
+.accordion_menu_label {
+    background-color: #3b375e;
+    color: #fff;
+}
+
+.accordion_menu_top {
+    background-color: #3b375e;
+    color: #fff;
+}
+
+.accordion_menu_top:active {
+    background-color: #3b375e;
+    color: #fff;
+}
+
+
+.buttons_block{
+    margin: 15px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.buttons_block_cancel {
+    background-color: #ff7066;
+    color:#fff;
+    width: 200px;
+    height:40px;
+    border-radius: 5px;
+    transition: 0.2s;
+    border: 0;
+    font-size: 20px;
+}
+
+.buttons_block_cancel:hover {
+    transform: scale(1.3)
+}
+
+.buttons_block_submit {
+    background-color: #9c5bfc;
+    color: #fff;
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    transition: 0.2s;
+    border: 0;
+    font-size: 20px;
+}
+
+.buttons_block_submit:hover {
+    transform: scale(1.3);
+}
+
 
 
 .trainer-header {

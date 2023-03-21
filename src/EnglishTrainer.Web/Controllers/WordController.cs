@@ -64,20 +64,6 @@ namespace EnglishTrainer.Services
         public async Task<IActionResult> Create(WordViewModel wordViewModel)
         {
 
-            //if (wordViewModel.Picture!=null)
-            //{
-            //    string path = "/Images/" + wordViewModel.Picture.FileName; //путь к файлу
-
-            //    using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
-            //    {
-            //        await wordViewModel.Picture.CopyToAsync(fileStream);
-            //    }
-
-            //    Picture file = new Picture { Name = wordViewModel.Picture.FileName, Path = path };
-            //    await _pictureService.CreatePictureAsync(file);
-            //}
-
-
             var response = await _wordViewModelService.CreateNewWordAsync(wordViewModel);
 
             if (response.StatusCode == ApplicationCore.Enums.StatusCode.OK)
