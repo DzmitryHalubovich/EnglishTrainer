@@ -2,6 +2,8 @@
 using EnglishTrainer.ApplicationCore.Interfaces;
 using EnglishTrainer.ApplicationCore.Models;
 using EnglishTrainer.Infrastructure.Data;
+using EnglishTrainer.Services.Implementations;
+using EnglishTrainer.Services.Interfaces;
 
 namespace EnglishTrainer.Services
 {
@@ -13,6 +15,10 @@ namespace EnglishTrainer.Services
             services.AddScoped(typeof(IVerbViewModelService), typeof(VerbViewModelService));
             services.AddScoped(typeof(IWordViewModelService),typeof(WordViewModelService));
             services.AddScoped(typeof(IExampleViewModelService),typeof(ExampleViewModelService));
+            services.AddScoped(typeof(ITokenService), typeof(TokenService));
+            services.AddScoped(typeof(IUserService), typeof(UserService));
+            services.AddScoped(typeof(IPictureService), typeof(PictureService));
+
             return services;
         }
     }

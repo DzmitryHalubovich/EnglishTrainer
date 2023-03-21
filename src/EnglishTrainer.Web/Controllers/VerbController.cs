@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using EnglishTrainer.ApplicationCore.Models;
 using EnglishTrainer.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using System.Net;
 
 namespace EnglishTrainer.Web.Controllers
 {
@@ -22,6 +25,7 @@ namespace EnglishTrainer.Web.Controllers
             return View();
         }
 
+        [Authorize(AuthenticationSchemes = "Bearer ", Roles = "Admin")]
         public async Task <IActionResult> MainTable()
         {
             _logger.LogInformation("Processing of the request MainTable.");

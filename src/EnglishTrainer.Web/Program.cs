@@ -1,13 +1,21 @@
+using EnglishTrainer.ApplicationCore.Common;
+using EnglishTrainer.ApplicationCore.Config;
+using EnglishTrainer.Config;
 using EnglishTrainer.Infrastructure.Data;
 using EnglishTrainer.Services;
+using EnglishTrainer.Web.Configuration;
 using EnglishTrainer.Web.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
+using System.Text.Json.Serialization;
 
 //var logger = new LoggerConfiguration()
 //.MinimumLevel.Debug()
@@ -28,6 +36,7 @@ using System.Security.Claims;
 //    .CreateLogger();
 #endregion
 
+
 //Serilog
 var logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -42,32 +51,39 @@ var logger = new LoggerConfiguration()
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
+
+builder.Services.AddOptions<AuthorizationConfig>().BindConfiguration("Authorization");
+builder.Services.AddOptions<JwtConfig>().BindConfiguration("Jwt");
+
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true; //Сохраняет токен после авторизации
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
+    };
+});
+
+builder.Services.AddCors();
+
+
 //Add logger
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
-builder.Services.AddAuthorization();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            // указывает, будет ли валидироваться издатель при валидации токена
-            ValidateIssuer = true,
-            // строка, представляющая издателя
-            ValidIssuer = AuthOptions.ISSUER,
-            // будет ли валидироваться потребитель токена
-            ValidateAudience = true,
-            // установка потребителя токена
-            ValidAudience = AuthOptions.AUDIENCE,
-            // будет ли валидироваться время существования
-            ValidateLifetime = true,
-            // установка ключа безопасности
-            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
-            // валидация ключа безопасности
-            ValidateIssuerSigningKey = true,
-        };
-    });
 
 EnglishTrainer.Infrastructure.Dependencies.ConfigureServices(builder.Configuration, builder.Services);
 
@@ -81,22 +97,11 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
-app.UseAuthentication();
-app.UseAuthorization();
+app.UseCors(x => x.AllowCredentials().AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000"));
 
-app.Map("/login/{username}", (string username) =>
-{
-    var claims = new List<Claim> { new Claim(ClaimTypes.Name, username) };
-    // создаем JWT-токен
-    var jwt = new JwtSecurityToken(
-            issuer: AuthOptions.ISSUER,
-            audience: AuthOptions.AUDIENCE,
-            claims: claims,
-            expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
-            signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
 
-    return new JwtSecurityTokenHandler().WriteToken(jwt);
-});
+
+
 
 
 
@@ -120,6 +125,14 @@ using (var scope = app.Services.CreateScope())
 
 }
 
+// Improves cookie security
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    MinimumSameSitePolicy = SameSiteMode.None,
+    HttpOnly = HttpOnlyPolicy.Always,
+    Secure = CookieSecurePolicy.Always
+});
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -133,9 +146,19 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Verb}/{action=Index}/{id?}");
 
+app.UseSecureJwt();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+//app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+//app.UseMiddleware<AuthorizationMiddleware>();
 
 app.Run();

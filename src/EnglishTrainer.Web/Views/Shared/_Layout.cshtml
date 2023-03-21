@@ -7,23 +7,23 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EnglishTrainer.Web.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/CustomMainPage.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/customMainPage.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-light" style="background-color: #ceecf5">
+        <nav class="navbar navbar-dark navbar-expand-lg my-nav-menu">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navigation</a>
+                <a class="navbar-brand" href="https://localhost:7063/">Главное меню</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" asp-action="MainPage" asp-controller="Verb">Home</a>
+                            <a class="nav-link active" aria-current="page" asp-action="Register" asp-controller="User">Регистрация</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-action="MainTable" asp-controller="Verb">Verbs</a>
+                            <a class="nav-link active" aria-current="page" asp-action="Login" asp-controller="User">Логин</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -48,14 +48,14 @@
             </div>
         </nav>
     </header>
-    <div class="trainer-header">
+@*    <div class="trainer-header">
         <div class="trainer-header-container">
             <h2 class="trainer-header-text">Самое время учить английский!</h2>
             <h3 class="trainer-header-text">Ты готов начать?</h3>
         </div>
-    </div>
+    </div>*@
     <div class="main-content">
-        <div class="left-menu" id="lastWords">
+        @*<div class="left-menu" id="lastWords">*@
 
         </div>
         <div class="container" style="height: 500px;">

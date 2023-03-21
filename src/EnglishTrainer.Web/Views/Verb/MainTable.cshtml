@@ -8,7 +8,7 @@
     <a asp-action="Index" asp-controller="Verb" style="border-radius:0" class="btn btn-info">На главную страницу</a>
 </div>
 <table class="table table-bordered table-hover">
-    <thead>
+   @* <thead>
         <tr >
             <th>
                 Infinitive
@@ -25,10 +25,42 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody>*@
+        <div class="container" style="width:1000px;">
+            <div class="row" >
+                <div class="col">
+                    <h5>Infinitive</h5>
+                </div>
+                <div class="col">
+                    <h5>PastSimple</h5>
+                </div>
+                <div class="col">
+                    <h5>PastParticiple</h5>
+                </div>  
+                <div class="col">
+                    <h5>ShortTranslate</h5>
+                </div>
+            </div>
+        </div>
         @foreach (var item in Model)
         {
-            <tr class="my-row">
+            <div class="container" style="width:1000px;">
+                <a asp-action="Details" asp-controller="Verb" asp-route-id="@item.Id" div class="row my-row border align-center text-decoration-none">
+                    <div class="col ">
+                        <p>@Html.DisplayFor(modelItem => item.Infinitive)</p>
+                    </div>
+                    <div class="col">
+                        <p>@Html.DisplayFor(modelItem => item.PastSimple)</p>
+                    </div>
+                    <div class="col">
+                        <p>@Html.DisplayFor(modelItem => item.PastParticiple)</p>
+                    </div>
+                    <div class="col">
+                        <p>@Html.DisplayFor(modelItem => item.ShortTranslate)</p>
+                    </div>
+                </a>
+            </div>
+           @* <tr class="my-row">
                 <td>
                 <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.Id">
                     @Html.DisplayFor(modelItem => item.Infinitive)
@@ -49,8 +81,11 @@
                     @Html.DisplayFor(modelItem => item.ShortTranslate)
                 </a> 
                 </td>
-            </tr>
-}
+            </tr>*@
+        }
+
+
+
       @*  <form method="get">
             <input type="hidden" name="pageOptions.CurrentPage" value="@(Model.Options.PageOptions.CurrentPage - 1)" />
             @if (Model.Options.PageOptions.HasPreviousPage)
@@ -73,7 +108,6 @@
                 <input class="btn btn-info" disabled type="submit" value="Следующая страница" />
             }
         </form>*@
-            </tbody>
-
+    </tbody>
 </table>
 

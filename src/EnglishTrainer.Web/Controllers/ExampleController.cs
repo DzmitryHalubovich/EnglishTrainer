@@ -10,18 +10,33 @@ namespace EnglishTrainer.Web.Controllers
     public class ExampleController : Controller
     {
         private readonly IExampleViewModelService _exampleViewModelService;
+        private readonly IWordViewModelService _wordViewModelService;
 
-        public ExampleController(IRepository<Example> repository, IExampleViewModelService exampleViewModelService)
+        public ExampleController(IExampleViewModelService exampleViewModelService, IWordViewModelService wordViewModelService)
         {
             _exampleViewModelService=exampleViewModelService;
+            _wordViewModelService=wordViewModelService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create(int id)
         {
             var newExample = new ExampleViewModel();
+            newExample.WordId = id;
 
-            return View(newExample);
+
+            return PartialView("_createPartial", newExample);
+            //return View(newExample);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(ExampleViewModel model)
+        {
+            await _exampleViewModelService.CreateExampleAsync(model);
+
+            var wordViewModel = await _wordViewModelService.GetWordViewModelByIdAsync(model.WordId);
+
+            return RedirectToAction("Details", "Word", wordViewModel);
         }
 
         [HttpGet]
@@ -39,5 +54,24 @@ namespace EnglishTrainer.Web.Controllers
 
             return RedirectToAction("MainTable", "Word");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmDelete(int id)
+        {
+            var existingExample = await _exampleViewModelService.GetExampleViewModelByIdAsync(id);
+
+            return View(existingExample);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var existedExample = await _exampleViewModelService.GetExampleViewModelByIdAsync(id);
+            var wordViewModel = await _wordViewModelService.GetWordViewModelByIdAsync(existedExample.WordId);
+
+            await _exampleViewModelService.DeleteExampleAsync(id);
+            return RedirectToAction("Details", "Word", wordViewModel);
+        }
+
     }
 }

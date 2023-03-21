@@ -1,7 +1,8 @@
-﻿using EnglishTrainer.ApplicationCore.Enums;
+﻿using EnglishTrainer.ApplicationCore.Entities;
+using EnglishTrainer.ApplicationCore.Enums;
 using EnglishTrainer.ApplicationCore.Models;
-
-
+using EnglishTrainer.Infrastructure.Data;
+using EnglishTrainer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +11,14 @@ namespace EnglishTrainer.Services
     public class WordController : Controller
     {
         private readonly IWordViewModelService _wordViewModelService;
+        private readonly IPictureService _pictureService;
+        private readonly IWebHostEnvironment _appEnvironment;
 
-        public WordController(IWordViewModelService wordViewModelService)
+        public WordController(IWordViewModelService wordViewModelService, IWebHostEnvironment appEnvironment,IPictureService pictureService)
         {
             _wordViewModelService=wordViewModelService;
+            _appEnvironment=appEnvironment;
+            _pictureService=pictureService;
         }
 
         //https://metanit.com/sharp/aspnet5/12.4.php
@@ -59,7 +64,7 @@ namespace EnglishTrainer.Services
         public async Task<IActionResult> Create(WordViewModel wordViewModel)
         {
 
-           var response = await _wordViewModelService.CreateNewWordAsync(wordViewModel);
+            var response = await _wordViewModelService.CreateNewWordAsync(wordViewModel);
 
             if (response.StatusCode == ApplicationCore.Enums.StatusCode.OK)
             {
@@ -89,6 +94,31 @@ namespace EnglishTrainer.Services
         {
             await _wordViewModelService.UpdateWordAsync(wordViewModel);
             return RedirectToAction("MainTable");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var existingWord = await _wordViewModelService.GetWordViewModelByIdAsync(id);
+
+            return View(existingWord);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteWord(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingWord = await _wordViewModelService.GetWordViewModelByIdAsync(id);
+
+                await _wordViewModelService.DeleteWordAsync(id);
+                return RedirectToAction("MainTable");
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

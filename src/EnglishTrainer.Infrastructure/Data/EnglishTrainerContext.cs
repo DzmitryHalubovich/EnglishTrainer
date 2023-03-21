@@ -13,6 +13,9 @@ namespace EnglishTrainer.Infrastructure.Data
         public DbSet<IrregularVerb> Verbs { get; set; }
         public DbSet<Example> Examples { get; set; }
         public DbSet<Word> Words { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
 
         public EnglishTrainerContext(DbContextOptions<EnglishTrainerContext> options) : base(options) { }
 

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.Infrastructu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.Web", "src\EnglishTrainer.Web\EnglishTrainer.Web.csproj", "{6B0C9643-9AAE-4F7F-BB81-D003332CCE70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishTrainer.Services", "src\EnglishTrainer.Services\EnglishTrainer.Services.csproj", "{7530312A-0D4B-41B4-A598-0C60CC1C9BF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.Services", "src\EnglishTrainer.Services\EnglishTrainer.Services.csproj", "{7530312A-0D4B-41B4-A598-0C60CC1C9BF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

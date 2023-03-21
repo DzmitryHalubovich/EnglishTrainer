@@ -70,6 +70,13 @@ namespace EnglishTrainer.ApplicationCore
             }
         }
 
+        public async Task DeleteWordAsync(int id)
+        {
+            var existingWord = await _wordRepository.GetFirstOrDefaultAsync(predicate: x=>x.Id == id);
+            await _wordRepository.DeleteAsync(existingWord);
+
+        }
+
         public async Task<IEnumerable<WordViewModel>> GetAllWordsAsync()
         {
             _logger.LogInformation("Получение списка слов из словаря.");

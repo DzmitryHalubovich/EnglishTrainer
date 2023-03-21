@@ -1,4 +1,5 @@
 ﻿using EnglishTrainer.ApplicationCore.Entities;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace EnglishTrainer.ApplicationCore.Models

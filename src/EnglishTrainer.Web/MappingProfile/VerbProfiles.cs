@@ -4,7 +4,7 @@ using EnglishTrainer.ApplicationCore.Models;
 
 namespace EnglishTrainer.Web.MappingProfile
 {
-    public class VerbProfiles : Profile
+    public class VerbProfiles : AutoMapper.Profile
     {
         public VerbProfiles()
         {

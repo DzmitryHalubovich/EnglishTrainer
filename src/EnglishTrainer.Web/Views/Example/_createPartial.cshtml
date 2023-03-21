@@ -1,0 +1,29 @@
+﻿@model EnglishTrainer.ApplicationCore.Models.ExampleViewModel
+
+<h4>ExampleViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EnglishExample" class="control-label"></label>
+                <input asp-for="EnglishExample" class="form-control" />
+                <span asp-validation-for="EnglishExample" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RussianExample" class="control-label"></label>
+                <input asp-for="RussianExample" class="form-control" />
+                <span asp-validation-for="RussianExample" class="text-danger"></span>
+            </div>
+            <input asp-for="WordId" value="@Model.WordId" type="hidden" />
+            <div class="form-group">
+                <a type="button" class="btn btn-info" asp-action="Details" asp-controller="Word" asp-route-id="@Model.WordId">Отмена</a>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

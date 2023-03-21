@@ -1,80 +1,57 @@
 ﻿@model EnglishTrainer.ApplicationCore.Models.WordViewModel
 
-@{
-    ViewData["Title"] = "Edit";
-}
 
-<h1>Edit</h1>
 
-<h4>WordViewModel</h4>
-<hr />
-<div class="row">
+<h2>@Model.Name</h2>
+
+
+<div class="row" style="width:800px;">
     <div class="col-lg">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Name" value="@Model.Name" />
+
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TranslateVariants" class="control-label"></label>
-                <input asp-for="TranslateVariants" class="form-control" />
+                <label asp-for="TranslateVariants" class="control-label">Варианты перевода</label>
+                <input asp-for="TranslateVariants" class="form-control" style="background-color: #3b375e; color:#fff; margin-bottom:20px;" />
                 <span asp-validation-for="TranslateVariants" class="text-danger"></span>
             </div>
             <div>
-@*                <h4>Description</h4>*@
             </div>
             <div class="form-group">
                 <div class="form-floating">
-                    <textarea asp-for="Description" class="form-control" placeholder="Определение" id="floatingTextarea"></textarea>
+                    <textarea asp-for="Description" class="form-control" style="background-color:#3b375e; color: #fff;" placeholder="Определение" id="floatingTextarea"></textarea>
                     <span asp-validation-for="Description" class="text-danger" ></span>
                     <label for="floatingTextarea">Определение (необязательно)</label>
                 </div>
             </div>
-            <div class="form-group">
+
+@*            <div class="form-group">
                 @foreach (var item in Model.Examples)
                 {
                     <h2>Примеры</h2>
                     <div>
-                        @*<input class="form-control" type="text" name="@item.EnglishExample" />*@
-                        <label asp-for="@item.EnglishExample" class="control-label"></label>
-                        <input asp-for="@item.EnglishExample" class="form-control" />
+                        <label asp-for="@item.EnglishExample" class="control-label" ></label>
+                        <input asp-for="@item.EnglishExample" class="form-control" style="background-color: #3b375e; color:#fff;" />
+                        <span asp-validation-for="@item.EnglishExample" class="text-danger"></span>
                     </div>
                     <div>
-                        @* <input class='form-control' type='text' name='item.RussianExample' placeholder="@item.RussianExample" />*@
                         <label asp-for="@item.RussianExample" class="control-label"></label>
-                        <input asp-for="@item.RussianExample" class="form-control" />
+                        <input asp-for="@item.RussianExample" class="form-control" style="background-color: #3b375e; color:#fff;" />
+                        <span asp-validation-for="@item.RussianExample" class="text-danger"></span>
                     </div>
                 }
+            </div>*@
+
+            <div id="exampleBlock">
+                <div class="exampleItem">
+
+                </div>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="form-group" style="margin-top:10px;">
+                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info" >Отмена</a>
+                <input type="submit" value="Сохранить изменения" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="MainTable">Back to List</a>
-</div>
-
-@section Scripts {
-    <script>
-        $(function () {
-            var i = 0;
-            $('.addLink').click(function () {
-                i++;
-                var html2Add = "<div class='exampleItem'>" +
-                    "<h4>Пример № " + (i) + "</h4>" +
-                    "<div><label>Английский вариант</label><div>" +
-                    "<input class='form-control'  type='text' name='Examples[" + i + "].EnglishExample' />" +
-                    "</div><label>Русский перевод</label><div>" +
-                    "<input class='form-control'  type='text' name='Examples[" + i + "].RussianExample' />" +
-                    "</div></div></div>";
-                $('#exampleBlock').append(html2Add);
-            })
-        });
-    </script>
-}
