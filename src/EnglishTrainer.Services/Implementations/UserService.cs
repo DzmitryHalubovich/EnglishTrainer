@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using EnglishTrainer.ApplicationCore.Response;
+using System;
 
 namespace EnglishTrainer.Services
 {
@@ -54,7 +56,7 @@ namespace EnglishTrainer.Services
 
         }
 
-        public async Task<ResponseStatus> RegisterUser(string userName, string password, string email)
+        public async Task<IBaseResponse<User>> RegisterUser(string userName, string password, string email)
         {
 
             User user = new User
@@ -81,11 +83,20 @@ namespace EnglishTrainer.Services
                 await _efContex.Profiles.AddAsync(profile);
                 await _efContex.SaveChangesAsync();
 
-                return new ResponseStatus { Status = "Success account created" };
+                //return new ResponseStatus { Status = "Success account created" };
+                return new BaseResponse<User>()
+                {
+                    Description = "Пользователь успешно зарегистрирован!",
+                    StatusCode = ApplicationCore.Enums.StatusCode.OK
+                };
             }
             else
             {
-                return new ResponseStatus { Status = "Sorry, this account exists" };
+                return new BaseResponse<User>()
+                {
+                    Description = "Такой пользователь уже зарегистрирован!",
+                    StatusCode = ApplicationCore.Enums.StatusCode.UserIsHasAlready,
+                };
             }
         }
     }

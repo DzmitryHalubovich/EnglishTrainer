@@ -28,7 +28,12 @@ namespace EnglishTrainer.ApplicationCore.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterUser(RegisterDto dto)
         {
-            await _userService.RegisterUser(dto.UserName,dto.Password, dto.Email);
+            var response = await _userService.RegisterUser(dto.UserName,dto.Password, dto.Email);
+
+            if (response.StatusCode == Enums.StatusCode.UserIsHasAlready)
+            {
+                return BadRequest(new { description = response.Description});
+            }
 
             var token = await _userService.LoginUser(dto.UserName, dto.Password);
 
@@ -36,7 +41,7 @@ namespace EnglishTrainer.ApplicationCore.Controllers
 
             //return RedirectToAction("MainTable", "Verb");
 
-            return Ok(new { description = "Пользователь зарегистрирован!" });
+            return Ok(new { description = response.Description });
 
         }
 

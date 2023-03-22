@@ -6,6 +6,7 @@
     public enum StatusCode
     {
         WordIsHasAlready = 1,
+        UserIsHasAlready = 2,
 
         OK = 200,
         InternalServerError = 500
