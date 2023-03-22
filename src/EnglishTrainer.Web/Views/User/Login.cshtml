@@ -4,10 +4,25 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
+<form id="LoginForm">
+    <div class="register-block">
+        <div style="margin:auto; width:100px;">
+        <h1>Логин</h1>
+        </div>
+        <div class="form-group">
+            <input asp-for="UserName" class="create-word-menu_top_translation_input" placeholder="Имя пользователя" />
+        </div>
+        <div class="form-group">
+            <input asp-for="Password"  class="create-word-menu_top_translation_input" placeholder="Пароль"/>
+        </div>
 
-<h4>LoginDto</h4>
-<hr />
+        <div class="register-buttons-block">
+            <button asp-action="Index" asp-controller="Verb" class="register-buttons-block_button_cancel">Отмена</button>
+            <button id="sendLoginForm" type="submit" value="Create" class="register-buttons-block_button_submit">Логин</button>
+        </div>
+    </div>
+</form>
+
 
 <form id="LoginForm">
 
