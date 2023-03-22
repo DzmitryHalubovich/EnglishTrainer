@@ -29,7 +29,7 @@
 </div>
 
 @section Scripts{
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $('#createWord').on('click', function (e) {
             e.preventDefault();
@@ -37,6 +37,22 @@
                 type: 'POST',
                 url: '@Url.Action("RegisterUser", "User")',
                 data: $('#createNewWordForm').serialize(),
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Информация',
+                        text: response.description,
+                        icon: 'success',
+                        confirmButtonText: 'Окей'
+                    })
+                },
+                error: function (response) {
+                    Swal.fire({
+                        title: 'Информация',
+                        text: response.responseJSON.description,
+                        icon: 'error',
+                        confirmButtonText: 'Окей'
+                    })
+                },
             })
         });
     </script>

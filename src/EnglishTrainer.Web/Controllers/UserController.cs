@@ -1,6 +1,8 @@
 ﻿
+using Azure;
 using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Models;
+using EnglishTrainer.ApplicationCore.Response;
 using EnglishTrainer.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +30,14 @@ namespace EnglishTrainer.ApplicationCore.Controllers
         {
             await _userService.RegisterUser(dto.UserName,dto.Password, dto.Email);
 
-            return RedirectToAction("MainTable", "Verb");
+            var token = await _userService.LoginUser(dto.UserName, dto.Password);
+
+            HttpContext.Response.Cookies.Append("X-UserRole", token.AccessToken);
+
+            //return RedirectToAction("MainTable", "Verb");
+
+            return Ok(new { description = "Пользователь зарегистрирован!" });
+
         }
 
         [HttpGet]
