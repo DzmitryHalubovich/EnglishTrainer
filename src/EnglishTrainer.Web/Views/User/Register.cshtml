@@ -1,32 +1,28 @@
 ﻿@model EnglishTrainer.ApplicationCore.Models.RegisterDto
 
-<h4>RegisterDto</h4>
-<hr />
-
 <form id ="createNewWordForm">
-           
-    <div class="form-group">
-        <label class="form-label">Имя пользователя</label>
-        <input asp-for="UserName" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Password" class="control-label"></label>
-        <input asp-for="Password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Email" class="control-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-            
-    <button id="createWord" type="submit"  class="btn btn-primary" >Зарегистрироваться</button>
-           
-</form>
+    <div class="register-block">
+        <div style="margin:auto; width:200px;">
+            <h1>Регистрация</h1>
+        </div>
+        <div class="form-group">
+            <input asp-for="UserName" class="create-word-menu_top_translation_input" placeholder="Имя пользователя" />
+        </div>
+        <div class="form-group">
+            <input asp-for="Password" class="create-word-menu_top_translation_input"  placeholder="Пароль"/>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="Email" class="create-word-menu_top_translation_input" placeholder="Email" html autocomplete="off" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
 
-<div>
-    <a asp-action="Index" asp-controller="Verb">Back to List</a>
-</div>
+        <div class="register-buttons-block">
+                <button asp-action="Index" asp-controller="Verb" class="register-buttons-block_button_cancel">Отмена</button>
+                <button id="createWord" type="submit" class="register-buttons-block_button_submit">Зарегистрироваться</button>
+        </div>
+    </div>
+</form>
 
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
