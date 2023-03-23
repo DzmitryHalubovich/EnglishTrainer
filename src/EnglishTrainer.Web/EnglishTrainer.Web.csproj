@@ -9,9 +9,13 @@
 
   <ItemGroup>
     <Compile Remove="DTO\**" />
+    <Compile Remove="wwwroot\Images\**" />
     <Content Remove="DTO\**" />
+    <Content Remove="wwwroot\Images\**" />
     <EmbeddedResource Remove="DTO\**" />
+    <EmbeddedResource Remove="wwwroot\Images\**" />
     <None Remove="DTO\**" />
+    <None Remove="wwwroot\Images\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,7 +44,6 @@
   <ItemGroup>
     <Folder Include="Views\Example\Patial\" />
     <Folder Include="Views\Shared\WordPartial\" />
-    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
 </Project>
