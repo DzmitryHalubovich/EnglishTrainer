@@ -9,13 +9,17 @@
 
   <ItemGroup>
     <Compile Remove="DTO\**" />
-    <Compile Remove="wwwroot\Images\**" />
+    <Compile Remove="Views\Example\Patial\**" />
+    <Compile Remove="Views\Shared\WordPartial\**" />
     <Content Remove="DTO\**" />
-    <Content Remove="wwwroot\Images\**" />
+    <Content Remove="Views\Example\Patial\**" />
+    <Content Remove="Views\Shared\WordPartial\**" />
     <EmbeddedResource Remove="DTO\**" />
-    <EmbeddedResource Remove="wwwroot\Images\**" />
+    <EmbeddedResource Remove="Views\Example\Patial\**" />
+    <EmbeddedResource Remove="Views\Shared\WordPartial\**" />
     <None Remove="DTO\**" />
-    <None Remove="wwwroot\Images\**" />
+    <None Remove="Views\Example\Patial\**" />
+    <None Remove="Views\Shared\WordPartial\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,8 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Example\Patial\" />
-    <Folder Include="Views\Shared\WordPartial\" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
 </Project>

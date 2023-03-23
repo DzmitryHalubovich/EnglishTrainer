@@ -27,7 +27,8 @@ namespace EnglishTrainer.ApplicationCore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterUser(RegisterDto dto)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterDto dto)
         {
 
             if (ModelState.IsValid)
@@ -36,7 +37,9 @@ namespace EnglishTrainer.ApplicationCore.Controllers
 
                 if (response.StatusCode == Enums.StatusCode.UserIsHasAlready)
                 {
-                    return BadRequest(new { description = response.Description });
+                    ViewBag.Description = response.Description;
+                    //return BadRequest(new { description = response.Description });
+                    return View("ErrorUserIsExist", response.Description);
                 }
 
                 var token = await _userService.LoginUser(dto.UserName, dto.Password);
@@ -44,6 +47,8 @@ namespace EnglishTrainer.ApplicationCore.Controllers
                 HttpContext.Response.Cookies.Append("X-UserRole", token.AccessToken);
 
                 //return RedirectToAction("MainTable", "Verb");
+
+                return RedirectToAction("Index", "Verb");
 
                 return Ok(new { description = response.Description });
             }
