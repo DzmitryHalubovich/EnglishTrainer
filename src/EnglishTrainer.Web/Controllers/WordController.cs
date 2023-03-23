@@ -63,7 +63,6 @@ namespace EnglishTrainer.Services
         [HttpPost]
         public async Task<IActionResult> Create(WordViewModel wordViewModel)
         {
-
             var response = await _wordViewModelService.CreateNewWordAsync(wordViewModel);
 
             if (response.StatusCode == ApplicationCore.Enums.StatusCode.OK)

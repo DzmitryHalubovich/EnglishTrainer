@@ -8,30 +8,28 @@
 
     <div class="create-word-menu">
         <form id = "createNewWordForm" style="min-height:1200px;">
-        <div class="create-word-menu_header">
-            <h1 class="create-word-menu_header_text">Новое слово</h1>
-        </div>
-        <div class="create-word-menu_top"> 
-            <div class="create-word-menu_top_translation">
+            <div class="create-word-menu_header">
+                <h1 class="create-word-menu_header_text">Новое слово</h1>
+            </div>
 
-                <div class="create-word-menu_top_translation_block_eu">
-                    <div class="create-word-menu_top_translation_label_block">
+            <div class="create-word-menu-top-translation">
+                <div class="create-word-menu-top-translation-block-eu">
+                    <div class="create-word-menu-top-translation-label-block">
                         <label class="create-word-menu_top_translation_label_block_text">Слово</label>
                     </div>
-                    <div class="create-word-menu_top_translation_label_block">
-                        <input asp-for="Name" class="create-word-menu_top_translation_input" />
+                    <div class="create-word-menu-top-translation-label-block">
+                    <input asp-for="Name" class="english-trainer-common-input" />
                     </div>
                </div>
 
                 <div class="create-word-menu_top_translation_block_ru">
-                    <div class="create-word-menu_top_translation_label_block">
+                    <div class="create-word-menu-top-translation-label-block">
                        <label class="create-word-menu_top_translation_label_block_text">Варианты перевода</label>
                    </div>
                    <div class="create-word-menu_top_translation_label_block">
-                        <input asp-for="TranslateVariants" class="create-word-menu_top_translation_input" />
+                    <input asp-for="TranslateVariants" class="english-trainer-common-input" />
                    </div>
                </div>
-
             </div>
 
             <div class="form-floating">
@@ -54,11 +52,11 @@
                                         <div>
                                             <label class="accordion_menu_label">Английский вариант</label>
                                             <div>
-                                                <input class="create-word-menu_top_translation_input" type="text" name="Examples[0].EnglishExample" />
+                                            <input class="english-trainer-common-input" type="text" name="Examples[0].EnglishExample" />
                                             </div>
                                             <label>Русский перевод</label>
                                             <div>
-                                                <input class="create-word-menu_top_translation_input" type="text" name="Examples[0].RussianExample" />
+                                            <input class="english-trainer-common-input" type="text" name="Examples[0].RussianExample" />
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +75,7 @@
             </div>
 
             
-        </div>
+
     </form>
     </div>
 
@@ -92,9 +90,9 @@
                 var html2Add = "<div class='exampleItem'>" +
                     "<h4>Пример № " + (i) + "</h4>" +
                     "<div><label>Английский вариант</label><div>" +
-                    "<input class='form-control'  type='text' name='Examples[" + i + "].EnglishExample' />" +
+                    "<input class='english-trainer-common-input'  type='text' name='Examples[" + i + "].EnglishExample' />" +
                     "</div><label>Русский перевод</label><div>" +
-                    "<input class='form-control'  type='text' name='Examples[" + i + "].RussianExample' />" +
+                    "<input class='english-trainer-common-input'  type='text' name='Examples[" + i + "].RussianExample' />" +
                     "</div></div></div>";
                 $('#exampleBlock').append(html2Add);
             })

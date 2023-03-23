@@ -6,6 +6,7 @@ using EnglishTrainer.ApplicationCore.Response;
 using EnglishTrainer.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace EnglishTrainer.ApplicationCore.Controllers
 {
@@ -28,20 +29,28 @@ namespace EnglishTrainer.ApplicationCore.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterUser(RegisterDto dto)
         {
-            var response = await _userService.RegisterUser(dto.UserName,dto.Password, dto.Email);
 
-            if (response.StatusCode == Enums.StatusCode.UserIsHasAlready)
+            if (ModelState.IsValid)
             {
-                return BadRequest(new { description = response.Description});
+                var response = await _userService.RegisterUser(dto.UserName, dto.Password, dto.Email);
+
+                if (response.StatusCode == Enums.StatusCode.UserIsHasAlready)
+                {
+                    return BadRequest(new { description = response.Description });
+                }
+
+                var token = await _userService.LoginUser(dto.UserName, dto.Password);
+
+                HttpContext.Response.Cookies.Append("X-UserRole", token.AccessToken);
+
+                //return RedirectToAction("MainTable", "Verb");
+
+                return Ok(new { description = response.Description });
             }
-
-            var token = await _userService.LoginUser(dto.UserName, dto.Password);
-
-            HttpContext.Response.Cookies.Append("X-UserRole", token.AccessToken);
-
-            //return RedirectToAction("MainTable", "Verb");
-
-            return Ok(new { description = response.Description });
+            else
+            {
+                return View();
+            }
 
         }
 
