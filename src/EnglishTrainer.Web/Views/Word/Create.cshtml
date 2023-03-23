@@ -34,21 +34,8 @@
 
             </div>
 
-            @*<div class="create-word-menu_top_translation_description">
-                <div class="create-word-menu_top_translation_description_block_textarea">
-                    <div class="create-word-menu_top_translation_label_block_text">Описание</div>
-                    <div class="form-floating">
-                        <textarea class=" create-word-menu_top_translation_description_block_textarea_field" asp-for="Description"  id="floatingTextarea"></textarea>
-                    </div>
-                </div>
-            </div>*@
-            <div>
-
-            </div>
-
             <div class="form-floating">
                 <textarea class="form-control-color  create-word-menu_top_translation_description_block_textarea_field" asp-for="Description" placeholder="Определение" id="floatingTextarea"></textarea>
-                @*<label for="floatingTextarea">Определение (необязательно)</label>*@
             </div>
 
             <div>
@@ -80,14 +67,12 @@
                                 <p><a class="removeLink">Убрать пример</a></p>
                             </div>
                         </div>
-                        @*<partial name="Example/_PartsCreateNewExample" model="@Model" />*@
                     </div>
                 </div>
             </div>
 
             <div class="buttons_block">
                 <button class="buttons_block_cancel" asp-action="MainTable" asp-controller="Word">Назад к словарю</button>
-                @*<button type="submit" asp-action="Create" asp-controller="Word" formmethod="post">Добавить слово></button>*@
                 <button id="createWord" class="buttons_block_submit">Добавить</button>
             </div>
 
@@ -96,74 +81,6 @@
     </form>
     </div>
 
-  @*  <div class="form-group">
-        <label class="form-label">Слово</label>
-        <input asp-for="Name" class="form-control" />
-    </div>
-    <div>
-        <label class="form-label">Варианты перевода</label>
-        <input asp-for="TranslateVariants" class="form-control" />
-    </div>
-    
-    <div class="form-floating" style="margin-bottom:20px; margin-top: 10px;">
-        <textarea class="form-control" asp-for="Description" placeholder="Определение" id="floatingTextarea"></textarea>
-        <label for="floatingTextarea">Определение (необязательно)</label>
-    </div>*@
-@*
-    <div class="input-group">
-        <label asp-for="Picture" class="input-group-text w-10">Pictures</label>
-        <input type="file" name="Picture" class="form-control"/>
-    </div>*@
-
-
-@*    <label asp-for="Picture" class="input-group-text w-10">Picture</label>
-    <input type="file" asp-for="Picture" class="form-control"  />
-*@
-
-@*    <input asp-for="Picture" type="file" class="form-control" />*@
-
-   @* <form asp-action="AddFile" asp-controller="Home" method="post" enctype="multipart/form-data">
-        <input type="file" name="uploadedFile" /><br>
-        <input type="submit" value="Загрузить" />
-    </form>*@
-
- @*   <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            Примеры
-            </button>
-        </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                     <div id="exampleBlock">
-                        <div class="exampleItem">
-                            <h4>Пример №1</h4>
-                            <div>
-                                <label>Английский вариант</label>
-                                <div>
-                                    <input class="form-control" type="text" name="Examples[0].EnglishExample" />
-                                </div>
-                                <label>Русский перевод</label>
-                                <div>
-                                    <input class="form-control" type="text" name="Examples[0].RussianExample" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p><a class="addLink">Добавить новый пример</a></p>
-                    <p><a class="removeLink">Убрать пример</a></p>
-                </div>
-            </div>
-            <partial name="Example/_PartsCreateNewExample" model="@Model" />
-        </div>
-    </div>
-*@
-   
-@*    <a type="button" class="btn btn-info" style="border-radius:0" asp-action="MainTable" asp-controller="Word">Назад к словарю</a>
-*@    @*<button type="submit" asp-action="Create" asp-controller="Word" formmethod="post">Добавить слово></button>*@
-@*    <button id="createWord" style="border-radius:0" class="btn btn-primary">Добавить</button>
-*@
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

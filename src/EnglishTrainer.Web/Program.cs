@@ -159,6 +159,6 @@ app.UseAuthorization();
 
 //app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-//app.UseMiddleware<AuthorizationMiddleware>();
+app.UseMiddleware<AuthorizationMiddleware>();
 
 app.Run();

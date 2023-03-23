@@ -4,31 +4,25 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
-
-<h4>LoginDto</h4>
-<hr />
-
 <form id="LoginForm">
+    <div class="register-block">
+        <div style="margin:auto; width:100px;">
+        <h1>Логин</h1>
+        </div>
+        <div class="form-group">
+            <input asp-for="UserName" class="create-word-menu_top_translation_input" placeholder="Имя пользователя" />
+        </div>
+        <div class="form-group">
+            <input asp-for="Password"  class="create-word-menu_top_translation_input" placeholder="Пароль"/>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="UserName" class="control-label"></label>
-        <input asp-for="UserName" class="form-control" />
-        <span asp-validation-for="UserName" class="text-danger"></span>
+        <div class="register-buttons-block">
+            <button asp-action="Index" asp-controller="Verb" class="register-buttons-block_button_cancel">Отмена</button>
+            <button id="sendLoginForm" type="submit" value="Create" class="register-buttons-block_button_submit">Логин</button>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Password" class="control-label"></label>
-        <input asp-for="Password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-
-@*    <input type="submit" value="Create" class="btn btn-primary" />*@
-    <button id="sendLoginForm" type="submit" value="Create" class="btn btn-primary">Логин</button>
 </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 
 @section Scripts{

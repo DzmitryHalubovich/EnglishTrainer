@@ -1,6 +1,8 @@
 ﻿
+using Azure;
 using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Models;
+using EnglishTrainer.ApplicationCore.Response;
 using EnglishTrainer.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,9 +28,21 @@ namespace EnglishTrainer.ApplicationCore.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterUser(RegisterDto dto)
         {
-            await _userService.RegisterUser(dto.UserName,dto.Password, dto.Email);
+            var response = await _userService.RegisterUser(dto.UserName,dto.Password, dto.Email);
 
-            return RedirectToAction("Main", "Verb");
+            if (response.StatusCode == Enums.StatusCode.UserIsHasAlready)
+            {
+                return BadRequest(new { description = response.Description});
+            }
+
+            var token = await _userService.LoginUser(dto.UserName, dto.Password);
+
+            HttpContext.Response.Cookies.Append("X-UserRole", token.AccessToken);
+
+            //return RedirectToAction("MainTable", "Verb");
+
+            return Ok(new { description = response.Description });
+
         }
 
         [HttpGet]
@@ -51,7 +65,7 @@ namespace EnglishTrainer.ApplicationCore.Controllers
             //return await _userService.LoginUser(dto.UserName, dto.Password);
         }
 
-        [HttpGet("getProfile/{id}"), Authorize(AuthenticationSchemes = "Bearer ",Roles ="Admin")]
+        [HttpGet("getProfile/{id}"), Authorize(AuthenticationSchemes = "Bearer ",Roles ="user")]
         public async Task<Profile> GetProfile([FromRoute] int id)
         {
             return await _userService.GetProfile(id);
