@@ -24,7 +24,6 @@ namespace EnglishTrainer.Web.Controllers
             var newExample = new ExampleViewModel();
             newExample.WordId = id;
 
-
             return PartialView("_createPartial", newExample);
             //return View(newExample);
         }
