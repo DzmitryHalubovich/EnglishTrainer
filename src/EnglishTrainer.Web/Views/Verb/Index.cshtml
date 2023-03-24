@@ -1,32 +1,49 @@
-﻿@{
-    ViewData["Title"] = "Main page";
+﻿@model IEnumerable<EnglishTrainer.ApplicationCore.Models.VerbViewModel>
+
+@{
+    ViewData["Title"] = "MainTable";
 }
 
-<div class="d-flex justify-content-sm-around ">
-    <a asp-action="MainTable" asp-controller="Verb" div class="card my-card">
-        <img src="https://i.gifer.com/Iqws.gif" class="card-img-top" alt="...">
-        <div class="card-body">
-        <h5 class="card-title">Таблица неправильных глаголов</h5>
-            @*<a asp-action="MainTable" asp-controller="Verb" class="btn btn-primary">Table</a>*@
-        </div>
-    </a>
-
-    <a asp-action="MainTable" asp-controller="Word" div class="card my-card" >
-        <img src="https://i.gifer.com/7n1w.gif" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Словарик</h5>
-        <p class="card-text">Записывайте слова, которые хотите запомнить!</p>
-            @*<a asp-action="MainTable" asp-controller="Word" class="btn btn-primary">К словарю</a>*@
-      </div>
-    </a> 
-
-    <a asp-action="Index" asp-controller="Tests" div class="card my-card" >
-        <img src="https://i.gifer.com/1xFe.gif" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Упражнения</h5>
-        <p class="card-text">Здесь будут тесты, когда я их сделаю</p>
-            @*<a asp-action="MainTable" asp-controller="Word" class="btn btn-primary">К словарю</a>*@
-      </div>
-    </a>
-
+<div class="back-to-main-page-button">
+    <a asp-action="Index" asp-controller="Home" style="border-radius:0" class="btn btn-info">На главную страницу</a>
 </div>
+<table class="table table-bordered table-hover">
+
+    <div class="container" style="width:1000px;">
+        <div class="row">
+            <div class="col">
+                <h5>Infinitive</h5>
+            </div>
+            <div class="col">
+                <h5>PastSimple</h5>
+            </div>
+            <div class="col">
+                <h5>PastParticiple</h5>
+            </div>
+            <div class="col">
+                <h5>ShortTranslate</h5>
+            </div>
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="container" style="width:1000px;">
+            <a asp-action="Details" asp-controller="Verb" asp-route-id="@item.Id" div class="row my-row border align-center text-decoration-none">
+                <div class="col ">
+                    <p>@Html.DisplayFor(modelItem => item.Infinitive)</p>
+                </div>
+                <div class="col">
+                    <p>@Html.DisplayFor(modelItem => item.PastSimple)</p>
+                </div>
+                <div class="col">
+                    <p>@Html.DisplayFor(modelItem => item.PastParticiple)</p>
+                </div>
+                <div class="col">
+                    <p>@Html.DisplayFor(modelItem => item.ShortTranslate)</p>
+                </div>
+            </a>
+        </div>
+    }
+
+</table>
+

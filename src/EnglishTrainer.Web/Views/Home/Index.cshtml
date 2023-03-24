@@ -4,7 +4,27 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div class="d-flex justify-content-sm-around ">
+    <a asp-action="Index" asp-controller="Verb" div class="card my-card">
+        <img src="https://i.gifer.com/Iqws.gif" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Таблица неправильных глаголов</h5>
+            @*<a asp-action="MainTable" asp-controller="Verb" class="btn btn-primary">Table</a>*@
+        </div>
+    </a>
+
+    <a asp-action="Index" asp-controller="Word" div class="card my-card">
+        <img src="https://i.gifer.com/7n1w.gif" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Словарик</h5>
+            <p class="card-text">Записывайте слова, которые хотите запомнить!</p>
+        </div>
+    </a>
+
+    <a asp-action="Index" asp-controller="Tests" div class="card my-card">
+        <img src="https://i.gifer.com/1xFe.gif" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Упражнения</h5>
+            <p class="card-text">Здесь будут тесты, когда я их сделаю</p>
+        </div>
+    </a>

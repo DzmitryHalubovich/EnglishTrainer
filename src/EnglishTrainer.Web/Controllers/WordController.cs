@@ -11,43 +11,18 @@ namespace EnglishTrainer.Services
     public class WordController : Controller
     {
         private readonly IWordViewModelService _wordViewModelService;
-        private readonly IPictureService _pictureService;
-        private readonly IWebHostEnvironment _appEnvironment;
 
-        public WordController(IWordViewModelService wordViewModelService, IWebHostEnvironment appEnvironment,IPictureService pictureService)
+        public WordController(IWordViewModelService wordViewModelService)
         {
             _wordViewModelService=wordViewModelService;
-            _appEnvironment=appEnvironment;
-            _pictureService=pictureService;
         }
 
-        //https://metanit.com/sharp/aspnet5/12.4.php
-        //public async Task<IActionResult> Index(SortState sortOrder = SortState.WordAsc)
-        //{
-        //    var words = _wordViewModelService.GetAllWords();
-
-        //    ViewData["NameSort"] = sortOrder == SortState.WordAsc ? SortState.WordDesc : SortState.WordAsc;
-        //    ViewData["DateSort"] = sortOrder == SortState.DateAsc ? SortState.DateDesc : SortState.DateAsc;
-
-        //    words = sortOrder switch
-        //    {
-        //        SortState.WordAsc => words.OrderBy(x => x.Name),
-        //        SortState.WordDesc => words.OrderByDescending(x=>x.Name),
-        //        SortState.DateAsc => words.OrderBy(x=>x.Created),
-        //        SortState.DateDesc => words.OrderByDescending(x =>x.Name),
-        //        _=>words.OrderBy(x=>x.Name),
-        //    };
-
-        //    return View(await words.AsNoTracking().ToListAsync());
-        //}
-
-        public async Task<IActionResult> MainTable()
+        public async Task<IActionResult> Index()
         {
             var wordViewModel = await _wordViewModelService.GetAllWordsAsync();
 
             return View(wordViewModel);
         }
-
 
         //Создание обьекта и вью работает по примеру отсюда
         //https://metanit.com/sharp/mvc5/5.11.php
@@ -67,7 +42,7 @@ namespace EnglishTrainer.Services
 
             if (response.StatusCode == ApplicationCore.Enums.StatusCode.OK)
             {
-                return Ok(new { description = response.Description});
+                return Ok(new { description = response.Description });
             }
 
             return BadRequest(new { description = response.Description });
@@ -75,7 +50,7 @@ namespace EnglishTrainer.Services
 
         public async Task<IActionResult> Details(int id)
         {
-            var existingWord = await  _wordViewModelService.GetWordViewModelByIdAsync(id);
+            var existingWord = await _wordViewModelService.GetWordViewModelByIdAsync(id);
 
             return View(existingWord);
         }
@@ -83,7 +58,7 @@ namespace EnglishTrainer.Services
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var existingWord =  await _wordViewModelService.GetWordViewModelByIdAsync(id);
+            var existingWord = await _wordViewModelService.GetWordViewModelByIdAsync(id);
 
             return View(existingWord);
         }
@@ -98,26 +73,8 @@ namespace EnglishTrainer.Services
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var existingWord = await _wordViewModelService.GetWordViewModelByIdAsync(id);
-
-            return View(existingWord);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteWord(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                var existingWord = await _wordViewModelService.GetWordViewModelByIdAsync(id);
-
-                await _wordViewModelService.DeleteWordAsync(id);
-                return RedirectToAction("MainTable");
-            }
-            else
-            {
-                return View();
-            }
+            await _wordViewModelService.DeleteWordAsync(id);
+            return RedirectToAction("Index");
         }
     }
 }

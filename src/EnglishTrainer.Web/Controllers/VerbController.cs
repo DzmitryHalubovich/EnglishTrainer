@@ -19,14 +19,14 @@ namespace EnglishTrainer.Web.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            _logger.LogInformation("On main page.");
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    _logger.LogInformation("On main page.");
+        //    return View();
+        //}
 
-        [Authorize(AuthenticationSchemes = "Bearer ", Roles = "user")]
-        public async Task <IActionResult> MainTable()
+        //[Authorize(AuthenticationSchemes = "Bearer ", Roles = "user")]
+        public async Task <IActionResult> Index()
         {
             _logger.LogInformation("Processing of the request MainTable.");
 

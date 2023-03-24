@@ -6,6 +6,7 @@ using EnglishTrainer.ApplicationCore.Response;
 using EnglishTrainer.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace EnglishTrainer.ApplicationCore
 {
@@ -42,7 +43,9 @@ namespace EnglishTrainer.ApplicationCore
                 var newWord = new Word()
                 {
                     Name = wordViewModel.Name,
-                    Examples = wordViewModel.Examples,
+                    Examples = wordViewModel.Examples.FirstOrDefault().EnglishExample is not null 
+                    ? wordViewModel.Examples 
+                    : null,
                     TranslateVariants = wordViewModel.TranslateVariants,
                     Description = wordViewModel.Description,
                     Created = DateTime.Now

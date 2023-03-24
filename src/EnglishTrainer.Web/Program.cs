@@ -150,7 +150,7 @@ app.UseRouting();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Verb}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}");
 
 app.UseSecureJwt();
 
