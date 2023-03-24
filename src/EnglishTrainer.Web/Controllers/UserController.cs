@@ -43,14 +43,13 @@ namespace EnglishTrainer.ApplicationCore.Controllers
                 }
 
                 var token = await _userService.LoginUser(dto.UserName, dto.Password);
-
                 HttpContext.Response.Cookies.Append("X-UserRole", token.AccessToken);
 
                 //return RedirectToAction("MainTable", "Verb");
 
                 return RedirectToAction("Index", "Verb");
 
-                return Ok(new { description = response.Description });
+                //return Ok(new { description = response.Description });
             }
             else
             {

@@ -15,7 +15,6 @@
         </div>
         <div class="form-group">
             <input asp-for="PasswordConfirm" class="english-trainer-common-input" placeholder="Подтвердите пароль" />
-            @*<span asp-validation-for="PasswordConfirm" class="text-danger"></span>*@
             <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -24,10 +23,6 @@
         </div>
 
         <div class="register-buttons-block">
-            @*<a asp-action="Index" asp-controller="Verb" class="register-buttons-block_button_cancel">Отмена</a>*@
-            @*                <button asp-action="RegisterUser" asp-controller="User" asp-route-model="@Model" class="register-buttons-block_button_submit">Зарегистрироваться</button>*@        
-         @*   <button type="submit" id="createWord" class="btn btn-primary" style="width: 150px;">Create</button>*@
-
             <a asp-action="Index" asp-controller="Verb" class="register-buttons-block_button_cancel">Отмена</a>
             <button type="submit" class="register-buttons-block_button_submit">Зарегистрироваться</button>
         </div>
@@ -35,35 +30,10 @@
 </form>
 
 @section Scripts{
+
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        $('#createWord').on('click', function (e) {
-            e.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("RegisterUser", "User")',
-                data: $('#createNewWordForm').serialize(),
-                success: function (response) {
-                    Swal.fire({
-                        title: 'Информация',
-                        text: response.description,
-                        icon: 'success',
-                        confirmButtonText: 'Окей'
-                    })
-                },
-                error: function (response) {
-                    Swal.fire({
-                        title: 'Информация',
-                        text: response.responseJSON.description,
-                        icon: 'error',
-                        confirmButtonText: 'Окей'
-                    })
-                },
-            })
-        });
-    </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }

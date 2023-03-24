@@ -19,9 +19,28 @@
             <a asp-action="Details" asp-controller="Word" asp-route-id="@item.Id" div class="text-decoration-none my-row_word">
                 @item.Name - @item.TranslateVariants
             </a>
-            <a asp-action="Delete" asp-controller="Word" asp-route-id="@item.Id" class="btn btn-danger">Удалить</a>
+           @* <a asp-action="Delete" asp-controller="Word" asp-route-id="@item.Id" class="btn btn-danger">Удалить</a>*@
+            <a data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#exampleModal">Удалить</a>
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:#3b375e; color:#fff;">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+                    </div>
+                    <div class="modal-body" style="background-color:#3b375e; color:#fff;">
+                        Вы действительно хотите удалить слово?
+                    </div>
+                    <div class="modal-footer" style="background-color:#3b375e; color:#fff;">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отмена</button>
+                        <a asp-action="Delete" asp-controller="Word" asp-route-id="@item.Id" class="btn btn-primary">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 </div>
-        
+

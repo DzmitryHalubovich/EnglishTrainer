@@ -14,7 +14,7 @@ namespace EnglishTrainer.Services
         private readonly IPictureService _pictureService;
         private readonly IWebHostEnvironment _appEnvironment;
 
-        public WordController(IWordViewModelService wordViewModelService, IWebHostEnvironment appEnvironment,IPictureService pictureService)
+        public WordController(IWordViewModelService wordViewModelService, IWebHostEnvironment appEnvironment, IPictureService pictureService)
         {
             _wordViewModelService=wordViewModelService;
             _appEnvironment=appEnvironment;
@@ -67,7 +67,7 @@ namespace EnglishTrainer.Services
 
             if (response.StatusCode == ApplicationCore.Enums.StatusCode.OK)
             {
-                return Ok(new { description = response.Description});
+                return Ok(new { description = response.Description });
             }
 
             return BadRequest(new { description = response.Description });
@@ -75,7 +75,7 @@ namespace EnglishTrainer.Services
 
         public async Task<IActionResult> Details(int id)
         {
-            var existingWord = await  _wordViewModelService.GetWordViewModelByIdAsync(id);
+            var existingWord = await _wordViewModelService.GetWordViewModelByIdAsync(id);
 
             return View(existingWord);
         }
@@ -83,7 +83,7 @@ namespace EnglishTrainer.Services
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var existingWord =  await _wordViewModelService.GetWordViewModelByIdAsync(id);
+            var existingWord = await _wordViewModelService.GetWordViewModelByIdAsync(id);
 
             return View(existingWord);
         }
@@ -98,26 +98,8 @@ namespace EnglishTrainer.Services
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var existingWord = await _wordViewModelService.GetWordViewModelByIdAsync(id);
-
-            return View(existingWord);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteWord(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                var existingWord = await _wordViewModelService.GetWordViewModelByIdAsync(id);
-
-                await _wordViewModelService.DeleteWordAsync(id);
-                return RedirectToAction("MainTable");
-            }
-            else
-            {
-                return View();
-            }
+            await _wordViewModelService.DeleteWordAsync(id);
+            return RedirectToAction("MainTable");
         }
     }
 }
