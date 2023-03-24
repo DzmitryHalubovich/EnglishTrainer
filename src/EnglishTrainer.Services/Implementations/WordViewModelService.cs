@@ -40,10 +40,6 @@ namespace EnglishTrainer.ApplicationCore
                     };
                 }
 
-            //    return orderBy is not null
-            //? await orderBy(query).ToListAsync()
-            //: await query.ToListAsync();
-
                 var newWord = new Word()
                 {
                     Name = wordViewModel.Name,
