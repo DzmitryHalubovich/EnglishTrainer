@@ -8,24 +8,7 @@
     <a asp-action="Index" asp-controller="Verb" style="border-radius:0" class="btn btn-info">На главную страницу</a>
 </div>
 <table class="table table-bordered table-hover">
-   @* <thead>
-        <tr >
-            <th>
-                Infinitive
-            </th>
-            <th>
-                PastSimple
-            </th>
-            <th>
-                PastParticiple
-            </th>
-            <th>
-                Short Translate
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>*@
+
         <div class="container" style="width:1000px;">
             <div class="row" >
                 <div class="col">
@@ -60,54 +43,7 @@
                     </div>
                 </a>
             </div>
-           @* <tr class="my-row">
-                <td>
-                <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.Id">
-                    @Html.DisplayFor(modelItem => item.Infinitive)
-                </a>
-                </td>
-                <td>
-                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.Id">
-                    @Html.DisplayFor(modelItem => item.PastSimple)
-                </a>
-                </td>
-                <td>
-                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.Id">
-                    @Html.DisplayFor(modelItem => item.PastParticiple)
-                </a>
-                </td>
-                <td>
-                    <a class="text-decoration-none" asp-action="Details" asp-controller="Verb" asp-route-id="@item.Id">
-                    @Html.DisplayFor(modelItem => item.ShortTranslate)
-                </a> 
-                </td>
-            </tr>*@
         }
 
-
-
-      @*  <form method="get">
-            <input type="hidden" name="pageOptions.CurrentPage" value="@(Model.Options.PageOptions.CurrentPage - 1)" />
-            @if (Model.Options.PageOptions.HasPreviousPage)
-            {
-                <input class="btn btn-outline-info" type="submit" value="Предыдущая страница" />
-            }
-            else
-            {
-                <input class="btn btn-info" disabled type="submit" value="Предыдущая страница" />
-            }
-        </form>
-        <form method="get">
-            <input type="hidden" name="pageOptions.CurrentPage" value="@(Model.Options.PageOptions.CurrentPage + 1)" />
-            @if (Model.Options.PageOptions.HasNextPage)
-            {
-                <input class="btn btn-outline-info" type="submit" value="Следующая страница" />
-            }
-            else
-            {
-                <input class="btn btn-info" disabled type="submit" value="Следующая страница" />
-            }
-        </form>*@
-    </tbody>
 </table>
 

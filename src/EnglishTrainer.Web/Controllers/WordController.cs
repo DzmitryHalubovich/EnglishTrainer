@@ -74,7 +74,7 @@ namespace EnglishTrainer.Services
         public async Task<IActionResult> Delete(int id)
         {
             await _wordViewModelService.DeleteWordAsync(id);
-            return RedirectToAction("MainTable");
+            return RedirectToAction("Index");
         }
     }
 }
