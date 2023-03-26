@@ -1,13 +1,7 @@
-﻿using EnglishTrainer.ApplicationCore.Entities;
-using EnglishTrainer.ApplicationCore.Enums;
-using EnglishTrainer.ApplicationCore.Models;
-using EnglishTrainer.Infrastructure.Data;
+﻿using EnglishTrainer.ApplicationCore.Models;
 using EnglishTrainer.Infrastructure.SortOptions;
-using EnglishTrainer.Services.Interfaces;
 using EnglishTrainer.Services.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace EnglishTrainer.Services
 {
@@ -23,12 +17,9 @@ namespace EnglishTrainer.Services
         [HttpGet]
         public async Task<IActionResult> Index(SortFilterPageOptions options)
         {
+            options.ElementsCount = await _wordViewModelService.TotalWordsCount();
 
-            var wordCount = await _wordViewModelService.TotalWordCount();
-
-            options.ElementsCount = wordCount;
-
-            ViewBag.PagesCount = (int)Math.Ceiling((double)wordCount / options.PageSize); 
+            ViewBag.PagesCount = (int)Math.Ceiling((double)options.ElementsCount  / options.PageSize); 
 
             var wordViewModel = await _wordViewModelService.GetAllWordsAsync(options);
 

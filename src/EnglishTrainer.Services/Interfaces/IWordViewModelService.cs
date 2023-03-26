@@ -11,7 +11,7 @@ namespace EnglishTrainer.Services
         Task<IBaseResponse<Word>> CreateNewWordAsync(WordViewModel wordViewModel);
         Task<WordViewModel> GetWordViewModelByIdAsync(int id);
         Task UpdateWordAsync(WordViewModel viewModel);
-        Task<int> TotalWordCount();
+        Task<int> TotalWordsCount();
         Task DeleteWordAsync(int id);
 
     }

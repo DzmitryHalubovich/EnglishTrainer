@@ -40,6 +40,9 @@ namespace EnglishTrainer.Services
             return result;
         }
 
-  
+        public async Task<int> TotalVerbsCount()
+        {
+            return await _verbRepository.TotalCount();
+        }
     }
 }

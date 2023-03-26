@@ -92,9 +92,6 @@ namespace EnglishTrainer.ApplicationCore
             return allWordsDto;
         }
 
-        
-
-
         public async Task<WordViewModel> GetWordViewModelByIdAsync(int id)
         {
             var entity = await _wordRepository.GetFirstOrDefaultAsync(
@@ -107,7 +104,7 @@ namespace EnglishTrainer.ApplicationCore
             return result;
         }
 
-        public async Task<int> TotalWordCount()
+        public async Task<int> TotalWordsCount()
         {
             return await _wordRepository.TotalCount();
         }

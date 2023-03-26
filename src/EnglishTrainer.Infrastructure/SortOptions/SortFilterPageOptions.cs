@@ -1,18 +1,8 @@
-﻿// Copyright (c) 2020 Jon P Smith, GitHub: JonPSmith, web: http://www.thereformedprogrammer.net/
-// Licensed under MIT license. See License.txt in the project root for license information.
-
-using System;
-using System.Linq;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-
-namespace EnglishTrainer.Infrastructure.SortOptions
+﻿namespace EnglishTrainer.Infrastructure.SortOptions
 {
     public class SortFilterPageOptions
     {
         public const int DefaultPageSize = 2; //default page size is 10
-
-        //-----------------------------------------
-        //Paging parts, which require the use of the method
 
         private int _pageNum = 1;
 

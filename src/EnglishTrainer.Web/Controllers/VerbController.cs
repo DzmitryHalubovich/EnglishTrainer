@@ -1,12 +1,8 @@
-﻿using AutoMapper;
-using EnglishTrainer.ApplicationCore.Models;
+﻿using EnglishTrainer.ApplicationCore;
 using EnglishTrainer.Infrastructure.SortOptions;
 using EnglishTrainer.Services;
-using Microsoft.AspNetCore.Authorization;
+using EnglishTrainer.Services.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using System.Data;
-using System.Net;
 
 namespace EnglishTrainer.Web.Controllers
 {
@@ -21,22 +17,21 @@ namespace EnglishTrainer.Web.Controllers
             _logger = logger;
         }
 
-        //public IActionResult Index()
-        //{
-        //    _logger.LogInformation("On main page.");
-        //    return View();
-        //}
-
         //[Authorize(AuthenticationSchemes = "Bearer ", Roles = "user")]
         public async Task <IActionResult> Index(SortFilterPageOptions options)
         {
             _logger.LogInformation("Processing of the request MainTable.");
 
+            options.ElementsCount = await _verbViewModelService.TotalVerbsCount();
+
+            ViewBag.PagesCount = (int)Math.Ceiling((double)options.ElementsCount  / options.PageSize);
+
             var verbViewModel = await _verbViewModelService.GetAllVerbsAsync(options);
           
             _logger.LogInformation($"Return collection {verbViewModel.ToString()} with {verbViewModel.Count()} elements");
 
-            return View(verbViewModel);
+            //return View(verbViewModel);
+            return View(new IndexVerbViewModel(options, verbViewModel));
         }
 
         public async Task<IActionResult> Details(int id)
@@ -48,7 +43,6 @@ namespace EnglishTrainer.Web.Controllers
             return View(verbById);
         }
 
-        public IActionResult MainPage()  => View();
 
     }
 }

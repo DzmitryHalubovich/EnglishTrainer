@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EnglishTrainer.ApplicationCore.Models.VerbViewModel>
+﻿@model EnglishTrainer.Services.Models.IndexVerbViewModel
 
 @{
     ViewData["Title"] = "MainTable";
@@ -7,6 +7,42 @@
 <div class="back-to-main-page-button">
     <a asp-action="Index" asp-controller="Home" style="border-radius:0" class="btn btn-info">На главную страницу</a>
 </div>
+<div style="display:flex; background-color: #3b375e;">
+    <div>
+        <form method="get">
+            <input type="hidden" name="PageNum" value="@(Model.SortFilterPageData.PageNum-1)" />
+            @if (Model.SortFilterPageData.HasPrevPage())
+            {
+                <input class="btn btn-light" type="submit" value="Предыдущая страница" />
+            }
+            else
+            {
+                <input class="btn btn-light" disabled type="submit" value="Предыдущая страница" />
+            }
+        </form>
+    </div>
+    <div>
+        <form method="get">
+            <input type="hidden" name="PageNum" value="@(Model.SortFilterPageData.PageNum+1)" />
+            @if (Model.SortFilterPageData.HasNextPage(@ViewBag.PagesCount))
+            {
+                <input class="btn btn-light" type="submit" value="Следующая страница" />
+            }
+            else
+            {
+                <input class="btn btn-light" disabled type="submit" value="Следующая страница" />
+            }
+        </form>
+    </div>
+    <div style="width:130px; margin-left:200px;">
+        <p>
+            Страница: @Model.SortFilterPageData.PageNum из @ViewBag.PagesCount
+        </p>
+    </div>
+
+    </div>
+
+
 <table class="table table-bordered table-hover">
 
     <div class="container" style="width:1000px;">
@@ -25,7 +61,7 @@
             </div>
         </div>
     </div>
-    @foreach (var item in Model)
+    @foreach (var item in Model.VerbsList)
     {
         <div class="container" style="width:1000px;">
             <a asp-action="Details" asp-controller="Verb" asp-route-id="@item.Id" div class="row my-row border align-center text-decoration-none">

@@ -7,5 +7,6 @@ namespace EnglishTrainer.Services
     {
         Task<IEnumerable<VerbViewModel>> GetAllVerbsAsync(SortFilterPageOptions options);
         Task<VerbViewModel> GetVerbViewModelByIdAsync(int id);
+        Task<int> TotalVerbsCount();
     }
 }
