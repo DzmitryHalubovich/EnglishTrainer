@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EnglishTrainer.ApplicationCore.Models.WordViewModel>
+﻿@model EnglishTrainer.Services.Models.IndexWordsViewModel
 
 @{
     ViewData["Title"] = "MainTable";
@@ -6,16 +6,59 @@
 
 <h1>Словарь</h1>
 
-<div style="margin-bottom: 15px;">
+<div style="width: 700px; margin:auto;">
     <h6>Навигация</h6>
-        <a type="button" class="btn btn-info"  asp-action="Index" asp-controller="Home">На главную страницу</a>
-        <a type="button" class="btn btn-primary" asp-action="Create" asp-controller="Word">Добавить новое слово </a>
+    <div>
+        <div>
+            <a type="button" class="btn btn-info" asp-action="Index" asp-controller="Home">На главную страницу</a>
+            <a type="button" class="btn btn-primary" asp-action="Create" asp-controller="Word">Добавить новое слово </a>
+        </div>
+
+        <div style="display:flex; background-color: #3b375e;">
+            <div>
+                <form method="get">
+                    <input type="hidden" name="PageNum" value="@(Model.SortFilterPageData.PageNum-1)" />
+                    @if (Model.SortFilterPageData.HasPrevPage())
+                    {
+                        <input class="btn btn-light" type="submit" value="Предыдущая страница" />
+                    }
+                    else
+                    {
+                        <input class="btn btn-light" disabled type="submit" value="Предыдущая страница" />
+                    }
+                </form>
+            </div>
+            <div>
+                <form method="get">
+                    <input type="hidden" name="PageNum" value="@(Model.SortFilterPageData.PageNum+1)" />
+                    @if (Model.SortFilterPageData.HasNextPage(@ViewBag.PagesCount))
+                    {
+                        <input class="btn btn-light" type="submit" value="Следующая страница" />
+                    }
+                    else
+                    {
+                        <input class="btn btn-light" disabled type="submit" value="Следующая страница" />
+                    }
+                </form>
+            </div>
+            <div style="width:130px; margin-left:200px;">
+                <p>
+                    Страница: @Model.SortFilterPageData.PageNum из @ViewBag.PagesCount
+                </p>
+            </div>
+           
+        </div>
+    </div>
+
+   
+
 </div>
 
-<div class="container flex-column justify-content-center" >
-    @foreach(var item in Model)
+
+<div class="container flex-column justify-content-center" style="margin:auto; width:700px; padding:0">
+    @foreach(var item in Model.WordsList)
     {
-        <div class="my-row" style="display:flex; justify-content:space-between; width:800px;">
+        <div class="my-row" style="display:flex; justify-content:space-between; width:700px;">
             <a asp-action="Details" asp-controller="Word" asp-route-id="@item.Id" div class="text-decoration-none my-row_word">
                 @item.Name - @item.TranslateVariants
             </a>
@@ -42,4 +85,15 @@
         </div>
     }
 </div>
+
+@section Scripts{
+
+    <script type='text/javascript'>
+        document.addEventListener("DOMContentLoaded",
+            function (event) {
+                WordList.initialise('@Url.Action("GetFilterSearchContent")');
+            });
+    </script>
+
+}
 

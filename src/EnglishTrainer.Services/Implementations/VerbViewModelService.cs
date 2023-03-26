@@ -2,6 +2,7 @@
 using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
 using EnglishTrainer.ApplicationCore.Models;
+using EnglishTrainer.Infrastructure.SortOptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -19,9 +20,9 @@ namespace EnglishTrainer.Services
             _mapper = mapper;
             _logger=logger;
         }
-        public async Task<IEnumerable<VerbViewModel>> GetAllVerbsAsync()
+        public async Task<IEnumerable<VerbViewModel>> GetAllVerbsAsync(SortFilterPageOptions options)
         {
-            var getAllVerbs = await _verbRepository.GetAllAsync(isTracking:true); //look in database all our enteties
+            var getAllVerbs = await _verbRepository.GetAllAsync(options, isTracking:true); //look in database all our enteties
 
             _logger.LogInformation("Запрос на получение таблицы неправильных глаголов.");
 

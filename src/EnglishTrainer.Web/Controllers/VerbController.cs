@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using EnglishTrainer.ApplicationCore.Models;
+using EnglishTrainer.Infrastructure.SortOptions;
 using EnglishTrainer.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Data;
 using System.Net;
 
@@ -26,11 +28,11 @@ namespace EnglishTrainer.Web.Controllers
         //}
 
         //[Authorize(AuthenticationSchemes = "Bearer ", Roles = "user")]
-        public async Task <IActionResult> Index()
+        public async Task <IActionResult> Index(SortFilterPageOptions options)
         {
             _logger.LogInformation("Processing of the request MainTable.");
 
-            var verbViewModel = await _verbViewModelService.GetAllVerbsAsync();
+            var verbViewModel = await _verbViewModelService.GetAllVerbsAsync(options);
           
             _logger.LogInformation($"Return collection {verbViewModel.ToString()} with {verbViewModel.Count()} elements");
 

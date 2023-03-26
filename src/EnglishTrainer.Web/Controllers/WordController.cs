@@ -2,9 +2,12 @@
 using EnglishTrainer.ApplicationCore.Enums;
 using EnglishTrainer.ApplicationCore.Models;
 using EnglishTrainer.Infrastructure.Data;
+using EnglishTrainer.Infrastructure.SortOptions;
 using EnglishTrainer.Services.Interfaces;
+using EnglishTrainer.Services.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace EnglishTrainer.Services
 {
@@ -17,11 +20,19 @@ namespace EnglishTrainer.Services
             _wordViewModelService=wordViewModelService;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(SortFilterPageOptions options)
         {
-            var wordViewModel = await _wordViewModelService.GetAllWordsAsync();
 
-            return View(wordViewModel);
+            var wordCount = await _wordViewModelService.TotalWordCount();
+
+            options.ElementsCount = wordCount;
+
+            ViewBag.PagesCount = (int)Math.Ceiling((double)wordCount / options.PageSize); 
+
+            var wordViewModel = await _wordViewModelService.GetAllWordsAsync(options);
+
+            return View(new IndexWordsViewModel(options, wordViewModel));
         }
 
         //Создание обьекта и вью работает по примеру отсюда
