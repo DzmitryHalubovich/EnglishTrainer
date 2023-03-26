@@ -3,6 +3,7 @@ using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
 using EnglishTrainer.ApplicationCore.Models;
 using EnglishTrainer.ApplicationCore.Response;
+using EnglishTrainer.Infrastructure.SortOptions;
 using EnglishTrainer.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -80,17 +81,17 @@ namespace EnglishTrainer.ApplicationCore
 
         }
 
-        public async Task<IEnumerable<WordViewModel>> GetAllWordsAsync()
+        public async Task<IEnumerable<WordViewModel>> GetAllWordsAsync(SortFilterPageOptions options)
         {
             _logger.LogInformation("Получение списка слов из словаря.");
 
-            var getAllWords = await _wordRepository.GetAllAsync(isTracking:true);
+            var getAllWords = await _wordRepository.GetAllAsync(options, isTracking:true);
 
             var allWordsDto = _mapper.Map<IEnumerable<WordViewModel>>(getAllWords);
 
             return allWordsDto;
         }
-        
+
         public async Task<WordViewModel> GetWordViewModelByIdAsync(int id)
         {
             var entity = await _wordRepository.GetFirstOrDefaultAsync(
@@ -101,6 +102,11 @@ namespace EnglishTrainer.ApplicationCore
             var result = _mapper.Map<WordViewModel>(entity);
 
             return result;
+        }
+
+        public async Task<int> TotalWordsCount()
+        {
+            return await _wordRepository.TotalCount();
         }
 
         public async Task UpdateWordAsync(WordViewModel viewModel)

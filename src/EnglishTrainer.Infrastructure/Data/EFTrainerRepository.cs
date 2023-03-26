@@ -1,5 +1,7 @@
 ﻿using EnglishTrainer.ApplicationCore.Entities;
 using EnglishTrainer.ApplicationCore.Interfaces;
+using EnglishTrainer.Infrastructure.QueryObject;
+using EnglishTrainer.Infrastructure.SortOptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
@@ -27,12 +29,13 @@ namespace EnglishTrainer.Infrastructure.Data
             await _dbContext.SaveChangesAsync();
         }
 
-        public IQueryable<T> GetAll()
+        public async Task<int> TotalCount()
         {
-            return _dbContext.Set<T>().AsNoTracking();
+            return await _dbContext.Set<T>().CountAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync(
+            SortFilterPageOptions options,
             Expression<Func<T, bool>>? predicate = null,
             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
@@ -44,10 +47,11 @@ namespace EnglishTrainer.Infrastructure.Data
             if (predicate is not null) { query = query.Where(predicate); }
             if (include is not null) { query = include(query); }
 
+            //query.Page(options.PageNum - 1, options.PageSize);
 
             return orderBy is not null
-              ? await orderBy(query).ToListAsync()
-              :  await query.ToListAsync();
+              ? await orderBy(query.Page(options.PageNum - 1, options.PageSize)).ToListAsync()
+              :  await query.Page(options.PageNum - 1, options.PageSize).ToListAsync();
         }
 
         public async Task<T?> GetFirstOrDefaultAsync(
