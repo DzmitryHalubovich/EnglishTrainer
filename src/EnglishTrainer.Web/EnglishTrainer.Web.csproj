@@ -46,6 +46,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="AppData\Logs\" />
+    <Folder Include="Controllers\Api\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnglishTrainer.Infrastructure.Migrations
 {
     [DbContext(typeof(EnglishTrainerContext))]
-    [Migration("20230320135608_AddPicture")]
-    partial class AddPicture
+    [Migration("20230407132557_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -185,17 +185,12 @@ namespace EnglishTrainer.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("word");
 
-                    b.Property<int?>("PictureId")
-                        .HasColumnType("int");
-
                     b.Property<string>("TranslateVariants")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("translate");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PictureId");
 
                     b.ToTable("dictionary", (string)null);
                 });
@@ -220,15 +215,6 @@ namespace EnglishTrainer.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.Word", b =>
-                {
-                    b.HasOne("EnglishTrainer.ApplicationCore.Entities.Picture", "Picture")
-                        .WithMany()
-                        .HasForeignKey("PictureId");
-
-                    b.Navigation("Picture");
                 });
 
             modelBuilder.Entity("EnglishTrainer.ApplicationCore.Entities.Word", b =>
