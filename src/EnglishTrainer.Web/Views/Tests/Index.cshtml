@@ -28,11 +28,9 @@
                     dataType: "html",
                     contentType: 'application/json; charset=utf-8',
                     success: function(data){ 
-                        //var message = data.Message; 
-                        //alert(data);
                         $('.partialResultVerb').html(data);
-                        } //<-- added close for anonymous function
-                    }); //<--added close/semicolon for ajax function
+                        } 
+                    }); 
             });
     </script>
 

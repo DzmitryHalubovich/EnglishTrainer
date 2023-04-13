@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "MainTable";
+    string prevPage = "Предыдущая страница";
 }
 
 <h1>Словарь</h1>
@@ -20,11 +21,11 @@
                     <input type="hidden" name="PageNum" value="@(Model.SortFilterPageData.PageNum-1)" />
                     @if (Model.SortFilterPageData.HasPrevPage())
                     {
-                        <input class="btn btn-light" type="submit" value="Предыдущая страница" />
+                        <input class="btn btn-light" type="submit" value=@prevPage/>
                     }
                     else
                     {
-                        <input class="btn btn-light" disabled type="submit" value="Предыдущая страница" />
+                        <input class="btn btn-light" disabled type="submit" value=@prevPage />
                     }
                 </form>
             </div>
@@ -46,14 +47,9 @@
                     Страница: @Model.SortFilterPageData.PageNum из @ViewBag.PagesCount
                 </p>
             </div>
-           
         </div>
     </div>
-
-   
-
 </div>
-
 
 <div class="container flex-column justify-content-center" style="margin:auto; width:700px; padding:0">
     @foreach(var item in Model.WordsList)

@@ -6,11 +6,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EnglishTrainer.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddPicture : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "dictionary",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    word = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    translate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created = table.Column<DateTime>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_dictionary", x => x.id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "irregular_verbs",
                 columns: table => new
@@ -58,25 +74,24 @@ namespace EnglishTrainer.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "dictionary",
+                name: "examples",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    word = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    translate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    created = table.Column<DateTime>(type: "date", nullable: false),
-                    PictureId = table.Column<int>(type: "int", nullable: true)
+                    WordId = table.Column<int>(type: "int", nullable: false),
+                    engliish_example = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    russian_translate = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_dictionary", x => x.id);
+                    table.PrimaryKey("PK_examples", x => x.id);
                     table.ForeignKey(
-                        name: "FK_dictionary_Pictures_PictureId",
-                        column: x => x.PictureId,
-                        principalTable: "Pictures",
-                        principalColumn: "id");
+                        name: "FK_examples_dictionary_WordId",
+                        column: x => x.WordId,
+                        principalTable: "dictionary",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,32 +115,6 @@ namespace EnglishTrainer.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "examples",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    WordId = table.Column<int>(type: "int", nullable: false),
-                    engliish_example = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    russian_translate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_examples", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_examples_dictionary_WordId",
-                        column: x => x.WordId,
-                        principalTable: "dictionary",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_dictionary_PictureId",
-                table: "dictionary",
-                column: "PictureId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_examples_WordId",
                 table: "examples",
@@ -147,6 +136,9 @@ namespace EnglishTrainer.Infrastructure.Migrations
                 name: "irregular_verbs");
 
             migrationBuilder.DropTable(
+                name: "Pictures");
+
+            migrationBuilder.DropTable(
                 name: "Profiles");
 
             migrationBuilder.DropTable(
@@ -154,9 +146,6 @@ namespace EnglishTrainer.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Pictures");
         }
     }
 }
