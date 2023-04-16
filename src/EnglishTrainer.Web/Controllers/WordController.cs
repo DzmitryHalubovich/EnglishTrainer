@@ -2,9 +2,11 @@
 using EnglishTrainer.Infrastructure.SortOptions;
 using EnglishTrainer.Services.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace EnglishTrainer.Services
 {
+
     public class WordController : Controller
     {
         private readonly IWordViewModelService _wordViewModelService;
@@ -12,14 +14,14 @@ namespace EnglishTrainer.Services
         public WordController(IWordViewModelService wordViewModelService)
         {
             _wordViewModelService=wordViewModelService;
-        }
+        }  
 
         [HttpGet]
         public async Task<IActionResult> Index(SortFilterPageOptions options)
         {
             options.ElementsCount = await _wordViewModelService.TotalWordsCount();
 
-            ViewBag.PagesCount = (int)Math.Ceiling((double)options.ElementsCount  / options.PageSize); 
+            ViewBag.PagesCount = (int)Math.Ceiling((double)options.ElementsCount  / options.PageSize);
 
             var wordViewModel = await _wordViewModelService.GetAllWordsAsync(options);
 

@@ -42,13 +42,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EnglishTrainer.Services\EnglishTrainer.Services.csproj" />
+    <Folder Include="AppData\Logs\" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AppData\Logs\" />
-    <Folder Include="Controllers\Api\" />
-    <Folder Include="wwwroot\Images\" />
+    <ProjectReference Include="..\EnglishTrainer.ApplicationCore\EnglishTrainer.ApplicationCore.csproj" />
+    <ProjectReference Include="..\EnglishTrainer.Infrastructure\EnglishTrainer.Infrastructure.csproj" />
+    <ProjectReference Include="..\EnglishTrainer.Services\EnglishTrainer.Services.csproj" />
   </ItemGroup>
 
 </Project>
