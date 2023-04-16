@@ -1,6 +1,8 @@
 ﻿using EnglishTrainer.ApplicationCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Net.Http;
 
 namespace EnglishTrainer.Web.Controllers.Api
 {
@@ -12,6 +14,13 @@ namespace EnglishTrainer.Web.Controllers.Api
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        [Route("addWordPartial")]
+        public IActionResult Create()
+        {
+            return PartialView("_AddWordPartial", new WordViewModel());
         }
 
         [HttpGet]

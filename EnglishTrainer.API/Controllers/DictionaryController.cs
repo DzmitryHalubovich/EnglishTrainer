@@ -1,4 +1,6 @@
-﻿using EnglishTrainer.Services.Interfaces;
+﻿using EnglishTrainer.ApplicationCore.Models;
+using EnglishTrainer.Services;
+using EnglishTrainer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnglishTrainer.API.Controllers
@@ -13,6 +15,13 @@ namespace EnglishTrainer.API.Controllers
             var allWords = await apiWordService.GetAllAsync();
 
             return Ok(allWords);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddWord([FromServices] IWordViewModelService wordViewModelService, WordViewModel viewModel)
+        {
+            await wordViewModelService.CreateNewWordAsync(viewModel);
+            return Ok();
         }
     }
 }
