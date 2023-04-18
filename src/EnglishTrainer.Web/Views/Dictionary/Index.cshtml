@@ -32,20 +32,4 @@
 
     <script src="~/js/modal.js"></script>
 
-    <script>
-        $('#createWord').on('click', function (e) {
-            e.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:7223/api/dictionary',
-                data: $('#createNewWordForm').serialize(),
-                success: function (response) {
-                   
-                },
-                error: function (response) {
-                    
-                },
-            })
-        });
-    </script>
 }

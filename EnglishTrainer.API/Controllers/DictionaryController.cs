@@ -1,4 +1,5 @@
-﻿using EnglishTrainer.ApplicationCore.Models;
+﻿using EnglishTrainer.ApplicationCore;
+using EnglishTrainer.ApplicationCore.Models;
 using EnglishTrainer.Services;
 using EnglishTrainer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,13 @@ namespace EnglishTrainer.API.Controllers
     [ApiController]
     public class DictionaryController : ControllerBase
     {
+        private readonly IWordViewModelService _wordViewModelService;
+
+        public DictionaryController(IWordViewModelService wordViewModelService)
+        {
+            _wordViewModelService=wordViewModelService;
+        }
+
         [HttpGet]
         public async Task<IActionResult> Index([FromServices] IApiWordService apiWordService)
         {
@@ -18,9 +26,12 @@ namespace EnglishTrainer.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddWord([FromServices] IWordViewModelService wordViewModelService, WordViewModel viewModel)
+        public async Task<IActionResult> AddWord(WordViewModel wordViewModel)
         {
-            await wordViewModelService.CreateNewWordAsync(viewModel);
+
+            var response = await _wordViewModelService.CreateNewWordAsync(wordViewModel);
+
+            //await wordViewModelService.CreateNewWordAsync(wordViewModel);
             return Ok();
         }
     }

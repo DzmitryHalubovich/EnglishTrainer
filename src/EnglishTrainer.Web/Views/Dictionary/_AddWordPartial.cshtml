@@ -75,7 +75,7 @@
 
 <script>
     $(function () {
-        var i = 1;
+        var i = 0;
         $('.addLink').click(function () {
             i++;
             var html2Add = "<div class='exampleItem'>" +
@@ -86,6 +86,63 @@
                 "<input class='english-trainer-common-input'  type='text' name='Examples[" + i + "].RussianExample' />" +
                 "</div></div></div>";
             $('#exampleBlock').append(html2Add);
+        })
+    });
+</script>
+
+@*<script>
+    $('#createWord').on('click', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '/7223/api/dictionary',
+            data: $('#createNewWordForm').serialize(),
+            success: function (response) {
+                Swal.fire({
+                    title: 'Информация',
+                    text: response.description,
+                    icon: 'success',
+                    confirmButtonText: 'Окей'
+                })
+            },
+            error: function (response) {
+                Swal.fire({
+                    title: 'Информация',
+                    text: response.responseJSON.description,
+                    icon: 'error',
+                    confirmButtonText: 'Окей'
+                })
+            },
+        })
+    });
+</script>
+*@
+
+<script>
+    $('#createWord').on('click', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: 'http://localhost:5268/api/dictionary',
+            data: $('#createNewWordForm').serialize(),
+            type: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                Swal.fire({
+                    title: 'Информация',
+                    text: response.description,
+                    icon: 'success',
+                    confirmButtonText: 'Окей'
+                })
+            },
+            error: function (response) {
+                Swal.fire({
+                    title: 'Информация',
+                    text: response.responseJSON.description,
+                    icon: 'error',
+                    confirmButtonText: 'Окей'
+                })
+            },
         })
     });
 </script>

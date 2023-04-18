@@ -20,14 +20,26 @@ namespace EnglishTrainer.Web.Controllers.Api
         [Route("addWordPartial")]
         public IActionResult Create()
         {
-            return PartialView("_AddWordPartial", new WordViewModel());
+            var newWord = new WordViewModel();
+
+            return PartialView("_AddWordPartial", newWord);
         }
 
         [HttpGet]
         [Route("dictionaryPartial")]
-        public async Task<IActionResult> DictionaryPartial()
+        public async Task<IActionResult> DictionaryPartial([FromServices] IHttpClientFactory _clientFactory)
         {
             var dictionary = new List<WordViewModel>();
+
+            ///////////////////////////////////////
+
+            var request = new HttpRequestMessage(HttpMethod.Get, "");
+
+            var client = _clientFactory.CreateClient();
+
+            HttpResponseMessage response = await client.SendAsync(request);
+
+            /////////////////////
 
             using (var httpClient = new HttpClient())
             {

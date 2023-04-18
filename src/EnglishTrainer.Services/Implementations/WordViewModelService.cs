@@ -7,7 +7,6 @@ using EnglishTrainer.Infrastructure.SortOptions;
 using EnglishTrainer.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace EnglishTrainer.ApplicationCore
 {
