@@ -1,148 +1,47 @@
 ﻿@using EnglishTrainer.ApplicationCore.Entities;
 @model EnglishTrainer.ApplicationCore.Models.WordViewModel
 
-<div class="create-word-menu">
-    <form id="createNewWordForm" style="min-height:1200px;">
+<div class="container">
+    <form asp-action="Create" >
         <div class="create-word-menu_header">
-            <h1 class="create-word-menu_header_text">Новое слово</h1>
+            <h1 style="margin:auto">Новое слово</h1>
         </div>
 
-        <div class="create-word-menu-top-translation">
-            <div class="create-word-menu-top-translation-block-eu">
-                <div class="create-word-menu-top-translation-label-block">
-                    <label class="create-word-menu_top_translation_label_block_text">Слово</label>
-                </div>
-                <div class="create-word-menu-top-translation-label-block">
-                    <input asp-for="Name" class="english-trainer-common-input" />
-                </div>
+        <div>
+            <div class="create-word-menu-top-translation-label-block">
+                <label class="create-word-menu_top_translation_label_block_text">Слово:</label>
             </div>
+            <div class="create-word-menu-top-translation-label-block">
+                <input asp-for="Name" class="english-trainer-common-input" style="color:yellow" />
+            </div>
+        </div>
 
-            <div class="create-word-menu_top_translation_block_ru">
-                <div class="create-word-menu-top-translation-label-block">
-                    <label class="create-word-menu_top_translation_label_block_text">Варианты перевода</label>
-                </div>
-                <div class="create-word-menu_top_translation_label_block">
-                    <input asp-for="TranslateVariants" class="english-trainer-common-input" />
-                </div>
+        <div>
+            <div class="create-word-menu-top-translation-label-block">
+                <label style="font-size:22px">Варианты перевода:</label>
+            </div>
+            <div class="create-word-menu_top_translation_label_block">
+                <input asp-for="TranslateVariants" class="english-trainer-common-input" style="color:yellow" />
             </div>
         </div>
 
         <div class="form-floating">
-            <textarea class="form-control-color  create-word-menu_top_translation_description_block_textarea_field" asp-for="Description" placeholder="Определение" id="floatingTextarea"></textarea>
-        </div>
-
-        <div>
-            <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button accordion_menu_top" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                            Примеры
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div class="accordion-body" style="background-color: #3b375e;">
-                            <div id="exampleBlock">
-                                <div class="exampleItem" style="background-color: #3b375e;">
-                                    <h4>Пример №1</h4>
-                                    <div>
-                                        <label class="accordion_menu_label">Английский вариант</label>
-                                        <div>
-                                            <input class="english-trainer-common-input" type="text" name="Examples[0].EnglishExample" />
-                                        </div>
-                                        <label>Русский перевод</label>
-                                        <div>
-                                            <input class="english-trainer-common-input" type="text" name="Examples[0].RussianExample" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <p><a class="addLink btn btn-primary">Добавить новый пример</a></p>
-                            <p><a class="removeLink">Убрать пример</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <textarea class="form-control-color  create-word-menu_top_translation_description_block_textarea_field" style="color:yellow" asp-for="Description" placeholder="Определение" id="floatingTextarea"></textarea>
         </div>
 
         <div class="buttons_block">
             <button class="buttons_block_cancel" asp-action="Index" asp-controller="Word">Назад к словарю</button>
-            <button id="createWord" class="buttons_block_submit">Добавить</button>
+            <input type="submit" class="buttons_block_submit" value="Добавить" />
         </div>
 
     </form>
 </div>
 
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
 
-<script>
-    $(function () {
-        var i = 0;
-        $('.addLink').click(function () {
-            i++;
-            var html2Add = "<div class='exampleItem'>" +
-                "<h4>Пример № " + (i) + "</h4>" +
-                "<div><label>Английский вариант</label><div>" +
-                "<input class='english-trainer-common-input'  type='text' name='Examples[" + i + "].EnglishExample' />" +
-                "</div><label>Русский перевод</label><div>" +
-                "<input class='english-trainer-common-input'  type='text' name='Examples[" + i + "].RussianExample' />" +
-                "</div></div></div>";
-            $('#exampleBlock').append(html2Add);
-        })
-    });
-</script>
 
-@*<script>
-    $('#createWord').on('click', function (e) {
-        e.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: '/7223/api/dictionary',
-            data: $('#createNewWordForm').serialize(),
-            success: function (response) {
-                Swal.fire({
-                    title: 'Информация',
-                    text: response.description,
-                    icon: 'success',
-                    confirmButtonText: 'Окей'
-                })
-            },
-            error: function (response) {
-                Swal.fire({
-                    title: 'Информация',
-                    text: response.responseJSON.description,
-                    icon: 'error',
-                    confirmButtonText: 'Окей'
-                })
-            },
-        })
-    });
-</script>
-*@
 
-<script>
-    $('#createWord').on('click', function (e) {
-        e.preventDefault();
-        $.ajax({
-            url: 'http://localhost:5268/api/dictionary',
-            data: $('#createNewWordForm').serialize(),
-            type: 'POST',
-            contentType: 'application/json',
-            dataType: 'json',
-            success: function (response) {
-                Swal.fire({
-                    title: 'Информация',
-                    text: response.description,
-                    icon: 'success',
-                    confirmButtonText: 'Окей'
-                })
-            },
-            error: function (response) {
-                Swal.fire({
-                    title: 'Информация',
-                    text: response.responseJSON.description,
-                    icon: 'error',
-                    confirmButtonText: 'Окей'
-                })
-            },
-        })
-    });
-</script>

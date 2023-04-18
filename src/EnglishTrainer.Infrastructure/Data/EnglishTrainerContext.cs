@@ -15,7 +15,6 @@ namespace EnglishTrainer.Infrastructure.Data
         public DbSet<Word> Words { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Profile> Profiles { get; set; }
-        public DbSet<Picture> Pictures { get; set; }
 
         public EnglishTrainerContext(DbContextOptions<EnglishTrainerContext> options) : base(options) { }
 

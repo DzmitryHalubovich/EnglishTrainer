@@ -1,21 +1,13 @@
-using EnglishTrainer.ApplicationCore.Common;
 using EnglishTrainer.ApplicationCore.Config;
 using EnglishTrainer.Config;
 using EnglishTrainer.Infrastructure.Data;
 using EnglishTrainer.Services;
 using EnglishTrainer.Web.Configuration;
-using EnglishTrainer.Web.Options;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using System.Text.Json.Serialization;
 
 //var logger = new LoggerConfiguration()
 //.MinimumLevel.Debug()
@@ -90,7 +82,7 @@ EnglishTrainer.Infrastructure.Dependencies.ConfigureServices(builder.Configurati
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddCoreServices();
+builder.Services.AddCoreServices(configuration: builder.Configuration);
 
 //AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -160,5 +152,6 @@ app.UseAuthorization();
 //app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseMiddleware<AuthorizationMiddleware>();
+
 
 app.Run();
