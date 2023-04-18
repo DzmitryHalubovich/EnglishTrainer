@@ -57,7 +57,7 @@ namespace EnglishTrainer.Web.Controllers
 
 
         [HttpPost]
-        //[Route("Create")]
+        [Route("addWordPartial")]
         public async Task<IActionResult> Create(WordViewModel wordViewModel)
         {
             var client = _clientFactory.CreateClient("Dictionary");
@@ -67,7 +67,6 @@ namespace EnglishTrainer.Web.Controllers
             {
                 var dictionary = await client.PostAsJsonAsync("dictionary", wordViewModel);
                 errorString = null;
-                return PartialView("_DictionaryPartial", dictionary);
             }
             catch (Exception ex)
             {

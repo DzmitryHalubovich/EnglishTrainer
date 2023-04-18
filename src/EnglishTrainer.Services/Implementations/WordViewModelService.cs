@@ -43,9 +43,8 @@ namespace EnglishTrainer.ApplicationCore
                 var newWord = new Word()
                 {
                     Name = wordViewModel.Name,
-                    Examples = wordViewModel.Examples.FirstOrDefault().EnglishExample is not null 
-                    ? wordViewModel.Examples 
-                    : null,
+                    Examples = wordViewModel.Examples is not null 
+                    ? wordViewModel.Examples : null,
                     TranslateVariants = wordViewModel.TranslateVariants,
                     Description = wordViewModel.Description,
                     Created = DateTime.Now
