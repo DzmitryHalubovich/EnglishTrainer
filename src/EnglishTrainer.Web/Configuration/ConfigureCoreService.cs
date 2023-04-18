@@ -21,9 +21,9 @@ namespace EnglishTrainer.Services
             services.AddScoped(typeof(ITokenService), typeof(TokenService));
             services.AddScoped(typeof(IUserService), typeof(UserService));
             services.AddHttpClient();
-            services.AddHttpClient("meta", c =>
+            services.AddHttpClient("Dictionary", c =>
             {
-                c.BaseAddress = new Uri(configuration.GetValue<string>("MetaAPI"));
+                c.BaseAddress = new Uri(configuration.GetValue<string>("DictionaryAPI"));
             });
 
 
